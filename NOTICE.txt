@@ -13852,7 +13852,7 @@ DAMAGE.
 
 ============================================================
 Notices for file(s):
-/framework/junit.jar
+/framework/junit-host.jar
 ------------------------------------------------------------
 Common Public License - v 1.0
 

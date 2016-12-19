@@ -811,6 +811,8 @@
 		<field name="keyWidth" since="3" />
 		<field name="keyboardLayout" since="16" />
 		<field name="keyboardMode" since="3" />
+		<field name="keyboardNavigationCluster" since="26" />
+		<field name="keyboardNavigationSection" since="26" />
 		<field name="keycode" />
 		<field name="killAfterRestore" since="5" />
 		<field name="label" />
@@ -954,11 +956,13 @@
 		<field name="negativeButtonText" />
 		<field name="nestedScrollingEnabled" since="21" />
 		<field name="networkSecurityConfig" since="24" />
+		<field name="nextClusterForward" since="26" />
 		<field name="nextFocusDown" />
 		<field name="nextFocusForward" since="11" />
 		<field name="nextFocusLeft" />
 		<field name="nextFocusRight" />
 		<field name="nextFocusUp" />
+		<field name="nextSectionForward" since="26" />
 		<field name="noHistory" since="3" />
 		<field name="normalScreens" since="4" />
 		<field name="notificationTimeout" since="14" />
@@ -1486,6 +1490,7 @@
 		<field name="viewportWidth" since="21" />
 		<field name="visibility" />
 		<field name="visible" />
+		<field name="visibleToEphemeral" since="26" />
 		<field name="vmSafeMode" since="8" />
 		<field name="voiceIcon" since="21" />
 		<field name="voiceLanguage" since="3" />
@@ -3675,6 +3680,7 @@
 		<method name="setMediaController(Landroid/media/session/MediaController;)V" since="21" />
 		<method name="setOverlayWithDecorCaptionEnabled(Z)V" since="26" />
 		<method name="setPersistent(Z)V" />
+		<method name="setPictureInPictureActions(Ljava/util/List;)V" since="26" />
 		<method name="setPictureInPictureAspectRatio(F)V" since="26" />
 		<method name="setProgress(I)V" deprecated="24" />
 		<method name="setProgressBarIndeterminate(Z)V" deprecated="24" />
@@ -3756,6 +3762,7 @@
 		<method name="getLauncherLargeIconDensity()I" since="11" />
 		<method name="getLauncherLargeIconSize()I" since="11" />
 		<method name="getLockTaskModeState()I" since="23" />
+		<method name="getMaxNumPictureInPictureActions()I" since="26" />
 		<method name="getMemoryClass()I" since="5" />
 		<method name="getMemoryInfo(Landroid/app/ActivityManager$MemoryInfo;)V" />
 		<method name="getMyMemoryState(Landroid/app/ActivityManager$RunningAppProcessInfo;)V" since="16" />
@@ -5521,6 +5528,21 @@
 		<field name="STYLE_HORIZONTAL" />
 		<field name="STYLE_SPINNER" />
 	</class>
+	<class name="android/app/RemoteAction" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>(Landroid/graphics/drawable/Icon;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/app/RemoteAction$OnActionListener;)V" />
+		<method name="clone()Landroid/app/RemoteAction;" />
+		<method name="dump(Ljava/lang/String;Ljava/io/PrintWriter;)V" />
+		<method name="getContentDescription()Ljava/lang/CharSequence;" />
+		<method name="getIcon()Landroid/graphics/drawable/Icon;" />
+		<method name="getTitle()Ljava/lang/CharSequence;" />
+		<field name="CREATOR" />
+	</class>
+	<class name="android/app/RemoteAction$OnActionListener" since="26">
+		<extends name="java/lang/Object" />
+		<method name="onAction(Landroid/app/RemoteAction;)V" />
+	</class>
 	<class name="android/app/RemoteInput" since="20">
 		<extends name="java/lang/Object" />
 		<implements name="android/os/Parcelable" />
@@ -6182,6 +6204,9 @@
 		<field name="EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION" since="21" />
 		<field name="EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME" since="21" deprecated="23" />
 		<field name="EXTRA_PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM" since="23" />
+		<field name="EXTRA_PROVISIONING_DISCLAIMERS" since="26" />
+		<field name="EXTRA_PROVISIONING_DISCLAIMER_CONTENT" since="26" />
+		<field name="EXTRA_PROVISIONING_DISCLAIMER_HEADER" since="26" />
 		<field name="EXTRA_PROVISIONING_EMAIL_ADDRESS" since="21" />
 		<field name="EXTRA_PROVISIONING_KEEP_ACCOUNT_ON_MIGRATION" since="26" />
 		<field name="EXTRA_PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED" since="22" />
@@ -8329,6 +8354,7 @@
 		<field name="TELECOM_SERVICE" since="21" />
 		<field name="TELEPHONY_SERVICE" />
 		<field name="TELEPHONY_SUBSCRIPTION_SERVICE" since="22" />
+		<field name="TEXT_CLASSIFICATION_SERVICE" since="26" />
 		<field name="TEXT_SERVICES_MANAGER_SERVICE" since="14" />
 		<field name="TV_INPUT_SERVICE" since="21" />
 		<field name="UI_MODE_SERVICE" since="8" />
@@ -9536,6 +9562,7 @@
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="getActivityList(Ljava/lang/String;Landroid/os/UserHandle;)Ljava/util/List;" />
+		<method name="getPinItemRequest(Landroid/content/Intent;)Landroid/content/pm/LauncherApps$PinItemRequest;" since="26" />
 		<method name="getShortcutBadgedIconDrawable(Landroid/content/pm/ShortcutInfo;I)Landroid/graphics/drawable/Drawable;" since="25" />
 		<method name="getShortcutIconDrawable(Landroid/content/pm/ShortcutInfo;I)Landroid/graphics/drawable/Drawable;" since="25" />
 		<method name="getShortcuts(Landroid/content/pm/LauncherApps$ShortcutQuery;Landroid/os/UserHandle;)Ljava/util/List;" since="25" />
@@ -9551,6 +9578,8 @@
 		<method name="startShortcut(Landroid/content/pm/ShortcutInfo;Landroid/graphics/Rect;Landroid/os/Bundle;)V" since="25" />
 		<method name="startShortcut(Ljava/lang/String;Ljava/lang/String;Landroid/graphics/Rect;Landroid/os/Bundle;Landroid/os/UserHandle;)V" since="25" />
 		<method name="unregisterCallback(Landroid/content/pm/LauncherApps$Callback;)V" />
+		<field name="ACTION_CONFIRM_PIN_ITEM" since="26" />
+		<field name="EXTRA_PIN_ITEM_REQUEST" since="26" />
 	</class>
 	<class name="android/content/pm/LauncherApps$Callback" since="21">
 		<extends name="java/lang/Object" />
@@ -9563,6 +9592,22 @@
 		<method name="onPackagesUnavailable([Ljava/lang/String;Landroid/os/UserHandle;Z)V" />
 		<method name="onPackagesUnsuspended([Ljava/lang/String;Landroid/os/UserHandle;)V" since="24" />
 		<method name="onShortcutsChanged(Ljava/lang/String;Ljava/util/List;Landroid/os/UserHandle;)V" since="25" />
+	</class>
+	<class name="android/content/pm/LauncherApps$PinItemRequest" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<method name="accept()Z" />
+		<method name="accept(Landroid/os/Bundle;)Z" />
+		<method name="getRequestType()I" />
+		<method name="getShortcutInfo()Landroid/content/pm/ShortcutInfo;" />
+		<method name="isValid()Z" />
+		<field name="CREATOR" />
+		<field name="REQUEST_TYPE_SHORTCUT" />
+	</class>
+	<class name="android/content/pm/LauncherApps$PinItemRequest$RequestType" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="java/lang/annotation/Annotation" />
 	</class>
 	<class name="android/content/pm/LauncherApps$ShortcutQuery" since="25">
 		<extends name="java/lang/Object" />
@@ -10161,9 +10206,11 @@
 		<method name="getMaxShortcutCountPerActivity()I" />
 		<method name="getPinnedShortcuts()Ljava/util/List;" />
 		<method name="isRateLimitingActive()Z" />
+		<method name="isRequestPinShortcutSupported()Z" since="26" />
 		<method name="removeAllDynamicShortcuts()V" />
 		<method name="removeDynamicShortcuts(Ljava/util/List;)V" />
 		<method name="reportShortcutUsed(Ljava/lang/String;)V" />
+		<method name="requestPinShortcut(Landroid/content/pm/ShortcutInfo;Landroid/content/IntentSender;)Z" since="26" />
 		<method name="setDynamicShortcuts(Ljava/util/List;)Z" />
 		<method name="updateShortcuts(Ljava/util/List;)Z" />
 	</class>
@@ -11498,10 +11545,12 @@
 		<method name="copyPixelsFromBuffer(Ljava/nio/Buffer;)V" since="3" />
 		<method name="copyPixelsToBuffer(Ljava/nio/Buffer;)V" />
 		<method name="createBitmap(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" />
+		<method name="createBitmap(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;" since="26" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
+		<method name="createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;" since="26" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
 		<method name="createBitmap([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" />
@@ -11563,6 +11612,8 @@
 		<field name="ALPHA_8" />
 		<field name="ARGB_4444" />
 		<field name="ARGB_8888" />
+		<field name="HARDWARE" since="26" />
+		<field name="RGBA_F16" since="26" />
 		<field name="RGB_565" />
 	</class>
 	<class name="android/graphics/BitmapFactory" since="1">
@@ -11930,6 +11981,7 @@
 		<method name="render()Landroid/graphics/Bitmap;" />
 		<method name="showWhitePoint(Z)Landroid/graphics/ColorSpace$Renderer;" />
 		<method name="size(I)Landroid/graphics/ColorSpace$Renderer;" />
+		<method name="uniformChromaticityScale(Z)Landroid/graphics/ColorSpace$Renderer;" />
 	</class>
 	<class name="android/graphics/ColorSpace$Rgb" since="26">
 		<extends name="android/graphics/ColorSpace" />
@@ -12469,6 +12521,7 @@
 		<field name="RGBA_4444" deprecated="16" />
 		<field name="RGBA_5551" deprecated="16" />
 		<field name="RGBA_8888" />
+		<field name="RGBA_F16" since="26" />
 		<field name="RGBX_8888" />
 		<field name="RGB_332" deprecated="16" />
 		<field name="RGB_565" />
@@ -15030,6 +15083,10 @@
 		<field name="CONTROL" />
 		<field name="CR" />
 		<field name="EXTEND" />
+		<field name="E_BASE" since="26" />
+		<field name="E_BASE_GAZ" since="26" />
+		<field name="E_MODIFIER" since="26" />
+		<field name="GLUE_AFTER_ZWJ" since="26" />
 		<field name="L" />
 		<field name="LF" />
 		<field name="LV" />
@@ -15040,6 +15097,7 @@
 		<field name="SPACING_MARK" />
 		<field name="T" />
 		<field name="V" />
+		<field name="ZWJ" since="26" />
 	</class>
 	<class name="android/icu/lang/UCharacter$HangulSyllableType" since="24">
 		<extends name="java/lang/Object" />
@@ -15052,6 +15110,9 @@
 	</class>
 	<class name="android/icu/lang/UCharacter$JoiningGroup" since="24">
 		<extends name="java/lang/Object" />
+		<field name="AFRICAN_FEH" since="26" />
+		<field name="AFRICAN_NOON" since="26" />
+		<field name="AFRICAN_QAF" since="26" />
 		<field name="AIN" />
 		<field name="ALAPH" />
 		<field name="ALEF" />
@@ -15165,6 +15226,8 @@
 		<field name="CONDITIONAL_JAPANESE_STARTER" />
 		<field name="CONTINGENT_BREAK" />
 		<field name="EXCLAMATION" />
+		<field name="E_BASE" since="26" />
+		<field name="E_MODIFIER" since="26" />
 		<field name="GLUE" />
 		<field name="H2" />
 		<field name="H3" />
@@ -15191,6 +15254,7 @@
 		<field name="SURROGATE" />
 		<field name="UNKNOWN" />
 		<field name="WORD_JOINER" />
+		<field name="ZWJ" since="26" />
 		<field name="ZWSPACE" />
 	</class>
 	<class name="android/icu/lang/UCharacter$NumericType" since="24">
@@ -15225,6 +15289,8 @@
 		<method name="getID()I" />
 		<method name="getInstance(I)Landroid/icu/lang/UCharacter$UnicodeBlock;" />
 		<method name="of(I)Landroid/icu/lang/UCharacter$UnicodeBlock;" />
+		<field name="ADLAM" since="26" />
+		<field name="ADLAM_ID" since="26" />
 		<field name="AEGEAN_NUMBERS" />
 		<field name="AEGEAN_NUMBERS_ID" />
 		<field name="AHOM" />
@@ -15273,6 +15339,8 @@
 		<field name="BATAK_ID" />
 		<field name="BENGALI" />
 		<field name="BENGALI_ID" />
+		<field name="BHAIKSUKI" since="26" />
+		<field name="BHAIKSUKI_ID" since="26" />
 		<field name="BLOCK_ELEMENTS" />
 		<field name="BLOCK_ELEMENTS_ID" />
 		<field name="BOPOMOFO" />
@@ -15362,6 +15430,8 @@
 		<field name="CYRILLIC_EXTENDED_A_ID" />
 		<field name="CYRILLIC_EXTENDED_B" />
 		<field name="CYRILLIC_EXTENDED_B_ID" />
+		<field name="CYRILLIC_EXTENDED_C" since="26" />
+		<field name="CYRILLIC_EXTENDED_C_ID" since="26" />
 		<field name="CYRILLIC_ID" />
 		<field name="CYRILLIC_SUPPLEMENT" />
 		<field name="CYRILLIC_SUPPLEMENTARY" />
@@ -15415,6 +15485,8 @@
 		<field name="GEORGIAN_SUPPLEMENT_ID" />
 		<field name="GLAGOLITIC" />
 		<field name="GLAGOLITIC_ID" />
+		<field name="GLAGOLITIC_SUPPLEMENT" since="26" />
+		<field name="GLAGOLITIC_SUPPLEMENT_ID" since="26" />
 		<field name="GOTHIC" />
 		<field name="GOTHIC_ID" />
 		<field name="GRANTHA" />
@@ -15453,6 +15525,8 @@
 		<field name="HIRAGANA_ID" />
 		<field name="IDEOGRAPHIC_DESCRIPTION_CHARACTERS" />
 		<field name="IDEOGRAPHIC_DESCRIPTION_CHARACTERS_ID" />
+		<field name="IDEOGRAPHIC_SYMBOLS_AND_PUNCTUATION" since="26" />
+		<field name="IDEOGRAPHIC_SYMBOLS_AND_PUNCTUATION_ID" since="26" />
 		<field name="IMPERIAL_ARAMAIC" />
 		<field name="IMPERIAL_ARAMAIC_ID" />
 		<field name="INSCRIPTIONAL_PAHLAVI" />
@@ -15537,6 +15611,8 @@
 		<field name="MANDAIC_ID" />
 		<field name="MANICHAEAN" />
 		<field name="MANICHAEAN_ID" />
+		<field name="MARCHEN" since="26" />
+		<field name="MARCHEN_ID" since="26" />
 		<field name="MATHEMATICAL_ALPHANUMERIC_SYMBOLS" />
 		<field name="MATHEMATICAL_ALPHANUMERIC_SYMBOLS_ID" />
 		<field name="MATHEMATICAL_OPERATORS" />
@@ -15571,6 +15647,8 @@
 		<field name="MODI_ID" />
 		<field name="MONGOLIAN" />
 		<field name="MONGOLIAN_ID" />
+		<field name="MONGOLIAN_SUPPLEMENT" since="26" />
+		<field name="MONGOLIAN_SUPPLEMENT_ID" since="26" />
 		<field name="MRO" />
 		<field name="MRO_ID" />
 		<field name="MULTANI" />
@@ -15585,6 +15663,8 @@
 		<field name="MYANMAR_ID" />
 		<field name="NABATAEAN" />
 		<field name="NABATAEAN_ID" />
+		<field name="NEWA" since="26" />
+		<field name="NEWA_ID" since="26" />
 		<field name="NEW_TAI_LUE" />
 		<field name="NEW_TAI_LUE_ID" />
 		<field name="NKO" />
@@ -15616,6 +15696,8 @@
 		<field name="ORIYA_ID" />
 		<field name="ORNAMENTAL_DINGBATS" />
 		<field name="ORNAMENTAL_DINGBATS_ID" />
+		<field name="OSAGE" since="26" />
+		<field name="OSAGE_ID" since="26" />
 		<field name="OSMANYA" />
 		<field name="OSMANYA_ID" />
 		<field name="PAHAWH_HMONG" />
@@ -15718,6 +15800,10 @@
 		<field name="TAKRI_ID" />
 		<field name="TAMIL" />
 		<field name="TAMIL_ID" />
+		<field name="TANGUT" since="26" />
+		<field name="TANGUT_COMPONENTS" since="26" />
+		<field name="TANGUT_COMPONENTS_ID" since="26" />
+		<field name="TANGUT_ID" since="26" />
 		<field name="TELUGU" />
 		<field name="TELUGU_ID" />
 		<field name="THAANA" />
@@ -15764,7 +15850,11 @@
 		<field name="DOUBLE_QUOTE" />
 		<field name="EXTEND" />
 		<field name="EXTENDNUMLET" />
+		<field name="E_BASE" since="26" />
+		<field name="E_BASE_GAZ" since="26" />
+		<field name="E_MODIFIER" since="26" />
 		<field name="FORMAT" />
+		<field name="GLUE_AFTER_ZWJ" since="26" />
 		<field name="HEBREW_LETTER" />
 		<field name="KATAKANA" />
 		<field name="LF" />
@@ -15776,6 +15866,7 @@
 		<field name="OTHER" />
 		<field name="REGIONAL_INDICATOR" />
 		<field name="SINGLE_QUOTE" />
+		<field name="ZWJ" since="26" />
 	</class>
 	<class name="android/icu/lang/UCharacterCategory" since="24">
 		<extends name="java/lang/Object" />
@@ -16000,6 +16091,7 @@
 		<method name="hasScript(II)Z" />
 		<method name="isCased(I)Z" />
 		<method name="isRightToLeft(I)Z" />
+		<field name="ADLAM" since="26" />
 		<field name="AFAKA" />
 		<field name="AHOM" />
 		<field name="ANATOLIAN_HIEROGLYPHS" />
@@ -16011,6 +16103,7 @@
 		<field name="BASSA_VAH" />
 		<field name="BATAK" />
 		<field name="BENGALI" />
+		<field name="BHAIKSUKI" since="26" />
 		<field name="BLISSYMBOLS" />
 		<field name="BOOK_PAHLAVI" />
 		<field name="BOPOMOFO" />
@@ -16049,6 +16142,7 @@
 		<field name="HAN" />
 		<field name="HANGUL" />
 		<field name="HANUNOO" />
+		<field name="HAN_WITH_BOPOMOFO" since="26" />
 		<field name="HARAPPAN_INDUS" />
 		<field name="HATRAN" />
 		<field name="HEBREW" />
@@ -16059,6 +16153,7 @@
 		<field name="INSCRIPTIONAL_PAHLAVI" />
 		<field name="INSCRIPTIONAL_PARTHIAN" />
 		<field name="INVALID_CODE" />
+		<field name="JAMO" since="26" />
 		<field name="JAPANESE" />
 		<field name="JAVANESE" />
 		<field name="JURCHEN" />
@@ -16092,6 +16187,7 @@
 		<field name="MANDAEAN" />
 		<field name="MANDAIC" />
 		<field name="MANICHAEAN" />
+		<field name="MARCHEN" since="26" />
 		<field name="MATHEMATICAL_NOTATION" />
 		<field name="MAYAN_HIEROGLYPHS" />
 		<field name="MEITEI_MAYEK" />
@@ -16108,6 +16204,7 @@
 		<field name="MYANMAR" />
 		<field name="NABATAEAN" />
 		<field name="NAKHI_GEBA" />
+		<field name="NEWA" since="26" />
 		<field name="NEW_TAI_LUE" />
 		<field name="NKO" />
 		<field name="NUSHU" />
@@ -16122,6 +16219,7 @@
 		<field name="OL_CHIKI" />
 		<field name="ORIYA" />
 		<field name="ORKHON" />
+		<field name="OSAGE" since="26" />
 		<field name="OSMANYA" />
 		<field name="PAHAWH_HMONG" />
 		<field name="PALMYRENE" />
@@ -16147,6 +16245,7 @@
 		<field name="SUNDANESE" />
 		<field name="SYLOTI_NAGRI" />
 		<field name="SYMBOLS" />
+		<field name="SYMBOLS_EMOJI" since="26" />
 		<field name="SYRIAC" />
 		<field name="TAGALOG" />
 		<field name="TAGBANWA" />
@@ -16669,6 +16768,8 @@
 		<method name="values()[Landroid/icu/text/DateFormat$BooleanAttribute;" />
 		<field name="PARSE_ALLOW_NUMERIC" />
 		<field name="PARSE_ALLOW_WHITESPACE" />
+		<field name="PARSE_MULTIPLE_PATTERNS_FOR_MATCH" since="26" />
+		<field name="PARSE_PARTIAL_LITERAL_MATCH" since="26" />
 	</class>
 	<class name="android/icu/text/DateFormat$Field" since="24">
 		<extends name="java/text/Format$Field" />
@@ -17352,6 +17453,7 @@
 		<field name="PERCENTSTYLE" />
 		<field name="PLURALCURRENCYSTYLE" />
 		<field name="SCIENTIFICSTYLE" />
+		<field name="STANDARDCURRENCYSTYLE" since="26" />
 	</class>
 	<class name="android/icu/text/NumberFormat$Field" since="24">
 		<extends name="java/text/Format$Field" />
@@ -18131,7 +18233,7 @@
 		<field name="AM_PM" />
 		<field name="APRIL" />
 		<field name="AUGUST" />
-		<field name="BASE_FIELD_COUNT" />
+		<field name="BASE_FIELD_COUNT" deprecated="26" />
 		<field name="DATE" />
 		<field name="DAY_OF_MONTH" />
 		<field name="DAY_OF_WEEK" />
@@ -18159,7 +18261,7 @@
 		<field name="MARCH" />
 		<field name="MAXIMUM" />
 		<field name="MAX_DATE" />
-		<field name="MAX_FIELD_COUNT" />
+		<field name="MAX_FIELD_COUNT" deprecated="26" />
 		<field name="MAX_JULIAN" />
 		<field name="MAX_MILLIS" />
 		<field name="MAY" />
@@ -18467,6 +18569,7 @@
 		<field name="CELSIUS" />
 		<field name="CENTILITER" />
 		<field name="CENTIMETER" />
+		<field name="CENTURY" since="26" />
 		<field name="CUBIC_CENTIMETER" />
 		<field name="CUBIC_FOOT" />
 		<field name="CUBIC_INCH" />
@@ -18475,6 +18578,7 @@
 		<field name="CUBIC_MILE" />
 		<field name="CUBIC_YARD" />
 		<field name="CUP" />
+		<field name="CUP_METRIC" since="26" />
 		<field name="DAY" />
 		<field name="DECILITER" />
 		<field name="DECIMETER" />
@@ -18486,6 +18590,7 @@
 		<field name="FOOT" />
 		<field name="FURLONG" />
 		<field name="GALLON" />
+		<field name="GENERIC_TEMPERATURE" since="26" />
 		<field name="GIGABIT" />
 		<field name="GIGABYTE" />
 		<field name="GIGAHERTZ" />
@@ -18513,8 +18618,10 @@
 		<field name="KILOMETER_PER_HOUR" />
 		<field name="KILOWATT" />
 		<field name="KILOWATT_HOUR" />
+		<field name="KNOT" since="26" />
 		<field name="LIGHT_YEAR" />
 		<field name="LITER" />
+		<field name="LITER_PER_100KILOMETERS" since="26" />
 		<field name="LITER_PER_KILOMETER" />
 		<field name="LUX" />
 		<field name="MEGABIT" />
@@ -18532,6 +18639,7 @@
 		<field name="MILE" />
 		<field name="MILE_PER_GALLON" />
 		<field name="MILE_PER_HOUR" />
+		<field name="MILE_SCANDINAVIAN" since="26" />
 		<field name="MILLIAMPERE" />
 		<field name="MILLIBAR" />
 		<field name="MILLIGRAM" />
@@ -18551,10 +18659,12 @@
 		<field name="PARSEC" />
 		<field name="PICOMETER" />
 		<field name="PINT" />
+		<field name="PINT_METRIC" since="26" />
 		<field name="POUND" />
 		<field name="POUND_PER_SQUARE_INCH" />
 		<field name="QUART" />
 		<field name="RADIAN" />
+		<field name="REVOLUTION_ANGLE" since="26" />
 		<field name="SECOND" />
 		<field name="SQUARE_CENTIMETER" />
 		<field name="SQUARE_FOOT" />
@@ -18871,6 +18981,7 @@
 		<field name="UNICODE_6_3" />
 		<field name="UNICODE_7_0" />
 		<field name="UNICODE_8_0" />
+		<field name="UNICODE_9_0" since="26" />
 	</class>
 	<class name="android/inputmethodservice/AbstractInputMethodService" since="3">
 		<extends name="android/app/Service" />
@@ -22367,6 +22478,7 @@
 		<method name="getServiceComponent()Landroid/content/ComponentName;" />
 		<method name="getSessionToken()Landroid/media/session/MediaSession$Token;" />
 		<method name="isConnected()Z" />
+		<method name="search(Ljava/lang/String;Landroid/os/Bundle;Landroid/media/browse/MediaBrowser$SearchCallback;)V" since="26" />
 		<method name="subscribe(Ljava/lang/String;Landroid/media/browse/MediaBrowser$SubscriptionCallback;)V" />
 		<method name="subscribe(Ljava/lang/String;Landroid/os/Bundle;Landroid/media/browse/MediaBrowser$SubscriptionCallback;)V" since="24" />
 		<method name="unsubscribe(Ljava/lang/String;)V" />
@@ -22399,6 +22511,12 @@
 		<field name="CREATOR" />
 		<field name="FLAG_BROWSABLE" />
 		<field name="FLAG_PLAYABLE" />
+	</class>
+	<class name="android/media/browse/MediaBrowser$SearchCallback" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="onError(Ljava/lang/String;Landroid/os/Bundle;)V" />
+		<method name="onSearchResult(Ljava/lang/String;Landroid/os/Bundle;Ljava/util/List;)V" />
 	</class>
 	<class name="android/media/browse/MediaBrowser$SubscriptionCallback" since="21">
 		<extends name="java/lang/Object" />
@@ -29514,6 +29632,7 @@
 		<method name="setUserRestrictions(Landroid/os/Bundle;Landroid/os/UserHandle;)V" since="18" deprecated="21" />
 		<method name="supportsMultipleUsers()Z" since="24" />
 		<field name="ALLOW_PARENT_PROFILE_APP_LINKING" since="23" />
+		<field name="DISALLOW_ADD_MANAGED_PROFILE" since="26" />
 		<field name="DISALLOW_ADD_USER" since="21" />
 		<field name="DISALLOW_ADJUST_VOLUME" since="21" />
 		<field name="DISALLOW_APPS_CONTROL" since="21" />
@@ -29538,6 +29657,7 @@
 		<field name="DISALLOW_NETWORK_RESET" since="23" />
 		<field name="DISALLOW_OUTGOING_BEAM" since="22" />
 		<field name="DISALLOW_OUTGOING_CALLS" since="21" />
+		<field name="DISALLOW_REMOVE_MANAGED_PROFILE" since="26" />
 		<field name="DISALLOW_REMOVE_USER" since="18" />
 		<field name="DISALLOW_SAFE_BOOT" since="23" />
 		<field name="DISALLOW_SET_USER_ICON" since="24" />
@@ -35477,7 +35597,8 @@
 		<method name="&lt;init>()V" />
 		<method name="onConnected()V" />
 		<method name="onDisconnected()V" />
-		<method name="onFillRequest(Landroid/app/assist/AssistStructure;Landroid/os/CancellationSignal;Landroid/service/autofill/FillCallback;)V" />
+		<method name="onFillRequest(Landroid/app/assist/AssistStructure;Landroid/os/Bundle;Landroid/os/CancellationSignal;Landroid/service/autofill/FillCallback;)V" />
+		<method name="onSaveRequest(Landroid/app/assist/AssistStructure;Landroid/os/Bundle;Landroid/os/CancellationSignal;Landroid/service/autofill/SaveCallback;)V" />
 		<field name="SERVICE_INTERFACE" />
 	</class>
 	<class name="android/service/autofill/FillCallback" since="26">
@@ -35495,6 +35616,12 @@
 		<method name="&lt;init>()V" />
 		<method name="build()Landroid/service/autofill/FillCallback$FillData;" />
 		<method name="setTextField(ILjava/lang/String;)Landroid/service/autofill/FillCallback$FillData$Builder;" />
+	</class>
+	<class name="android/service/autofill/SaveCallback" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="onFailure(Ljava/lang/CharSequence;)V" />
+		<method name="onSuccess([I)V" />
 	</class>
 	<class name="android/service/carrier/CarrierIdentifier" since="23">
 		<extends name="java/lang/Object" />
@@ -35630,6 +35757,7 @@
 		<method name="onLoadChildren(Ljava/lang/String;Landroid/service/media/MediaBrowserService$Result;)V" />
 		<method name="onLoadChildren(Ljava/lang/String;Landroid/service/media/MediaBrowserService$Result;Landroid/os/Bundle;)V" since="24" />
 		<method name="onLoadItem(Ljava/lang/String;Landroid/service/media/MediaBrowserService$Result;)V" since="23" />
+		<method name="onSearch(Ljava/lang/String;Landroid/os/Bundle;Landroid/service/media/MediaBrowserService$Result;)V" since="26" />
 		<method name="setSessionToken(Landroid/media/session/MediaSession$Token;)V" />
 		<field name="SERVICE_INTERFACE" />
 	</class>
@@ -35713,7 +35841,11 @@
 		<method name="&lt;init>()V" />
 		<method name="adjustNotification(Landroid/service/notification/Adjustment;)V" />
 		<method name="adjustNotifications(Ljava/util/List;)V" />
+		<method name="createNotificationChannel(Ljava/lang/String;Landroid/app/NotificationChannel;)V" />
+		<method name="deleteNotificationChannel(Ljava/lang/String;Ljava/lang/String;)V" />
+		<method name="getNotificationChannels(Ljava/lang/String;)Ljava/util/List;" />
 		<method name="onNotificationEnqueued(Landroid/service/notification/StatusBarNotification;IZ)Landroid/service/notification/Adjustment;" />
+		<method name="updateNotificationChannel(Ljava/lang/String;Landroid/app/NotificationChannel;)V" />
 		<field name="SERVICE_INTERFACE" />
 	</class>
 	<class name="android/service/notification/NotificationListenerService" since="18">
@@ -37864,6 +37996,7 @@
 		<field name="KEY_SHOW_ONSCREEN_DIAL_BUTTON_BOOL" />
 		<field name="KEY_SIM_NETWORK_UNLOCK_ALLOW_DISMISS_BOOL" />
 		<field name="KEY_SMS_REQUIRES_DESTINATION_NUMBER_CONVERSION_BOOL" since="26" />
+		<field name="KEY_SUPPORT_3GPP_CALL_FORWARDING_WHILE_ROAMING_BOOL" since="26" />
 		<field name="KEY_SUPPORT_CONFERENCE_CALL_BOOL" since="24" />
 		<field name="KEY_SUPPORT_PAUSE_IMS_VIDEO_CALLS_BOOL" />
 		<field name="KEY_SUPPORT_SWAP_AFTER_MERGE_BOOL" />
@@ -38381,6 +38514,7 @@
 		<method name="getSimOperatorName()Ljava/lang/String;" />
 		<method name="getSimSerialNumber()Ljava/lang/String;" />
 		<method name="getSimState()I" />
+		<method name="getSimState(I)I" since="26" />
 		<method name="getSubscriberId()Ljava/lang/String;" />
 		<method name="getVoiceMailAlphaTag()Ljava/lang/String;" />
 		<method name="getVoiceMailNumber()Ljava/lang/String;" />
@@ -38465,7 +38599,11 @@
 		<field name="PHONE_TYPE_NONE" />
 		<field name="PHONE_TYPE_SIP" since="11" />
 		<field name="SIM_STATE_ABSENT" />
+		<field name="SIM_STATE_CARD_IO_ERROR" since="26" />
+		<field name="SIM_STATE_CARD_RESTRICTED" since="26" />
 		<field name="SIM_STATE_NETWORK_LOCKED" />
+		<field name="SIM_STATE_NOT_READY" since="26" />
+		<field name="SIM_STATE_PERM_DISABLED" since="26" />
 		<field name="SIM_STATE_PIN_REQUIRED" />
 		<field name="SIM_STATE_PUK_REQUIRED" />
 		<field name="SIM_STATE_READY" />
@@ -38994,7 +39132,7 @@
 		<method name="&lt;init>()V" />
 		<method name="make(Ljava/lang/CharSequence;[CII)Landroid/text/AlteredCharSequence;" />
 	</class>
-	<class name="android/text/AndroidCharacter" since="1">
+	<class name="android/text/AndroidCharacter" since="1" deprecated="26">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="getDirectionalities([C[BI)V" />
@@ -39459,6 +39597,12 @@
 		<method name="&lt;init>()V" />
 		<method name="getTypeConfidence()Ljava/util/Map;" />
 	</class>
+	<class name="android/text/TextClassificationManager" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/text/TextAssistant" />
+		<method name="&lt;init>()V" />
+		<method name="detectLanguages(Ljava/lang/CharSequence;)Ljava/util/List;" />
+	</class>
 	<class name="android/text/TextDirectionHeuristic" since="18">
 		<extends name="java/lang/Object" />
 		<method name="isRtl(Ljava/lang/CharSequence;II)Z" />
@@ -39473,6 +39617,13 @@
 		<field name="LOCALE" />
 		<field name="LTR" />
 		<field name="RTL" />
+	</class>
+	<class name="android/text/TextLanguage" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>(IILjava/util/Map;)V" />
+		<method name="getEndIndex()I" />
+		<method name="getLanguageConfidence()Ljava/util/Map;" />
+		<method name="getStartIndex()I" />
 	</class>
 	<class name="android/text/TextPaint" since="1">
 		<extends name="android/graphics/Paint" />
@@ -41727,6 +41878,7 @@
 		<method name="findNearestTouchable(Landroid/view/ViewGroup;III[I)Landroid/view/View;" />
 		<method name="findNextFocus(Landroid/view/ViewGroup;Landroid/view/View;I)Landroid/view/View;" />
 		<method name="findNextFocusFromRect(Landroid/view/ViewGroup;Landroid/graphics/Rect;I)Landroid/view/View;" />
+		<method name="findNextKeyboardNavigationCluster(Landroid/view/ViewGroup;Landroid/view/View;I)Landroid/view/View;" since="26" />
 		<method name="getInstance()Landroid/view/FocusFinder;" />
 	</class>
 	<class name="android/view/FrameMetrics" since="24">
@@ -43048,6 +43200,7 @@
 		<method name="addChildrenForAccessibility(Ljava/util/ArrayList;)V" since="16" />
 		<method name="addFocusables(Ljava/util/ArrayList;I)V" />
 		<method name="addFocusables(Ljava/util/ArrayList;II)V" since="4" />
+		<method name="addKeyboardNavigationClusters(Ljava/util/Collection;I)V" since="26" />
 		<method name="addOnAttachStateChangeListener(Landroid/view/View$OnAttachStateChangeListener;)V" since="12" />
 		<method name="addOnLayoutChangeListener(Landroid/view/View$OnLayoutChangeListener;)V" since="11" />
 		<method name="addTouchables(Ljava/util/ArrayList;)V" />
@@ -43104,7 +43257,8 @@
 		<method name="dispatchNestedPreScroll(II[I[I)Z" since="21" />
 		<method name="dispatchNestedScroll(IIII[I)Z" since="21" />
 		<method name="dispatchPopulateAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)Z" since="4" />
-		<method name="dispatchProvideStructure(Landroid/view/ViewStructure;)V" since="23" />
+		<method name="dispatchProvideStructure(Landroid/view/ViewStructure;)V" since="23" deprecated="26" />
+		<method name="dispatchProvideStructure(Landroid/view/ViewStructure;I)V" since="26" />
 		<method name="dispatchRestoreInstanceState(Landroid/util/SparseArray;)V" />
 		<method name="dispatchSaveInstanceState(Landroid/util/SparseArray;)V" />
 		<method name="dispatchSetActivated(Z)V" since="11" />
@@ -43202,11 +43356,13 @@
 		<method name="getMeasuredWidthAndState()I" since="11" />
 		<method name="getMinimumHeight()I" since="16" />
 		<method name="getMinimumWidth()I" since="16" />
+		<method name="getNextClusterForwardId()I" since="26" />
 		<method name="getNextFocusDownId()I" />
 		<method name="getNextFocusForwardId()I" since="11" />
 		<method name="getNextFocusLeftId()I" />
 		<method name="getNextFocusRightId()I" />
 		<method name="getNextFocusUpId()I" />
+		<method name="getNextSectionForwardId()I" since="26" />
 		<method name="getOnFocusChangeListener()Landroid/view/View$OnFocusChangeListener;" />
 		<method name="getOutlineProvider()Landroid/view/ViewOutlineProvider;" since="21" />
 		<method name="getOverScrollMode()I" since="9" />
@@ -43310,6 +43466,8 @@
 		<method name="isInEditMode()Z" since="3" />
 		<method name="isInLayout()Z" since="18" />
 		<method name="isInTouchMode()Z" />
+		<method name="isKeyboardNavigationCluster()Z" since="26" />
+		<method name="isKeyboardNavigationSection()Z" since="26" />
 		<method name="isLaidOut()Z" since="19" />
 		<method name="isLayoutDirectionResolved()Z" since="19" />
 		<method name="isLayoutRequested()Z" />
@@ -43332,6 +43490,7 @@
 		<method name="isVerticalFadingEdgeEnabled()Z" />
 		<method name="isVerticalScrollBarEnabled()Z" />
 		<method name="jumpDrawablesToCurrentState()V" since="11" />
+		<method name="keyboardNavigationClusterSearch(I)Landroid/view/View;" since="26" />
 		<method name="layout(IIII)V" />
 		<method name="measure(II)V" />
 		<method name="mergeDrawableStates([I[I)[I" />
@@ -43368,8 +43527,10 @@
 		<method name="onMeasure(II)V" />
 		<method name="onOverScrolled(IIZZ)V" since="9" />
 		<method name="onPopulateAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V" since="14" />
-		<method name="onProvideStructure(Landroid/view/ViewStructure;)V" since="23" />
-		<method name="onProvideVirtualStructure(Landroid/view/ViewStructure;)V" since="23" />
+		<method name="onProvideStructure(Landroid/view/ViewStructure;)V" since="23" deprecated="26" />
+		<method name="onProvideStructure(Landroid/view/ViewStructure;I)V" since="26" />
+		<method name="onProvideVirtualStructure(Landroid/view/ViewStructure;)V" since="23" deprecated="26" />
+		<method name="onProvideVirtualStructure(Landroid/view/ViewStructure;I)V" since="26" />
 		<method name="onResolvePointerIcon(Landroid/view/MotionEvent;I)Landroid/view/PointerIcon;" since="24" />
 		<method name="onRestoreInstanceState(Landroid/os/Parcelable;)V" />
 		<method name="onRtlPropertiesChanged(I)V" since="17" />
@@ -43469,6 +43630,8 @@
 		<method name="setId(I)V" />
 		<method name="setImportantForAccessibility(I)V" since="16" />
 		<method name="setKeepScreenOn(Z)V" />
+		<method name="setKeyboardNavigationCluster(Z)V" since="26" />
+		<method name="setKeyboardNavigationSection(Z)V" since="26" />
 		<method name="setLabelFor(I)V" since="17" />
 		<method name="setLayerPaint(Landroid/graphics/Paint;)V" since="17" />
 		<method name="setLayerType(ILandroid/graphics/Paint;)V" since="11" />
@@ -43480,11 +43643,13 @@
 		<method name="setMinimumHeight(I)V" />
 		<method name="setMinimumWidth(I)V" />
 		<method name="setNestedScrollingEnabled(Z)V" since="21" />
+		<method name="setNextClusterForwardId(I)V" since="26" />
 		<method name="setNextFocusDownId(I)V" />
 		<method name="setNextFocusForwardId(I)V" since="11" />
 		<method name="setNextFocusLeftId(I)V" />
 		<method name="setNextFocusRightId(I)V" />
 		<method name="setNextFocusUpId(I)V" />
+		<method name="setNextSectionForwardId(I)V" since="26" />
 		<method name="setOnApplyWindowInsetsListener(Landroid/view/View$OnApplyWindowInsetsListener;)V" since="20" />
 		<method name="setOnClickListener(Landroid/view/View$OnClickListener;)V" />
 		<method name="setOnContextClickListener(Landroid/view/View$OnContextClickListener;)V" since="23" />
@@ -43567,6 +43732,8 @@
 		<field name="ACCESSIBILITY_LIVE_REGION_NONE" since="19" />
 		<field name="ACCESSIBILITY_LIVE_REGION_POLITE" since="19" />
 		<field name="ALPHA" since="14" />
+		<field name="ASSIST_FLAG_NON_SANITIZED_TEXT" since="26" />
+		<field name="ASSIST_FLAG_SANITIZED_TEXT" since="26" />
 		<field name="DRAG_FLAG_GLOBAL" since="24" />
 		<field name="DRAG_FLAG_GLOBAL_PERSISTABLE_URI_PERMISSION" since="24" />
 		<field name="DRAG_FLAG_GLOBAL_PREFIX_URI_PERMISSION" since="24" />
@@ -44122,6 +44289,7 @@
 		<method name="isLayoutRequested()Z" />
 		<method name="isTextAlignmentResolved()Z" since="19" />
 		<method name="isTextDirectionResolved()Z" since="19" />
+		<method name="keyboardNavigationClusterSearch(Landroid/view/View;I)Landroid/view/View;" since="26" />
 		<method name="notifySubtreeAccessibilityStateChanged(Landroid/view/View;Landroid/view/View;I)V" since="19" />
 		<method name="onNestedFling(Landroid/view/View;FFZ)Z" since="21" />
 		<method name="onNestedPreFling(Landroid/view/View;FF)Z" since="21" />
@@ -60137,6 +60305,10 @@
 		<method name="&lt;init>(Ljava/lang/String;)V" />
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/String;)V" />
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" />
+		<method name="filter(Ljava/util/List;Ljava/util/Collection;)Ljava/util/List;" since="26" />
+		<method name="filter(Ljava/util/List;Ljava/util/Collection;Ljava/util/Locale$FilteringMode;)Ljava/util/List;" since="26" />
+		<method name="filterTags(Ljava/util/List;Ljava/util/Collection;)Ljava/util/List;" since="26" />
+		<method name="filterTags(Ljava/util/List;Ljava/util/Collection;Ljava/util/Locale$FilteringMode;)Ljava/util/List;" since="26" />
 		<method name="forLanguageTag(Ljava/lang/String;)Ljava/util/Locale;" since="21" />
 		<method name="getAvailableLocales()[Ljava/util/Locale;" />
 		<method name="getCountry()Ljava/lang/String;" />
@@ -60165,6 +60337,8 @@
 		<method name="getUnicodeLocaleType(Ljava/lang/String;)Ljava/lang/String;" since="21" />
 		<method name="getVariant()Ljava/lang/String;" />
 		<method name="hasExtensions()Z" since="26" />
+		<method name="lookup(Ljava/util/List;Ljava/util/Collection;)Ljava/util/Locale;" since="26" />
+		<method name="lookupTag(Ljava/util/List;Ljava/util/Collection;)Ljava/lang/String;" since="26" />
 		<method name="setDefault(Ljava/util/Locale$Category;Ljava/util/Locale;)V" since="24" />
 		<method name="setDefault(Ljava/util/Locale;)V" />
 		<method name="stripExtensions()Ljava/util/Locale;" since="26" />
@@ -60217,6 +60391,28 @@
 		<method name="values()[Ljava/util/Locale$Category;" />
 		<field name="DISPLAY" />
 		<field name="FORMAT" />
+	</class>
+	<class name="java/util/Locale$FilteringMode" since="26">
+		<extends name="java/lang/Enum" />
+		<method name="valueOf(Ljava/lang/String;)Ljava/util/Locale$FilteringMode;" />
+		<method name="values()[Ljava/util/Locale$FilteringMode;" />
+		<field name="AUTOSELECT_FILTERING" />
+		<field name="EXTENDED_FILTERING" />
+		<field name="IGNORE_EXTENDED_RANGES" />
+		<field name="MAP_EXTENDED_RANGES" />
+		<field name="REJECT_EXTENDED_RANGES" />
+	</class>
+	<class name="java/util/Locale$LanguageRange" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>(Ljava/lang/String;)V" />
+		<method name="&lt;init>(Ljava/lang/String;D)V" />
+		<method name="getRange()Ljava/lang/String;" />
+		<method name="getWeight()D" />
+		<method name="mapEquivalents(Ljava/util/List;Ljava/util/Map;)Ljava/util/List;" />
+		<method name="parse(Ljava/lang/String;)Ljava/util/List;" />
+		<method name="parse(Ljava/lang/String;Ljava/util/Map;)Ljava/util/List;" />
+		<field name="MAX_WEIGHT" />
+		<field name="MIN_WEIGHT" />
 	</class>
 	<class name="java/util/LongSummaryStatistics" since="24">
 		<extends name="java/lang/Object" />

@@ -43,6 +43,7 @@
 		<field name="BIND_TELECOM_CONNECTION_SERVICE" since="23" />
 		<field name="BIND_TEXT_SERVICE" since="14" />
 		<field name="BIND_TV_INPUT" since="21" />
+		<field name="BIND_VISUAL_VOICEMAIL_SERVICE" since="26" />
 		<field name="BIND_VOICE_INTERACTION" since="21" />
 		<field name="BIND_VPN_SERVICE" since="14" />
 		<field name="BIND_VR_LISTENER_SERVICE" since="24" />
@@ -1352,6 +1353,7 @@
 		<field name="textCheckMarkInverse" />
 		<field name="textColor" />
 		<field name="textColorAlertDialogListItem" since="11" />
+		<field name="textColorError" since="26" />
 		<field name="textColorHighlight" />
 		<field name="textColorHighlightInverse" since="11" />
 		<field name="textColorHint" />
@@ -5364,6 +5366,7 @@
 		<method name="&lt;init>(Landroid/os/Parcel;)V" />
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/CharSequence;I)V" />
 		<method name="canBypassDnd()Z" />
+		<method name="canShowBadge()Z" />
 		<method name="enableVibration(Z)V" />
 		<method name="getId()Ljava/lang/String;" />
 		<method name="getImportance()I" />
@@ -5371,10 +5374,13 @@
 		<method name="getName()Ljava/lang/CharSequence;" />
 		<method name="getSound()Landroid/net/Uri;" />
 		<method name="getVibrationPattern()[J" />
+		<method name="isAllowed()Z" />
+		<method name="setAllowed(Z)V" />
 		<method name="setBypassDnd(Z)V" />
 		<method name="setImportance(I)V" />
 		<method name="setLights(Z)V" />
 		<method name="setLockscreenVisibility(I)V" />
+		<method name="setShowBadge(Z)V" />
 		<method name="setSound(Landroid/net/Uri;)V" />
 		<method name="setVibrationPattern([J)V" />
 		<method name="shouldShowLights()Z" />
@@ -7983,6 +7989,7 @@
 		<method name="query(Landroid/net/Uri;[Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/database/Cursor;" since="26" />
 		<method name="query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;" />
 		<method name="query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/database/Cursor;" since="16" />
+		<method name="refresh(Landroid/net/Uri;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Z" since="26" />
 		<method name="release()Z" deprecated="24" />
 		<method name="uncanonicalize(Landroid/net/Uri;)Landroid/net/Uri;" since="19" />
 		<method name="update(Landroid/net/Uri;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)I" />
@@ -8105,6 +8112,7 @@
 		<field name="ANY_CURSOR_ITEM_TYPE" since="21" />
 		<field name="CURSOR_DIR_BASE_TYPE" />
 		<field name="CURSOR_ITEM_BASE_TYPE" />
+		<field name="EXTRA_REFRESH_SUPPORTED" since="26" />
 		<field name="EXTRA_SIZE" since="21" />
 		<field name="NOTIFY_SKIP_NOTIFY_FOR_DESCENDANTS" since="24" />
 		<field name="NOTIFY_SYNC_TO_NETWORK" since="24" />
@@ -8550,6 +8558,7 @@
 		<method name="readFromParcel(Landroid/os/Parcel;)V" />
 		<method name="removeCategory(Ljava/lang/String;)V" />
 		<method name="removeExtra(Ljava/lang/String;)V" />
+		<method name="removeFlags(I)V" since="26" />
 		<method name="replaceExtras(Landroid/content/Intent;)Landroid/content/Intent;" since="3" />
 		<method name="replaceExtras(Landroid/os/Bundle;)Landroid/content/Intent;" since="3" />
 		<method name="resolveActivity(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;" />
@@ -19670,6 +19679,7 @@
 		<field name="USAGE_ASSISTANCE_ACCESSIBILITY" />
 		<field name="USAGE_ASSISTANCE_NAVIGATION_GUIDANCE" />
 		<field name="USAGE_ASSISTANCE_SONIFICATION" />
+		<field name="USAGE_ASSISTANT" since="26" />
 		<field name="USAGE_GAME" />
 		<field name="USAGE_MEDIA" />
 		<field name="USAGE_NOTIFICATION" />
@@ -19817,6 +19827,7 @@
 		<method name="adjustVolume(II)V" />
 		<method name="dispatchMediaKeyEvent(Landroid/view/KeyEvent;)V" since="19" />
 		<method name="generateAudioSessionId()I" since="21" />
+		<method name="getActivePlaybackConfigurations()Ljava/util/List;" since="26" />
 		<method name="getActiveRecordingConfigurations()Ljava/util/List;" since="24" />
 		<method name="getDevices(I)[Landroid/media/AudioDeviceInfo;" since="23" />
 		<method name="getMode()I" />
@@ -19840,6 +19851,7 @@
 		<method name="playSoundEffect(I)V" />
 		<method name="playSoundEffect(IF)V" since="3" />
 		<method name="registerAudioDeviceCallback(Landroid/media/AudioDeviceCallback;Landroid/os/Handler;)V" since="23" />
+		<method name="registerAudioPlaybackCallback(Landroid/media/AudioManager$AudioPlaybackCallback;Landroid/os/Handler;)V" since="26" />
 		<method name="registerAudioRecordingCallback(Landroid/media/AudioManager$AudioRecordingCallback;Landroid/os/Handler;)V" since="24" />
 		<method name="registerMediaButtonEventReceiver(Landroid/app/PendingIntent;)V" since="18" deprecated="21" />
 		<method name="registerMediaButtonEventReceiver(Landroid/content/ComponentName;)V" since="8" deprecated="21" />
@@ -19864,6 +19876,7 @@
 		<method name="stopBluetoothSco()V" since="8" />
 		<method name="unloadSoundEffects()V" />
 		<method name="unregisterAudioDeviceCallback(Landroid/media/AudioDeviceCallback;)V" since="23" />
+		<method name="unregisterAudioPlaybackCallback(Landroid/media/AudioManager$AudioPlaybackCallback;)V" since="26" />
 		<method name="unregisterAudioRecordingCallback(Landroid/media/AudioManager$AudioRecordingCallback;)V" since="24" />
 		<method name="unregisterMediaButtonEventReceiver(Landroid/app/PendingIntent;)V" since="18" deprecated="21" />
 		<method name="unregisterMediaButtonEventReceiver(Landroid/content/ComponentName;)V" since="8" deprecated="21" />
@@ -19961,6 +19974,11 @@
 		<field name="VIBRATE_TYPE_NOTIFICATION" deprecated="16" />
 		<field name="VIBRATE_TYPE_RINGER" deprecated="16" />
 	</class>
+	<class name="android/media/AudioManager$AudioPlaybackCallback" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="onPlaybackConfigChanged(Ljava/util/List;)V" />
+	</class>
 	<class name="android/media/AudioManager$AudioRecordingCallback" since="24">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
@@ -19969,6 +19987,13 @@
 	<class name="android/media/AudioManager$OnAudioFocusChangeListener" since="8">
 		<extends name="java/lang/Object" />
 		<method name="onAudioFocusChange(I)V" />
+	</class>
+	<class name="android/media/AudioPlaybackConfiguration" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<method name="getAudioAttributes()Landroid/media/AudioAttributes;" />
+		<field name="CREATOR" />
 	</class>
 	<class name="android/media/AudioRecord" since="3">
 		<extends name="java/lang/Object" />
@@ -29551,6 +29576,7 @@
 		<method name="detectActivityLeaks()Landroid/os/StrictMode$VmPolicy$Builder;" since="11" />
 		<method name="detectAll()Landroid/os/StrictMode$VmPolicy$Builder;" />
 		<method name="detectCleartextNetwork()Landroid/os/StrictMode$VmPolicy$Builder;" since="23" />
+		<method name="detectContentUriWithoutPermission()Landroid/os/StrictMode$VmPolicy$Builder;" since="26" />
 		<method name="detectFileUriExposure()Landroid/os/StrictMode$VmPolicy$Builder;" since="18" />
 		<method name="detectLeakedClosableObjects()Landroid/os/StrictMode$VmPolicy$Builder;" since="11" />
 		<method name="detectLeakedRegistrationObjects()Landroid/os/StrictMode$VmPolicy$Builder;" since="16" />
@@ -32575,6 +32601,7 @@
 		<method name="moveDocument(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;" since="24" />
 		<method name="removeDocument(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z" since="24" />
 		<method name="renameDocument(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;" since="21" />
+		<field name="ACTION_DOCUMENT_SETTINGS" since="26" />
 		<field name="EXTRA_ERROR" />
 		<field name="EXTRA_EXCLUDE_SELF" since="23" />
 		<field name="EXTRA_INFO" />
@@ -32603,6 +32630,7 @@
 		<field name="FLAG_SUPPORTS_MOVE" since="24" />
 		<field name="FLAG_SUPPORTS_REMOVE" since="24" />
 		<field name="FLAG_SUPPORTS_RENAME" since="21" />
+		<field name="FLAG_SUPPORTS_SETTINGS" since="26" />
 		<field name="FLAG_SUPPORTS_THUMBNAIL" />
 		<field name="FLAG_SUPPORTS_WRITE" />
 		<field name="FLAG_VIRTUAL_DOCUMENT" since="24" />
@@ -33096,6 +33124,7 @@
 		<field name="ACTION_WIFI_IP_SETTINGS" since="3" />
 		<field name="ACTION_WIFI_SETTINGS" />
 		<field name="ACTION_WIRELESS_SETTINGS" />
+		<field name="ACTION_ZEN_MODE_PRIORITY_SETTINGS" since="26" />
 		<field name="AUTHORITY" />
 		<field name="EXTRA_ACCOUNT_TYPES" since="18" />
 		<field name="EXTRA_AIRPLANE_MODE_ENABLED" since="23" />
@@ -37901,6 +37930,7 @@
 		<field name="KEY_ALWAYS_SHOW_EMERGENCY_ALERT_ONOFF_BOOL" since="24" />
 		<field name="KEY_APN_EXPAND_BOOL" />
 		<field name="KEY_AUTO_RETRY_ENABLED_BOOL" />
+		<field name="KEY_CALL_FORWARDING_BLOCKS_WHILE_ROAMING_STRING_ARRAY" since="26" />
 		<field name="KEY_CARRIER_ALLOW_TURNOFF_IMS_BOOL" />
 		<field name="KEY_CARRIER_DATA_CALL_PERMANENT_FAILURE_STRINGS" since="26" />
 		<field name="KEY_CARRIER_FORCE_DISABLE_ETWS_CMAS_TEST_BOOL" since="24" />
@@ -37994,6 +38024,7 @@
 		<field name="KEY_SHOW_CDMA_CHOICES_BOOL" />
 		<field name="KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL" since="24" />
 		<field name="KEY_SHOW_ONSCREEN_DIAL_BUTTON_BOOL" />
+		<field name="KEY_SIMPLIFIED_NETWORK_SETTINGS_BOOL" since="26" />
 		<field name="KEY_SIM_NETWORK_UNLOCK_ALLOW_DISMISS_BOOL" />
 		<field name="KEY_SMS_REQUIRES_DESTINATION_NUMBER_CONVERSION_BOOL" since="26" />
 		<field name="KEY_SUPPORT_3GPP_CALL_FORWARDING_WHILE_ROAMING_BOOL" since="26" />
@@ -38616,6 +38647,54 @@
 		<method name="&lt;init>()V" />
 		<method name="onReceiveUssdResponse(Ljava/lang/String;Ljava/lang/CharSequence;)V" />
 		<method name="onReceiveUssdResponseFailed(Ljava/lang/String;I)V" />
+	</class>
+	<class name="android/telephony/VisualVoicemailService" since="26">
+		<extends name="android/app/Service" />
+		<method name="&lt;init>()V" />
+		<method name="onCellServiceConnected(Landroid/telephony/VisualVoicemailService$VisualVoicemailTask;Landroid/telecom/PhoneAccountHandle;)V" />
+		<method name="onSimRemoved(Landroid/telephony/VisualVoicemailService$VisualVoicemailTask;Landroid/telecom/PhoneAccountHandle;)V" />
+		<method name="onSmsReceived(Landroid/telephony/VisualVoicemailService$VisualVoicemailTask;Landroid/telephony/VisualVoicemailSms;)V" />
+		<method name="onStopped(Landroid/telephony/VisualVoicemailService$VisualVoicemailTask;)V" />
+		<method name="sendVisualVoicemailSms(Landroid/content/Context;Landroid/telecom/PhoneAccountHandle;Ljava/lang/String;SLjava/lang/String;Landroid/app/PendingIntent;)V" />
+		<method name="setSmsFilterSettings(Landroid/content/Context;Landroid/telecom/PhoneAccountHandle;Landroid/telephony/VisualVoicemailSmsFilterSettings;)V" />
+		<field name="SERVICE_INTERFACE" />
+	</class>
+	<class name="android/telephony/VisualVoicemailService$VisualVoicemailTask" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="finish()V" />
+	</class>
+	<class name="android/telephony/VisualVoicemailSms" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<method name="getFields()Landroid/os/Bundle;" />
+		<method name="getMessageBody()Ljava/lang/String;" />
+		<method name="getPhoneAccountHandle()Landroid/telecom/PhoneAccountHandle;" />
+		<method name="getPrefix()Ljava/lang/String;" />
+		<field name="CREATOR" />
+	</class>
+	<class name="android/telephony/VisualVoicemailSmsFilterSettings" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<field name="CREATOR" />
+		<field name="DEFAULT_CLIENT_PREFIX" />
+		<field name="DEFAULT_DESTINATION_PORT" />
+		<field name="DEFAULT_ORIGINATING_NUMBERS" />
+		<field name="DESTINATION_PORT_ANY" />
+		<field name="DESTINATION_PORT_DATA_SMS" />
+		<field name="clientPrefix" />
+		<field name="destinationPort" />
+		<field name="originatingNumbers" />
+	</class>
+	<class name="android/telephony/VisualVoicemailSmsFilterSettings$Builder" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="build()Landroid/telephony/VisualVoicemailSmsFilterSettings;" />
+		<method name="setClientPrefix(Ljava/lang/String;)Landroid/telephony/VisualVoicemailSmsFilterSettings$Builder;" />
+		<method name="setDestinationPort(I)Landroid/telephony/VisualVoicemailSmsFilterSettings$Builder;" />
+		<method name="setOriginatingNumbers(Ljava/util/List;)Landroid/telephony/VisualVoicemailSmsFilterSettings$Builder;" />
 	</class>
 	<class name="android/telephony/cdma/CdmaCellLocation" since="5">
 		<extends name="android/telephony/CellLocation" />
@@ -43584,6 +43663,7 @@
 		<method name="resolveSize(II)I" />
 		<method name="resolveSizeAndState(III)I" since="11" />
 		<method name="restoreHierarchyState(Landroid/util/SparseArray;)V" />
+		<method name="restoreLastFocus()Z" since="26" />
 		<method name="saveHierarchyState(Landroid/util/SparseArray;)V" />
 		<method name="scrollBy(II)V" />
 		<method name="scrollTo(II)V" />

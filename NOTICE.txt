@@ -3408,9 +3408,7 @@ Public License instead of this License.
 
 ============================================================
 Notices for file(s):
-/lib/libunwind.a
 /lib/libunwind.so
-/lib64/libunwind.a
 /lib64/libunwind.so
 ------------------------------------------------------------
 Permission is hereby granted, free of charge, to any person obtaining
@@ -3435,9 +3433,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ============================================================
 Notices for file(s):
 /lib/libevent-host.so
-/lib/libevent.a
 /lib64/libevent-host.so
-/lib64/libevent.a
 ------------------------------------------------------------
 Libevent is available for use under the following license, commonly known
 as the 3-clause (or "modified") BSD license:
@@ -4766,9 +4762,6 @@ support library is itself covered by the above license.
 ============================================================
 Notices for file(s):
 /bin/memory_replay
-/bin/simpleperf
-/lib/libsimpleperf.a
-/lib64/libsimpleperf.a
 /nativetest/memory_replay_tests/memory_replay_tests32
 /nativetest64/memory_replay_tests/memory_replay_tests64
 ------------------------------------------------------------

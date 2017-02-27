@@ -471,6 +471,7 @@
 		<field name="colorControlHighlight" since="21" />
 		<field name="colorControlNormal" since="21" />
 		<field name="colorEdgeEffect" since="21" />
+		<field name="colorError" since="26" />
 		<field name="colorFocusedHighlight" since="14" />
 		<field name="colorForeground" />
 		<field name="colorForegroundInverse" />
@@ -1377,7 +1378,6 @@
 		<field name="textCheckMarkInverse" />
 		<field name="textColor" />
 		<field name="textColorAlertDialogListItem" since="11" />
-		<field name="textColorError" since="26" />
 		<field name="textColorHighlight" />
 		<field name="textColorHighlightInverse" since="11" />
 		<field name="textColorHint" />
@@ -4726,6 +4726,7 @@
 		<method name="getPrimaryNavigationFragment()Landroid/app/Fragment;" since="26" />
 		<method name="invalidateOptionsMenu()V" since="14" />
 		<method name="isDestroyed()Z" since="17" />
+		<method name="isStateSaved()Z" since="26" />
 		<method name="popBackStack()V" />
 		<method name="popBackStack(II)V" />
 		<method name="popBackStack(Ljava/lang/String;I)V" />
@@ -8886,6 +8887,7 @@
 		<field name="ACTION_CALL" />
 		<field name="ACTION_CALL_BUTTON" />
 		<field name="ACTION_CAMERA_BUTTON" />
+		<field name="ACTION_CARRIER_SETUP" since="26" />
 		<field name="ACTION_CHOOSER" />
 		<field name="ACTION_CLEAR_PACKAGE" since="26" />
 		<field name="ACTION_CLOSE_SYSTEM_DIALOGS" />
@@ -12355,6 +12357,7 @@
 		<method name="valueOf(Ljava/lang/String;)Landroid/graphics/ColorSpace$Adaptation;" />
 		<method name="values()[Landroid/graphics/ColorSpace$Adaptation;" />
 		<field name="BRADFORD" />
+		<field name="CIECAT02" />
 		<field name="VON_KRIES" />
 	</class>
 	<class name="android/graphics/ColorSpace$Connector" since="26">
@@ -20720,6 +20723,7 @@
 	<class name="android/media/AudioTrack" since="3">
 		<extends name="java/lang/Object" />
 		<implements name="android/media/AudioRouting" since="24" />
+		<implements name="android/media/VolumeAutomation" since="26" />
 		<method name="&lt;init>(IIIIII)V" deprecated="26" />
 		<method name="&lt;init>(IIIIIII)V" since="9" deprecated="26" />
 		<method name="&lt;init>(Landroid/media/AudioAttributes;Landroid/media/AudioFormat;III)V" since="21" />
@@ -21198,9 +21202,44 @@
 		<field name="START_VIDEO_RECORDING" />
 		<field name="STOP_VIDEO_RECORDING" />
 	</class>
+	<class name="android/media/MediaCas" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>(I)V" />
+		<method name="closeSession([B)V" />
+		<method name="enumeratePlugins()[Landroid/media/MediaCas$PluginDescriptor;" />
+		<method name="isSystemIdSupported(I)Z" />
+		<method name="openSession(I)[B" />
+		<method name="openSession(II)[B" />
+		<method name="processEcm([B[B)V" />
+		<method name="processEcm([B[BII)V" />
+		<method name="processEmm([B)V" />
+		<method name="processEmm([BII)V" />
+		<method name="provision(Ljava/lang/String;)V" />
+		<method name="refreshEntitlements(I[B)V" />
+		<method name="release()V" />
+		<method name="sendEvent(II[B)V" />
+		<method name="setEventListener(Landroid/media/MediaCas$EventListener;Landroid/os/Handler;)V" />
+		<method name="setPrivateData([B)V" />
+		<method name="setSessionPrivateData([B[B)V" />
+	</class>
+	<class name="android/media/MediaCas$EventListener" since="26">
+		<extends name="java/lang/Object" />
+		<method name="onEvent(Landroid/media/MediaCas;II[B)V" />
+	</class>
+	<class name="android/media/MediaCas$PluginDescriptor" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="getName()Ljava/lang/String;" />
+		<method name="getSystemId()I" />
+	</class>
+	<class name="android/media/MediaCasException" since="26">
+		<extends name="java/lang/Exception" />
+		<method name="&lt;init>(Ljava/lang/String;)V" />
+	</class>
 	<class name="android/media/MediaCodec" since="16">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
+		<method name="configure(Landroid/media/MediaFormat;Landroid/view/Surface;ILandroid/media/MediaDescrambler;)V" since="26" />
 		<method name="configure(Landroid/media/MediaFormat;Landroid/view/Surface;Landroid/media/MediaCrypto;I)V" />
 		<method name="createByCodecName(Ljava/lang/String;)Landroid/media/MediaCodec;" />
 		<method name="createDecoderByType(Ljava/lang/String;)Landroid/media/MediaCodec;" />
@@ -21241,6 +21280,7 @@
 		<field name="BUFFER_FLAG_CODEC_CONFIG" />
 		<field name="BUFFER_FLAG_END_OF_STREAM" />
 		<field name="BUFFER_FLAG_KEY_FRAME" since="21" />
+		<field name="BUFFER_FLAG_PARTIAL_FRAME" since="26" />
 		<field name="BUFFER_FLAG_SYNC_FRAME" deprecated="21" />
 		<field name="CONFIGURE_FLAG_ENCODE" />
 		<field name="CRYPTO_MODE_AES_CBC" since="24" />
@@ -21400,6 +21440,7 @@
 		<field name="COLOR_TI_FormatYUV420PackedSemiPlanar" deprecated="23" />
 		<field name="FEATURE_AdaptivePlayback" since="19" />
 		<field name="FEATURE_IntraRefresh" since="24" />
+		<field name="FEATURE_PartialFrame" since="26" />
 		<field name="FEATURE_SecurePlayback" since="21" />
 		<field name="FEATURE_TunneledPlayback" since="21" />
 		<field name="colorFormats" />
@@ -21627,6 +21668,14 @@
 		<method name="getSize()J" />
 		<method name="readAt(J[BII)I" />
 	</class>
+	<class name="android/media/MediaDescrambler" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>(I)V" />
+		<method name="descramble(Ljava/nio/ByteBuffer;ILjava/nio/ByteBuffer;ILandroid/media/MediaCodec$CryptoInfo;)I" />
+		<method name="release()V" />
+		<method name="requiresSecureDecoderComponent(Ljava/lang/String;)Z" />
+		<method name="setMediaCasSession([B)V" />
+	</class>
 	<class name="android/media/MediaDescription" since="21">
 		<extends name="java/lang/Object" />
 		<implements name="android/os/Parcelable" />
@@ -21789,8 +21838,10 @@
 		<method name="setDataSource(Ljava/io/FileDescriptor;JJ)V" />
 		<method name="setDataSource(Ljava/lang/String;)V" />
 		<method name="setDataSource(Ljava/lang/String;Ljava/util/Map;)V" />
+		<method name="setMediaCas(Landroid/media/MediaCas;)V" since="26" />
 		<method name="unselectTrack(I)V" />
 		<field name="SAMPLE_FLAG_ENCRYPTED" />
+		<field name="SAMPLE_FLAG_PARTIAL_FRAME" since="26" />
 		<field name="SAMPLE_FLAG_SYNC" />
 		<field name="SEEK_TO_CLOSEST_SYNC" />
 		<field name="SEEK_TO_NEXT_SYNC" />
@@ -21887,6 +21938,7 @@
 		<field name="MIMETYPE_AUDIO_OPUS" since="21" />
 		<field name="MIMETYPE_AUDIO_QCELP" since="21" />
 		<field name="MIMETYPE_AUDIO_RAW" since="21" />
+		<field name="MIMETYPE_AUDIO_SCRAMBLED" since="26" />
 		<field name="MIMETYPE_AUDIO_VORBIS" since="21" />
 		<field name="MIMETYPE_TEXT_CEA_608" since="21" />
 		<field name="MIMETYPE_TEXT_VTT" since="21" />
@@ -21897,6 +21949,7 @@
 		<field name="MIMETYPE_VIDEO_MPEG2" since="21" />
 		<field name="MIMETYPE_VIDEO_MPEG4" since="21" />
 		<field name="MIMETYPE_VIDEO_RAW" since="21" />
+		<field name="MIMETYPE_VIDEO_SCRAMBLED" since="26" />
 		<field name="MIMETYPE_VIDEO_VP8" since="21" />
 		<field name="MIMETYPE_VIDEO_VP9" since="21" />
 	</class>
@@ -22040,6 +22093,7 @@
 	</class>
 	<class name="android/media/MediaPlayer" since="1">
 		<extends name="java/lang/Object" />
+		<implements name="android/media/VolumeAutomation" since="26" />
 		<method name="&lt;init>()V" />
 		<method name="addTimedTextSource(Landroid/content/Context;Landroid/net/Uri;Ljava/lang/String;)V" since="16" />
 		<method name="addTimedTextSource(Ljava/io/FileDescriptor;JJLjava/lang/String;)V" since="16" />
@@ -22885,9 +22939,17 @@
 		<field name="TONE_SUP_RADIO_NOTAVAIL" />
 		<field name="TONE_SUP_RINGTONE" />
 	</class>
+	<class name="android/media/UnsupportedCasException" since="26">
+		<extends name="android/media/MediaCasException" />
+		<method name="&lt;init>(Ljava/lang/String;)V" />
+	</class>
 	<class name="android/media/UnsupportedSchemeException" since="18">
 		<extends name="android/media/MediaDrmException" />
 		<method name="&lt;init>(Ljava/lang/String;)V" />
+	</class>
+	<class name="android/media/VolumeAutomation" since="26">
+		<extends name="java/lang/Object" />
+		<method name="createVolumeShaper(Landroid/media/VolumeShaper$Configuration;)Landroid/media/VolumeShaper;" />
 	</class>
 	<class name="android/media/VolumeProvider" since="21">
 		<extends name="java/lang/Object" />
@@ -22901,6 +22963,54 @@
 		<field name="VOLUME_CONTROL_ABSOLUTE" />
 		<field name="VOLUME_CONTROL_FIXED" />
 		<field name="VOLUME_CONTROL_RELATIVE" />
+	</class>
+	<class name="android/media/VolumeShaper" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="java/lang/AutoCloseable" />
+		<method name="&lt;init>()V" />
+		<method name="apply(Landroid/media/VolumeShaper$Operation;)V" />
+		<method name="getVolume()F" />
+		<method name="replace(Landroid/media/VolumeShaper$Configuration;Landroid/media/VolumeShaper$Operation;Z)V" />
+	</class>
+	<class name="android/media/VolumeShaper$Configuration" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<method name="getDurationMs()D" />
+		<method name="getInterpolatorType()I" />
+		<method name="getMaximumCurvePoints()I" />
+		<method name="getTimes()[F" />
+		<method name="getVolumes()[F" />
+		<field name="CREATOR" />
+		<field name="CUBIC_RAMP" />
+		<field name="INTERPOLATOR_TYPE_CUBIC" />
+		<field name="INTERPOLATOR_TYPE_CUBIC_MONOTONIC" />
+		<field name="INTERPOLATOR_TYPE_LINEAR" />
+		<field name="INTERPOLATOR_TYPE_STEP" />
+		<field name="LINEAR_RAMP" />
+		<field name="SCURVE_RAMP" />
+		<field name="SINE_RAMP" />
+	</class>
+	<class name="android/media/VolumeShaper$Configuration$Builder" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="&lt;init>(Landroid/media/VolumeShaper$Configuration;)V" />
+		<method name="build()Landroid/media/VolumeShaper$Configuration;" />
+		<method name="invertVolumes()Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="reflectTimes()Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="scaleToEndVolume(F)Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="scaleToStartVolume(F)Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="setCurve([F[F)Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="setDurationMs(D)Landroid/media/VolumeShaper$Configuration$Builder;" />
+		<method name="setInterpolatorType(I)Landroid/media/VolumeShaper$Configuration$Builder;" />
+	</class>
+	<class name="android/media/VolumeShaper$Operation" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<field name="CREATOR" />
+		<field name="PLAY" />
+		<field name="REVERSE" />
 	</class>
 	<class name="android/media/audiofx/AcousticEchoCanceler" since="16">
 		<extends name="android/media/audiofx/AudioEffect" />
@@ -36910,16 +37020,32 @@
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="addDataset(Landroid/service/autofill/Dataset;)Landroid/service/autofill/FillResponse$Builder;" />
-		<method name="addSavableFields([Landroid/view/autofill/AutoFillId;)Landroid/service/autofill/FillResponse$Builder;" />
 		<method name="build()Landroid/service/autofill/FillResponse;" />
 		<method name="setAuthentication(Landroid/content/IntentSender;Landroid/widget/RemoteViews;)Landroid/service/autofill/FillResponse$Builder;" />
 		<method name="setExtras(Landroid/os/Bundle;)Landroid/service/autofill/FillResponse$Builder;" />
+		<method name="setSaveInfo(Landroid/service/autofill/SaveInfo;)Landroid/service/autofill/FillResponse$Builder;" />
 	</class>
 	<class name="android/service/autofill/SaveCallback" since="26">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="onFailure(Ljava/lang/CharSequence;)V" />
 		<method name="onSuccess()V" />
+	</class>
+	<class name="android/service/autofill/SaveInfo" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="android/os/Parcelable" />
+		<method name="&lt;init>()V" />
+		<field name="CREATOR" />
+		<field name="SAVE_UI_TYPE_ADDRESS" />
+		<field name="SAVE_UI_TYPE_CREDENTIALS" />
+		<field name="SAVE_UI_TYPE_GENERIC" />
+		<field name="SAVE_UI_TYPE_PAYMENT" />
+	</class>
+	<class name="android/service/autofill/SaveInfo$Builder" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>(I)V" />
+		<method name="addSavableIds([Landroid/view/autofill/AutoFillId;)Landroid/service/autofill/SaveInfo$Builder;" />
+		<method name="build()Landroid/service/autofill/SaveInfo;" />
 	</class>
 	<class name="android/service/carrier/CarrierIdentifier" since="23">
 		<extends name="java/lang/Object" />
@@ -40438,7 +40564,7 @@
 		<extends name="android/content/res/Resources" />
 		<method name="&lt;init>()V" />
 	</class>
-	<class name="android/test/suitebuilder/TestMethod" since="1">
+	<class name="android/test/suitebuilder/TestMethod" since="1" deprecated="26">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/Class;)V" since="3" />
 		<method name="&lt;init>(Ljava/lang/reflect/Method;Ljava/lang/Class;)V" />
@@ -40449,7 +40575,7 @@
 		<method name="getEnclosingClassname()Ljava/lang/String;" />
 		<method name="getName()Ljava/lang/String;" />
 	</class>
-	<class name="android/test/suitebuilder/TestSuiteBuilder" since="1">
+	<class name="android/test/suitebuilder/TestSuiteBuilder" since="1" deprecated="26">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>(Ljava/lang/Class;)V" />
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/ClassLoader;)V" />
@@ -40462,7 +40588,7 @@
 		<method name="includePackages([Ljava/lang/String;)Landroid/test/suitebuilder/TestSuiteBuilder;" />
 		<method name="named(Ljava/lang/String;)Landroid/test/suitebuilder/TestSuiteBuilder;" />
 	</class>
-	<class name="android/test/suitebuilder/TestSuiteBuilder$FailedToCreateTests" since="1">
+	<class name="android/test/suitebuilder/TestSuiteBuilder$FailedToCreateTests" since="1" deprecated="26">
 		<extends name="junit/framework/TestCase" />
 		<method name="&lt;init>(Ljava/lang/Exception;)V" />
 		<method name="testSuiteConstructionFailed()V" />
@@ -43296,11 +43422,13 @@
 		<field name="DRAW_DURATION" />
 		<field name="FIRST_DRAW_FRAME" />
 		<field name="INPUT_HANDLING_DURATION" />
+		<field name="INTENDED_VSYNC_TIMESTAMP" since="26" />
 		<field name="LAYOUT_MEASURE_DURATION" />
 		<field name="SWAP_BUFFERS_DURATION" />
 		<field name="SYNC_DURATION" />
 		<field name="TOTAL_DURATION" />
 		<field name="UNKNOWN_DELAY_DURATION" />
+		<field name="VSYNC_TIMESTAMP" since="26" />
 	</class>
 	<class name="android/view/FrameStats" since="21">
 		<extends name="java/lang/Object" />
@@ -51173,7 +51301,7 @@
 		<method name="setZoomSpeed(J)V" />
 		<method name="show()V" />
 	</class>
-	<class name="com/android/internal/util/Predicate" since="1">
+	<class name="com/android/internal/util/Predicate" since="1" deprecated="26">
 		<extends name="java/lang/Object" />
 		<method name="apply(Ljava/lang/Object;)Z" />
 	</class>

@@ -1670,6 +1670,7 @@
 		<field name="alert_light_frame" />
 		<field name="arrow_down_float" />
 		<field name="arrow_up_float" />
+		<field name="autofilled_highlight" since="26" />
 		<field name="bottom_bar" />
 		<field name="btn_default" />
 		<field name="btn_default_small" />
@@ -5099,6 +5100,7 @@
 		<method name="getChannel()Ljava/lang/String;" since="26" />
 		<method name="getGroup()Ljava/lang/String;" since="20" />
 		<method name="getLargeIcon()Landroid/graphics/drawable/Icon;" since="23" />
+		<method name="getSettingsText()Ljava/lang/CharSequence;" since="26" />
 		<method name="getShortcutId()Ljava/lang/String;" since="26" />
 		<method name="getSmallIcon()Landroid/graphics/drawable/Icon;" since="23" />
 		<method name="getSortKey()Ljava/lang/String;" since="20" />
@@ -5143,6 +5145,8 @@
 		<field name="EXTRA_LARGE_ICON_BIG" since="19" />
 		<field name="EXTRA_MEDIA_SESSION" since="21" />
 		<field name="EXTRA_MESSAGES" since="24" />
+		<field name="EXTRA_NOTIFICATION_ID" since="26" />
+		<field name="EXTRA_NOTIFICATION_TAG" since="26" />
 		<field name="EXTRA_PEOPLE" since="19" />
 		<field name="EXTRA_PICTURE" since="19" />
 		<field name="EXTRA_PROGRESS" since="19" />
@@ -5327,6 +5331,7 @@
 		<method name="setProgress(IIZ)Landroid/app/Notification$Builder;" since="14" />
 		<method name="setPublicVersion(Landroid/app/Notification;)Landroid/app/Notification$Builder;" since="21" />
 		<method name="setRemoteInputHistory([Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;" since="24" />
+		<method name="setSettingsText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setShortcutId(Ljava/lang/String;)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setShowWhen(Z)Landroid/app/Notification$Builder;" since="17" />
 		<method name="setSmallIcon(I)Landroid/app/Notification$Builder;" />
@@ -10454,6 +10459,7 @@
 		<field name="DONT_KILL_APP" />
 		<field name="EXTRA_VERIFICATION_ID" since="14" />
 		<field name="EXTRA_VERIFICATION_RESULT" since="17" />
+		<field name="FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS" since="26" />
 		<field name="FEATURE_APP_WIDGETS" since="18" />
 		<field name="FEATURE_AUDIO_LOW_LATENCY" since="9" />
 		<field name="FEATURE_AUDIO_OUTPUT" since="21" />
@@ -10672,6 +10678,7 @@
 		<field name="PROTECTION_FLAG_PRE23" since="23" />
 		<field name="PROTECTION_FLAG_PREINSTALLED" since="23" />
 		<field name="PROTECTION_FLAG_PRIVILEGED" since="23" />
+		<field name="PROTECTION_FLAG_RUNTIME_ONLY" since="26" />
 		<field name="PROTECTION_FLAG_SETUP" since="24" />
 		<field name="PROTECTION_FLAG_SYSTEM" since="16" deprecated="23" />
 		<field name="PROTECTION_FLAG_VERIFIER" since="23" />
@@ -12190,11 +12197,13 @@
 		<method name="copyPixelsToBuffer(Ljava/nio/Buffer;)V" />
 		<method name="createBitmap(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;" since="26" />
+		<method name="createBitmap(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;" since="26" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;" since="26" />
+		<method name="createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;" since="26" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
 		<method name="createBitmap(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" since="17" />
 		<method name="createBitmap([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;" />
@@ -12628,7 +12637,7 @@
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="getDestination()Landroid/graphics/ColorSpace;" />
-		<method name="getIntent()Landroid/graphics/ColorSpace$RenderIntent;" />
+		<method name="getRenderIntent()Landroid/graphics/ColorSpace$RenderIntent;" />
 		<method name="getSource()Landroid/graphics/ColorSpace;" />
 		<method name="transform(FFF)[F" />
 		<method name="transform([F)[F" />
@@ -15724,7 +15733,7 @@
 		<method name="getSerial()Ljava/lang/String;" />
 		<method name="releaseInterface(Landroid/hardware/usb/UsbInterface;)Z" />
 		<method name="requestWait()Landroid/hardware/usb/UsbRequest;" />
-		<method name="requestWait(I)Landroid/hardware/usb/UsbRequest;" since="26" />
+		<method name="requestWait(J)Landroid/hardware/usb/UsbRequest;" since="26" />
 		<method name="setConfiguration(Landroid/hardware/usb/UsbConfiguration;)Z" since="21" />
 		<method name="setInterface(Landroid/hardware/usb/UsbInterface;)Z" since="21" />
 	</class>
@@ -21190,40 +21199,6 @@
 		<implements name="android/media/AudioRouting$OnRoutingChangedListener" since="24" />
 		<method name="onRoutingChanged(Landroid/media/AudioTrack;)V" />
 	</class>
-	<class name="android/media/BufferingParams" since="26">
-		<extends name="java/lang/Object" />
-		<implements name="android/os/Parcelable" />
-		<method name="&lt;init>()V" />
-		<method name="getInitialBufferingMode()I" />
-		<method name="getInitialBufferingWatermarkKB()I" />
-		<method name="getInitialBufferingWatermarkMs()I" />
-		<method name="getRebufferingMode()I" />
-		<method name="getRebufferingWatermarkHighKB()I" />
-		<method name="getRebufferingWatermarkHighMs()I" />
-		<method name="getRebufferingWatermarkLowKB()I" />
-		<method name="getRebufferingWatermarkLowMs()I" />
-		<field name="BUFFERING_MODE_NONE" />
-		<field name="BUFFERING_MODE_SIZE_ONLY" />
-		<field name="BUFFERING_MODE_TIME_ONLY" />
-		<field name="BUFFERING_MODE_TIME_THEN_SIZE" />
-		<field name="CREATOR" />
-	</class>
-	<class name="android/media/BufferingParams$Builder" since="26">
-		<extends name="java/lang/Object" />
-		<method name="&lt;init>()V" />
-		<method name="&lt;init>(Landroid/media/BufferingParams;)V" />
-		<method name="build()Landroid/media/BufferingParams;" />
-		<method name="setInitialBufferingMode(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setInitialBufferingWatermarkKB(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setInitialBufferingWatermarkMs(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingMode(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarkHighKB(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarkHighMs(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarkLowKB(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarkLowMs(I)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarksKB(II)Landroid/media/BufferingParams$Builder;" />
-		<method name="setRebufferingWatermarksMs(II)Landroid/media/BufferingParams$Builder;" />
-	</class>
 	<class name="android/media/CamcorderProfile" since="8">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
@@ -22564,9 +22539,7 @@
 		<method name="create(Landroid/content/Context;Landroid/net/Uri;Landroid/view/SurfaceHolder;Landroid/media/AudioAttributes;I)Landroid/media/MediaPlayer;" since="21" />
 		<method name="deselectTrack(I)V" since="16" />
 		<method name="getAudioSessionId()I" since="9" />
-		<method name="getBufferingParams()Landroid/media/BufferingParams;" since="26" />
 		<method name="getCurrentPosition()I" />
-		<method name="getDefaultBufferingParams()Landroid/media/BufferingParams;" since="26" />
 		<method name="getDrmInfo()Landroid/media/MediaPlayer$DrmInfo;" since="26" />
 		<method name="getDrmPropertyString(Ljava/lang/String;)Ljava/lang/String;" since="26" />
 		<method name="getDuration()I" />
@@ -22597,7 +22570,6 @@
 		<method name="setAudioSessionId(I)V" since="9" />
 		<method name="setAudioStreamType(I)V" deprecated="26" />
 		<method name="setAuxEffectSendLevel(F)V" since="9" />
-		<method name="setBufferingParams(Landroid/media/BufferingParams;)V" since="26" />
 		<method name="setDataSource(Landroid/content/Context;Landroid/net/Uri;)V" />
 		<method name="setDataSource(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map;)V" since="14" />
 		<method name="setDataSource(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map;Ljava/util/List;)V" since="26" />
@@ -22640,6 +22612,7 @@
 		<field name="MEDIA_ERROR_TIMED_OUT" since="17" />
 		<field name="MEDIA_ERROR_UNKNOWN" />
 		<field name="MEDIA_ERROR_UNSUPPORTED" since="17" />
+		<field name="MEDIA_INFO_AUDIO_NOT_PLAYING" since="26" />
 		<field name="MEDIA_INFO_BAD_INTERLEAVING" since="3" />
 		<field name="MEDIA_INFO_BUFFERING_END" since="9" />
 		<field name="MEDIA_INFO_BUFFERING_START" since="9" />
@@ -22648,6 +22621,7 @@
 		<field name="MEDIA_INFO_SUBTITLE_TIMED_OUT" since="19" />
 		<field name="MEDIA_INFO_UNKNOWN" since="3" />
 		<field name="MEDIA_INFO_UNSUPPORTED_SUBTITLE" since="19" />
+		<field name="MEDIA_INFO_VIDEO_NOT_PLAYING" since="26" />
 		<field name="MEDIA_INFO_VIDEO_RENDERING_START" since="17" />
 		<field name="MEDIA_INFO_VIDEO_TRACK_LAGGING" since="3" />
 		<field name="MEDIA_MIMETYPE_TEXT_SUBRIP" since="16" />
@@ -24302,6 +24276,7 @@
 		<method name="isChannelUriForPassthroughInput(Landroid/net/Uri;)Z" since="24" />
 		<method name="isChannelUriForTunerInput(Landroid/net/Uri;)Z" since="24" />
 		<method name="isProgramUri(Landroid/net/Uri;)Z" since="24" />
+		<field name="ACTION_INITIALIZE_PROGRAMS" since="26" />
 		<field name="ACTION_MAKE_CHANNEL_BROWSABLE" since="26" />
 		<field name="ACTION_PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT" since="26" />
 		<field name="ACTION_PREVIEW_PROGRAM_BROWSABLE_DISABLED" since="26" />
@@ -37625,7 +37600,6 @@
 	<class name="android/service/autofill/AutofillService" since="26">
 		<extends name="android/app/Service" />
 		<method name="&lt;init>()V" />
-		<method name="disableSelf()V" />
 		<method name="onConnected()V" />
 		<method name="onDisconnected()V" />
 		<method name="onFillRequest(Landroid/app/assist/AssistStructure;Landroid/os/Bundle;ILandroid/os/CancellationSignal;Landroid/service/autofill/FillCallback;)V" />
@@ -40037,6 +40011,7 @@
 		<field name="KEY_GSM_ROAMING_NETWORKS_STRING_ARRAY" />
 		<field name="KEY_HAS_IN_CALL_NOISE_SUPPRESSION_BOOL" />
 		<field name="KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL" />
+		<field name="KEY_HIDE_ENHANCED_4G_LTE_BOOL" since="26" />
 		<field name="KEY_HIDE_IMS_APN_BOOL" since="24" />
 		<field name="KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL" since="24" />
 		<field name="KEY_HIDE_SIM_LOCK_SETTINGS_BOOL" />
@@ -40642,7 +40617,6 @@
 		<method name="isVoicemailVibrationEnabled(Landroid/telecom/PhoneAccountHandle;)Z" since="24" />
 		<method name="isWorldPhone()Z" since="23" />
 		<method name="listen(Landroid/telephony/PhoneStateListener;I)V" />
-		<method name="sendDialerCode(Ljava/lang/String;)Z" since="26" deprecated="26" />
 		<method name="sendDialerSpecialCode(Ljava/lang/String;)V" since="26" />
 		<method name="sendEnvelopeWithStatus(Ljava/lang/String;)Ljava/lang/String;" since="21" />
 		<method name="sendUssdRequest(Ljava/lang/String;Landroid/telephony/TelephonyManager$UssdResponseCallback;Landroid/os/Handler;)V" since="26" />
@@ -47941,6 +47915,7 @@
 		<method name="&lt;init>()V" />
 		<method name="cancel()V" />
 		<method name="commit()V" />
+		<method name="disableOwnedAutofillServices()V" />
 		<method name="isEnabled()Z" />
 		<method name="notifyValueChanged(Landroid/view/View;)V" />
 		<method name="notifyValueChanged(Landroid/view/View;ILandroid/view/autofill/AutofillValue;)V" />
@@ -48986,6 +48961,7 @@
 		<method name="getPluginState()Landroid/webkit/WebSettings$PluginState;" since="8" deprecated="18" />
 		<method name="getPluginsEnabled()Z" deprecated="16" />
 		<method name="getPluginsPath()Ljava/lang/String;" deprecated="16" />
+		<method name="getSafeBrowsingEnabled()Z" since="26" />
 		<method name="getSansSerifFontFamily()Ljava/lang/String;" />
 		<method name="getSaveFormData()Z" deprecated="26" />
 		<method name="getSavePassword()Z" deprecated="18" />
@@ -49041,6 +49017,7 @@
 		<method name="setPluginsEnabled(Z)V" deprecated="16" />
 		<method name="setPluginsPath(Ljava/lang/String;)V" deprecated="16" />
 		<method name="setRenderPriority(Landroid/webkit/WebSettings$RenderPriority;)V" deprecated="18" />
+		<method name="setSafeBrowsingEnabled(Z)V" since="26" />
 		<method name="setSansSerifFontFamily(Ljava/lang/String;)V" />
 		<method name="setSaveFormData(Z)V" deprecated="26" />
 		<method name="setSavePassword(Z)V" deprecated="18" />

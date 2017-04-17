@@ -2416,6 +2416,7 @@ Public License instead of this License.
 
 ============================================================
 Notices for file(s):
+/bin/assemble_vintf
 /bin/hidl-gen
 /framework/guavalib.jar
 /framework/jarjar-apache-ant.jar

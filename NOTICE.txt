@@ -2425,6 +2425,7 @@ Notices for file(s):
 /framework/jsilver.jar
 /framework/objenesis-host.jar
 /lib64/libhidl-gen-ast.so
+/lib64/libhidl-gen-hash.so
 /lib64/libhidl-gen.so
 /lib64/libvintf.so
 ------------------------------------------------------------

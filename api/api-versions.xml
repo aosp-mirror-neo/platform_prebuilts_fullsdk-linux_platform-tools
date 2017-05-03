@@ -143,7 +143,6 @@
 		<field name="REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" since="23" />
 		<field name="REQUEST_INSTALL_PACKAGES" since="23" />
 		<field name="RESTART_PACKAGES" deprecated="16" />
-		<field name="RESTRICTED_VR_ACCESS" since="26" />
 		<field name="SEND_RESPOND_VIA_MESSAGE" since="18" />
 		<field name="SEND_SMS" />
 		<field name="SET_ACTIVITY_WATCHER" />
@@ -268,9 +267,6 @@
 	<class name="android/R$attr" since="1">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
-		<field name="__removed1" since="26" />
-		<field name="__removed2" since="26" />
-		<field name="__removed3" since="26" />
 		<field name="absListViewStyle" />
 		<field name="accessibilityEventTypes" since="14" />
 		<field name="accessibilityFeedbackType" since="14" />
@@ -1123,6 +1119,7 @@
 		<field name="ratingBarStyleSmall" />
 		<field name="readPermission" />
 		<field name="recognitionService" since="21" />
+		<field name="recreateOnConfigChanges" since="26" />
 		<field name="recycleEnabled" since="26" />
 		<field name="relinquishTaskIdentity" since="21" />
 		<field name="reparent" since="21" />
@@ -1147,7 +1144,6 @@
 		<field name="resizeable" since="4" />
 		<field name="resizeableActivity" since="24" />
 		<field name="resource" />
-		<field name="restartOnConfigChanges" since="26" />
 		<field name="restoreAnyVersion" since="8" />
 		<field name="restoreNeedsApplication" since="5" deprecated="16" />
 		<field name="restrictedAccountType" since="18" />
@@ -1770,7 +1766,6 @@
 		<field name="ic_notification_clear_all" />
 		<field name="ic_notification_overlay" />
 		<field name="ic_partial_secure" />
-		<field name="ic_picture_in_picture" since="26" />
 		<field name="ic_popup_disk_full" />
 		<field name="ic_popup_reminder" />
 		<field name="ic_popup_sync" />
@@ -2889,7 +2884,7 @@
 		<method name="getResolveInfo()Landroid/content/pm/ResolveInfo;" since="14" />
 		<method name="getSettingsActivityName()Ljava/lang/String;" since="14" />
 		<method name="loadDescription(Landroid/content/pm/PackageManager;)Ljava/lang/String;" since="16" />
-		<method name="loadSummary(Landroid/content/pm/PackageManager;)Ljava/lang/String;" since="26" />
+		<method name="loadSummary(Landroid/content/pm/PackageManager;)Ljava/lang/CharSequence;" since="26" />
 		<field name="CAPABILITY_CAN_CONTROL_MAGNIFICATION" since="24" />
 		<field name="CAPABILITY_CAN_PERFORM_GESTURES" since="24" />
 		<field name="CAPABILITY_CAN_REQUEST_ENHANCED_WEB_ACCESSIBILITY" since="18" deprecated="26" />
@@ -3631,7 +3626,6 @@
 		<method name="dismissKeyboardShortcutsHelper()V" since="24" />
 		<method name="dump(Ljava/lang/String;Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V" since="11" />
 		<method name="enterPictureInPictureMode()V" since="24" deprecated="26" />
-		<method name="enterPictureInPictureMode(Landroid/app/PictureInPictureArgs;)Z" since="26" deprecated="26" />
 		<method name="enterPictureInPictureMode(Landroid/app/PictureInPictureParams;)Z" since="26" />
 		<method name="findViewById(I)Landroid/view/View;" />
 		<method name="finish()V" />
@@ -3781,7 +3775,6 @@
 		<method name="setIntent(Landroid/content/Intent;)V" />
 		<method name="setMediaController(Landroid/media/session/MediaController;)V" since="21" />
 		<method name="setPersistent(Z)V" />
-		<method name="setPictureInPictureArgs(Landroid/app/PictureInPictureArgs;)V" since="26" />
 		<method name="setPictureInPictureParams(Landroid/app/PictureInPictureParams;)V" since="26" />
 		<method name="setProgress(I)V" deprecated="24" />
 		<method name="setProgressBarIndeterminate(Z)V" deprecated="24" />
@@ -3862,7 +3855,6 @@
 		<method name="getLauncherLargeIconDensity()I" since="11" />
 		<method name="getLauncherLargeIconSize()I" since="11" />
 		<method name="getLockTaskModeState()I" since="23" />
-		<method name="getMaxNumPictureInPictureActions()I" since="26" deprecated="26" />
 		<method name="getMemoryClass()I" since="5" />
 		<method name="getMemoryInfo(Landroid/app/ActivityManager$MemoryInfo;)V" />
 		<method name="getMyMemoryState(Landroid/app/ActivityManager$RunningAppProcessInfo;)V" since="16" />
@@ -4689,7 +4681,6 @@
 	<class name="android/app/FragmentContainer" since="23">
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
-		<method name="instantiate(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;)Landroid/app/Fragment;" since="26" />
 		<method name="onFindViewById(I)Landroid/view/View;" />
 		<method name="onHasView()Z" />
 	</class>
@@ -4962,7 +4953,6 @@
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="createConfirmDeviceCredentialIntent(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/Intent;" since="21" />
-		<method name="dismissKeyguard(Landroid/app/Activity;Landroid/app/KeyguardManager$KeyguardDismissCallback;Landroid/os/Handler;)V" since="26" deprecated="26" />
 		<method name="exitKeyguardSecurely(Landroid/app/KeyguardManager$OnKeyguardExitResult;)V" deprecated="16" />
 		<method name="inKeyguardRestrictedInputMode()Z" />
 		<method name="isDeviceLocked()Z" since="22" />
@@ -5105,7 +5095,6 @@
 		<method name="&lt;init>(Landroid/os/Parcel;)V" />
 		<method name="clone()Landroid/app/Notification;" since="9" />
 		<method name="getBadgeIconType()I" since="26" />
-		<method name="getChannel()Ljava/lang/String;" since="26" />
 		<method name="getChannelId()Ljava/lang/String;" since="26" />
 		<method name="getGroup()Ljava/lang/String;" since="20" />
 		<method name="getGroupAlertBehavior()I" since="26" />
@@ -5114,7 +5103,6 @@
 		<method name="getShortcutId()Ljava/lang/String;" since="26" />
 		<method name="getSmallIcon()Landroid/graphics/drawable/Icon;" since="23" />
 		<method name="getSortKey()Ljava/lang/String;" since="20" />
-		<method name="getTimeout()J" since="26" />
 		<method name="getTimeoutAfter()J" since="26" />
 		<method name="setLatestEventInfo(Landroid/content/Context;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/app/PendingIntent;)V" deprecated="16" />
 		<field name="AUDIO_ATTRIBUTES_DEFAULT" since="21" />
@@ -5316,7 +5304,6 @@
 		<method name="setAutoCancel(Z)Landroid/app/Notification$Builder;" />
 		<method name="setBadgeIconType(I)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setCategory(Ljava/lang/String;)Landroid/app/Notification$Builder;" since="21" />
-		<method name="setChannel(Ljava/lang/String;)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setChannelId(Ljava/lang/String;)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setChronometerCountDown(Z)Landroid/app/Notification$Builder;" since="24" />
 		<method name="setColor(I)Landroid/app/Notification$Builder;" since="21" />
@@ -5361,7 +5348,6 @@
 		<method name="setSubText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;" since="16" />
 		<method name="setTicker(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;" />
 		<method name="setTicker(Ljava/lang/CharSequence;Landroid/widget/RemoteViews;)Landroid/app/Notification$Builder;" deprecated="21" />
-		<method name="setTimeout(J)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setTimeoutAfter(J)Landroid/app/Notification$Builder;" since="26" />
 		<method name="setUsesChronometer(Z)Landroid/app/Notification$Builder;" since="16" />
 		<method name="setVibrate([J)Landroid/app/Notification$Builder;" deprecated="26" />
@@ -5678,22 +5664,11 @@
 		<extends name="java/lang/Object" />
 		<method name="onSendFinished(Landroid/app/PendingIntent;Landroid/content/Intent;ILjava/lang/String;Landroid/os/Bundle;)V" />
 	</class>
-	<class name="android/app/PictureInPictureArgs" since="26" deprecated="26">
-		<extends name="android/app/PictureInPictureParams" />
-		<method name="&lt;init>()V" deprecated="26" />
-		<method name="&lt;init>(FLjava/util/List;)V" deprecated="26" />
-		<method name="setActions(Ljava/util/List;)V" deprecated="26" />
-		<method name="setAspectRatio(F)V" deprecated="26" />
-		<method name="setSourceRectHint(Landroid/graphics/Rect;)V" deprecated="26" />
-	</class>
 	<class name="android/app/PictureInPictureParams" since="26">
 		<extends name="java/lang/Object" />
 		<implements name="android/os/Parcelable" />
 		<method name="&lt;init>()V" />
 		<field name="CREATOR" />
-		<field name="mAspectRatio" />
-		<field name="mSourceRectHint" />
-		<field name="mUserActions" />
 	</class>
 	<class name="android/app/PictureInPictureParams$Builder" since="26">
 		<extends name="java/lang/Object" />
@@ -9171,15 +9146,12 @@
 		<field name="ACTION_CAMERA_BUTTON" />
 		<field name="ACTION_CARRIER_SETUP" since="26" />
 		<field name="ACTION_CHOOSER" />
-		<field name="ACTION_CLEAR_PACKAGE" since="26" />
 		<field name="ACTION_CLOSE_SYSTEM_DIALOGS" />
 		<field name="ACTION_CONFIGURATION_CHANGED" />
 		<field name="ACTION_CREATE_DOCUMENT" since="19" />
 		<field name="ACTION_CREATE_SHORTCUT" />
 		<field name="ACTION_DATE_CHANGED" />
 		<field name="ACTION_DEFAULT" />
-		<field name="ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED" since="26" />
-		<field name="ACTION_DEFAULT_SUBSCRIPTION_CHANGED" since="26" />
 		<field name="ACTION_DELETE" />
 		<field name="ACTION_DEVICE_STORAGE_LOW" deprecated="26" />
 		<field name="ACTION_DEVICE_STORAGE_OK" deprecated="26" />
@@ -9384,7 +9356,6 @@
 		<field name="EXTRA_SHUTDOWN_USERSPACE_ONLY" since="19" />
 		<field name="EXTRA_STREAM" />
 		<field name="EXTRA_SUBJECT" />
-		<field name="EXTRA_SUBSCRIPTION_INDEX" since="26" />
 		<field name="EXTRA_TEMPLATE" />
 		<field name="EXTRA_TEXT" />
 		<field name="EXTRA_TITLE" />
@@ -10783,8 +10754,8 @@
 		<field name="activityInfo" />
 		<field name="filter" />
 		<field name="icon" />
-		<field name="instantAppAvailable" since="26" />
 		<field name="isDefault" />
+		<field name="isInstantAppAvailable" since="26" />
 		<field name="labelRes" />
 		<field name="match" />
 		<field name="nonLocalizedLabel" />
@@ -10823,7 +10794,7 @@
 		<method name="getDependentPackages()Ljava/util/List;" />
 		<method name="getName()Ljava/lang/String;" />
 		<method name="getType()I" />
-		<method name="getVersion()J" />
+		<method name="getVersion()I" />
 		<field name="CREATOR" />
 		<field name="TYPE_BUILTIN" />
 		<field name="TYPE_DYNAMIC" />
@@ -13622,7 +13593,7 @@
 	<class name="android/graphics/drawable/AdaptiveIconDrawable" since="26">
 		<extends name="android/graphics/drawable/Drawable" />
 		<implements name="android/graphics/drawable/Drawable$Callback" />
-		<method name="&lt;init>()V" />
+		<method name="&lt;init>(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V" />
 		<method name="getBackground()Landroid/graphics/drawable/Drawable;" />
 		<method name="getExtraInsetFraction()F" />
 		<method name="getForeground()Landroid/graphics/drawable/Drawable;" />
@@ -20724,6 +20695,7 @@
 		<method name="setAcceptsDelayedFocusGain(Z)Landroid/media/AudioFocusRequest$Builder;" />
 		<method name="setAudioAttributes(Landroid/media/AudioAttributes;)Landroid/media/AudioFocusRequest$Builder;" />
 		<method name="setFocusGain(I)Landroid/media/AudioFocusRequest$Builder;" />
+		<method name="setOnAudioFocusChangeListener(Landroid/media/AudioManager$OnAudioFocusChangeListener;)Landroid/media/AudioFocusRequest$Builder;" />
 		<method name="setOnAudioFocusChangeListener(Landroid/media/AudioManager$OnAudioFocusChangeListener;Landroid/os/Handler;)Landroid/media/AudioFocusRequest$Builder;" />
 		<method name="setWillPauseWhenDucked(Z)Landroid/media/AudioFocusRequest$Builder;" />
 	</class>
@@ -26333,6 +26305,7 @@
 		<method name="setTdlsEnabled(Ljava/net/InetAddress;Z)V" since="19" />
 		<method name="setTdlsEnabledWithMacAddress(Ljava/lang/String;Z)V" since="19" />
 		<method name="setWifiEnabled(Z)Z" />
+		<method name="startLocalOnlyHotspot(Landroid/net/wifi/WifiManager$LocalOnlyHotspotCallback;Landroid/os/Handler;)V" since="26" />
 		<method name="startScan()Z" />
 		<method name="startWps(Landroid/net/wifi/WpsInfo;Landroid/net/wifi/WifiManager$WpsCallback;)V" since="21" />
 		<method name="updateNetwork(Landroid/net/wifi/WifiConfiguration;)I" />
@@ -26381,6 +26354,23 @@
 		<field name="WPS_TIMED_OUT" since="21" />
 		<field name="WPS_TKIP_ONLY_PROHIBITED" since="21" />
 		<field name="WPS_WEP_PROHIBITED" since="21" />
+	</class>
+	<class name="android/net/wifi/WifiManager$LocalOnlyHotspotCallback" since="26">
+		<extends name="java/lang/Object" />
+		<method name="&lt;init>()V" />
+		<method name="onFailed(I)V" />
+		<method name="onStarted(Landroid/net/wifi/WifiManager$LocalOnlyHotspotReservation;)V" />
+		<method name="onStopped()V" />
+		<field name="ERROR_GENERIC" />
+		<field name="ERROR_INCOMPATIBLE_MODE" />
+		<field name="ERROR_NO_CHANNEL" />
+		<field name="ERROR_TETHERING_DISALLOWED" />
+	</class>
+	<class name="android/net/wifi/WifiManager$LocalOnlyHotspotReservation" since="26">
+		<extends name="java/lang/Object" />
+		<implements name="java/lang/AutoCloseable" />
+		<method name="&lt;init>(Landroid/net/wifi/WifiManager;)V" />
+		<method name="getWifiConfiguration()Landroid/net/wifi/WifiConfiguration;" />
 	</class>
 	<class name="android/net/wifi/WifiManager$MulticastLock" since="4">
 		<extends name="java/lang/Object" />
@@ -26545,33 +26535,9 @@
 		<method name="&lt;init>()V" />
 		<method name="&lt;init>(Landroid/net/wifi/hotspot2/PasspointConfiguration;)V" />
 		<method name="getCredential()Landroid/net/wifi/hotspot2/pps/Credential;" />
-		<method name="getCredentialPriority()I" />
 		<method name="getHomeSp()Landroid/net/wifi/hotspot2/pps/HomeSp;" />
-		<method name="getPolicy()Landroid/net/wifi/hotspot2/pps/Policy;" />
-		<method name="getSubscriptionCreationTimeInMs()J" />
-		<method name="getSubscriptionExpirationTimeInMs()J" />
-		<method name="getSubscriptionType()Ljava/lang/String;" />
-		<method name="getSubscriptionUpdate()Landroid/net/wifi/hotspot2/pps/UpdateParameter;" />
-		<method name="getTrustRootCertList()Ljava/util/Map;" />
-		<method name="getUpdateIdentifier()I" />
-		<method name="getUsageLimitDataLimit()J" />
-		<method name="getUsageLimitStartTimeInMs()J" />
-		<method name="getUsageLimitTimeLimitInMinutes()J" />
-		<method name="getUsageLimitUsageTimePeriodInMinutes()J" />
 		<method name="setCredential(Landroid/net/wifi/hotspot2/pps/Credential;)V" />
-		<method name="setCredentialPriority(I)V" />
 		<method name="setHomeSp(Landroid/net/wifi/hotspot2/pps/HomeSp;)V" />
-		<method name="setPolicy(Landroid/net/wifi/hotspot2/pps/Policy;)V" />
-		<method name="setSubscriptionCreationTimeInMs(J)V" />
-		<method name="setSubscriptionExpirationTimeInMs(J)V" />
-		<method name="setSubscriptionType(Ljava/lang/String;)V" />
-		<method name="setSubscriptionUpdate(Landroid/net/wifi/hotspot2/pps/UpdateParameter;)V" />
-		<method name="setTrustRootCertList(Ljava/util/Map;)V" />
-		<method name="setUpdateIdentifier(I)V" />
-		<method name="setUsageLimitDataLimit(J)V" />
-		<method name="setUsageLimitStartTimeInMs(J)V" />
-		<method name="setUsageLimitTimeLimitInMinutes(J)V" />
-		<method name="setUsageLimitUsageTimePeriodInMinutes(J)V" />
 		<field name="CREATOR" />
 	</class>
 	<class name="android/net/wifi/hotspot2/omadm/PpsMoParser" since="26">
@@ -26586,21 +26552,15 @@
 		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/Credential;)V" />
 		<method name="getCaCertificate()Ljava/security/cert/X509Certificate;" />
 		<method name="getCertCredential()Landroid/net/wifi/hotspot2/pps/Credential$CertificateCredential;" />
-		<method name="getCheckAaaServerCertStatus()Z" />
 		<method name="getClientCertificateChain()[Ljava/security/cert/X509Certificate;" />
 		<method name="getClientPrivateKey()Ljava/security/PrivateKey;" />
-		<method name="getCreationTimeInMs()J" />
-		<method name="getExpirationTimeInMs()J" />
 		<method name="getRealm()Ljava/lang/String;" />
 		<method name="getSimCredential()Landroid/net/wifi/hotspot2/pps/Credential$SimCredential;" />
 		<method name="getUserCredential()Landroid/net/wifi/hotspot2/pps/Credential$UserCredential;" />
 		<method name="setCaCertificate(Ljava/security/cert/X509Certificate;)V" />
 		<method name="setCertCredential(Landroid/net/wifi/hotspot2/pps/Credential$CertificateCredential;)V" />
-		<method name="setCheckAaaServerCertStatus(Z)V" />
 		<method name="setClientCertificateChain([Ljava/security/cert/X509Certificate;)V" />
 		<method name="setClientPrivateKey(Ljava/security/PrivateKey;)V" />
-		<method name="setCreationTimeInMs(J)V" />
-		<method name="setExpirationTimeInMs(J)V" />
 		<method name="setRealm(Ljava/lang/String;)V" />
 		<method name="setSimCredential(Landroid/net/wifi/hotspot2/pps/Credential$SimCredential;)V" />
 		<method name="setUserCredential(Landroid/net/wifi/hotspot2/pps/Credential$UserCredential;)V" />
@@ -26633,19 +26593,13 @@
 		<implements name="android/os/Parcelable" />
 		<method name="&lt;init>()V" />
 		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/Credential$UserCredential;)V" />
-		<method name="getAbleToShare()Z" />
 		<method name="getEapType()I" />
-		<method name="getMachineManaged()Z" />
 		<method name="getNonEapInnerMethod()Ljava/lang/String;" />
 		<method name="getPassword()Ljava/lang/String;" />
-		<method name="getSoftTokenApp()Ljava/lang/String;" />
 		<method name="getUsername()Ljava/lang/String;" />
-		<method name="setAbleToShare(Z)V" />
 		<method name="setEapType(I)V" />
-		<method name="setMachineManaged(Z)V" />
 		<method name="setNonEapInnerMethod(Ljava/lang/String;)V" />
 		<method name="setPassword(Ljava/lang/String;)V" />
-		<method name="setSoftTokenApp(Ljava/lang/String;)V" />
 		<method name="setUsername(Ljava/lang/String;)V" />
 		<field name="CREATOR" />
 	</class>
@@ -26656,90 +26610,11 @@
 		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/HomeSp;)V" />
 		<method name="getFqdn()Ljava/lang/String;" />
 		<method name="getFriendlyName()Ljava/lang/String;" />
-		<method name="getHomeNetworkIds()Ljava/util/Map;" />
-		<method name="getIconUrl()Ljava/lang/String;" />
-		<method name="getMatchAllOis()[J" />
-		<method name="getMatchAnyOis()[J" />
-		<method name="getOtherHomePartners()[Ljava/lang/String;" />
 		<method name="getRoamingConsortiumOis()[J" />
 		<method name="setFqdn(Ljava/lang/String;)V" />
 		<method name="setFriendlyName(Ljava/lang/String;)V" />
-		<method name="setHomeNetworkIds(Ljava/util/Map;)V" />
-		<method name="setIconUrl(Ljava/lang/String;)V" />
-		<method name="setMatchAllOis([J)V" />
-		<method name="setMatchAnyOis([J)V" />
-		<method name="setOtherHomePartners([Ljava/lang/String;)V" />
 		<method name="setRoamingConsortiumOis([J)V" />
 		<field name="CREATOR" />
-	</class>
-	<class name="android/net/wifi/hotspot2/pps/Policy" since="26">
-		<extends name="java/lang/Object" />
-		<implements name="android/os/Parcelable" />
-		<method name="&lt;init>()V" />
-		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/Policy;)V" />
-		<method name="getExcludedSsidList()[Ljava/lang/String;" />
-		<method name="getMaximumBssLoadValue()I" />
-		<method name="getMinHomeDownlinkBandwidth()J" />
-		<method name="getMinHomeUplinkBandwidth()J" />
-		<method name="getMinRoamingDownlinkBandwidth()J" />
-		<method name="getMinRoamingUplinkBandwidth()J" />
-		<method name="getPolicyUpdate()Landroid/net/wifi/hotspot2/pps/UpdateParameter;" />
-		<method name="getPreferredRoamingPartnerList()Ljava/util/List;" />
-		<method name="getRequiredProtoPortMap()Ljava/util/Map;" />
-		<method name="setExcludedSsidList([Ljava/lang/String;)V" />
-		<method name="setMaximumBssLoadValue(I)V" />
-		<method name="setMinHomeDownlinkBandwidth(J)V" />
-		<method name="setMinHomeUplinkBandwidth(J)V" />
-		<method name="setMinRoamingDownlinkBandwidth(J)V" />
-		<method name="setMinRoamingUplinkBandwidth(J)V" />
-		<method name="setPolicyUpdate(Landroid/net/wifi/hotspot2/pps/UpdateParameter;)V" />
-		<method name="setPreferredRoamingPartnerList(Ljava/util/List;)V" />
-		<method name="setRequiredProtoPortMap(Ljava/util/Map;)V" />
-		<field name="CREATOR" />
-	</class>
-	<class name="android/net/wifi/hotspot2/pps/Policy$RoamingPartner" since="26">
-		<extends name="java/lang/Object" />
-		<implements name="android/os/Parcelable" />
-		<method name="&lt;init>()V" />
-		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/Policy$RoamingPartner;)V" />
-		<method name="getCountries()Ljava/lang/String;" />
-		<method name="getFqdn()Ljava/lang/String;" />
-		<method name="getFqdnExactMatch()Z" />
-		<method name="getPriority()I" />
-		<method name="setCountries(Ljava/lang/String;)V" />
-		<method name="setFqdn(Ljava/lang/String;)V" />
-		<method name="setFqdnExactMatch(Z)V" />
-		<method name="setPriority(I)V" />
-		<field name="CREATOR" />
-	</class>
-	<class name="android/net/wifi/hotspot2/pps/UpdateParameter" since="26">
-		<extends name="java/lang/Object" />
-		<implements name="android/os/Parcelable" />
-		<method name="&lt;init>()V" />
-		<method name="&lt;init>(Landroid/net/wifi/hotspot2/pps/UpdateParameter;)V" />
-		<method name="getBase64EncodedPassword()Ljava/lang/String;" />
-		<method name="getRestriction()Ljava/lang/String;" />
-		<method name="getServerUri()Ljava/lang/String;" />
-		<method name="getTrustRootCertSha256Fingerprint()[B" />
-		<method name="getTrustRootCertUrl()Ljava/lang/String;" />
-		<method name="getUpdateIntervalInMinutes()J" />
-		<method name="getUpdateMethod()Ljava/lang/String;" />
-		<method name="getUsername()Ljava/lang/String;" />
-		<method name="setBase64EncodedPassword(Ljava/lang/String;)V" />
-		<method name="setRestriction(Ljava/lang/String;)V" />
-		<method name="setServerUri(Ljava/lang/String;)V" />
-		<method name="setTrustRootCertSha256Fingerprint([B)V" />
-		<method name="setTrustRootCertUrl(Ljava/lang/String;)V" />
-		<method name="setUpdateIntervalInMinutes(J)V" />
-		<method name="setUpdateMethod(Ljava/lang/String;)V" />
-		<method name="setUsername(Ljava/lang/String;)V" />
-		<field name="CREATOR" />
-		<field name="UPDATE_CHECK_INTERVAL_NEVER" />
-		<field name="UPDATE_METHOD_OMADM" />
-		<field name="UPDATE_METHOD_SSP" />
-		<field name="UPDATE_RESTRICTION_HOMESP" />
-		<field name="UPDATE_RESTRICTION_ROAMING_PARTNER" />
-		<field name="UPDATE_RESTRICTION_UNRESTRICTED" />
 	</class>
 	<class name="android/net/wifi/p2p/WifiP2pConfig" since="14">
 		<extends name="java/lang/Object" />
@@ -31402,7 +31277,7 @@
 		<extends name="java/lang/Object" />
 		<method name="&lt;init>()V" />
 		<method name="execute(Landroid/os/Message;)V" />
-		<method name="getQueue()Landroid/os/MessageQueue;" />
+		<method name="getMessageQueue()Landroid/os/MessageQueue;" />
 		<method name="hasMessages(Landroid/os/Handler;Ljava/lang/Object;I)Z" />
 		<method name="hasMessages(Landroid/os/Handler;Ljava/lang/Object;Ljava/lang/Runnable;)Z" />
 		<method name="next()Landroid/os/Message;" />
@@ -37630,7 +37505,7 @@
 		<implements name="android/os/Parcelable" />
 		<method name="&lt;init>()V" />
 		<method name="getClientState()Landroid/os/Bundle;" />
-		<method name="getFillContexts()Ljava/util/ArrayList;" />
+		<method name="getFillContexts()Ljava/util/List;" />
 		<method name="getFlags()I" />
 		<method name="getId()I" />
 		<field name="CREATOR" />
@@ -38525,7 +38400,6 @@
 		<method name="onRangeStart(Ljava/lang/String;III)V" since="26" />
 		<method name="onStart(Ljava/lang/String;)V" />
 		<method name="onStop(Ljava/lang/String;Z)V" since="23" />
-		<method name="onUtteranceRangeStart(Ljava/lang/String;II)V" since="26" deprecated="26" />
 	</class>
 	<class name="android/speech/tts/Voice" since="21">
 		<extends name="java/lang/Object" />
@@ -40574,8 +40448,11 @@
 		<method name="getDefaultVoiceSubscriptionId()I" since="24" />
 		<method name="isNetworkRoaming(I)Z" />
 		<method name="removeOnSubscriptionsChangedListener(Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;)V" />
+		<field name="ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED" since="26" />
+		<field name="ACTION_DEFAULT_SUBSCRIPTION_CHANGED" since="26" />
 		<field name="DATA_ROAMING_DISABLE" />
 		<field name="DATA_ROAMING_ENABLE" />
+		<field name="EXTRA_SUBSCRIPTION_INDEX" since="26" />
 		<field name="INVALID_SUBSCRIPTION_ID" since="24" />
 	</class>
 	<class name="android/telephony/SubscriptionManager$OnSubscriptionsChangedListener" since="22">

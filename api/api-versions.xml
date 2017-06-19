@@ -26296,7 +26296,6 @@
 		<method name="isTdlsSupported()Z" since="21" />
 		<method name="isWifiEnabled()Z" />
 		<method name="pingSupplicant()Z" deprecated="26" />
-		<method name="queryPasspointIcon(JLjava/lang/String;)V" since="26" />
 		<method name="reassociate()Z" />
 		<method name="reconnect()Z" />
 		<method name="removeNetwork(I)Z" />
@@ -26309,29 +26308,17 @@
 		<method name="startScan()Z" />
 		<method name="startWps(Landroid/net/wifi/WpsInfo;Landroid/net/wifi/WifiManager$WpsCallback;)V" since="21" />
 		<method name="updateNetwork(Landroid/net/wifi/WifiConfiguration;)I" />
-		<field name="ACTION_PASSPOINT_DEAUTH_IMMINENT" since="26" />
-		<field name="ACTION_PASSPOINT_ICON" since="26" />
-		<field name="ACTION_PASSPOINT_OSU_PROVIDERS_LIST" since="26" />
-		<field name="ACTION_PASSPOINT_SUBSCRIPTION_REMEDIATION" since="26" />
 		<field name="ACTION_PICK_WIFI_NETWORK" />
 		<field name="ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE" since="18" />
 		<field name="ERROR_AUTHENTICATING" />
-		<field name="EXTRA_ANQP_ELEMENT_DATA" since="26" />
 		<field name="EXTRA_BSSID" />
-		<field name="EXTRA_BSSID_LONG" since="26" />
-		<field name="EXTRA_DELAY" since="26" />
-		<field name="EXTRA_ESS" since="26" />
-		<field name="EXTRA_FILENAME" since="26" />
-		<field name="EXTRA_ICON" since="26" />
 		<field name="EXTRA_NETWORK_INFO" />
 		<field name="EXTRA_NEW_RSSI" />
 		<field name="EXTRA_NEW_STATE" />
 		<field name="EXTRA_PREVIOUS_WIFI_STATE" />
 		<field name="EXTRA_RESULTS_UPDATED" since="23" />
-		<field name="EXTRA_SUBSCRIPTION_REMEDIATION_METHOD" since="26" />
 		<field name="EXTRA_SUPPLICANT_CONNECTED" />
 		<field name="EXTRA_SUPPLICANT_ERROR" />
-		<field name="EXTRA_URL" since="26" />
 		<field name="EXTRA_WIFI_INFO" since="14" />
 		<field name="EXTRA_WIFI_STATE" />
 		<field name="NETWORK_IDS_CHANGED_ACTION" />
@@ -33956,7 +33943,6 @@
 		<field name="EXTRA_RECIPIENT_CONTACT_CHAT_ID" since="24" />
 		<field name="EXTRA_RECIPIENT_CONTACT_NAME" since="24" />
 		<field name="EXTRA_RECIPIENT_CONTACT_URI" since="24" />
-		<field name="EXTRA_SENDER_ACCOUNT_HASH" since="26" />
 		<field name="INVITE_CONTACT" since="14" />
 		<field name="METADATA_ACCOUNT_TYPE" since="24" />
 		<field name="METADATA_MIMETYPE" since="24" />

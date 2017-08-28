@@ -143,7 +143,6 @@
 		<field name="REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" since="23"/>
 		<field name="REQUEST_INSTALL_PACKAGES" since="23"/>
 		<field name="RESTART_PACKAGES" deprecated="16"/>
-		<field name="SEND_EMBMS_INTENTS" since="27"/>
 		<field name="SEND_RESPOND_VIA_MESSAGE" since="18"/>
 		<field name="SEND_SMS"/>
 		<field name="SET_ACTIVITY_WATCHER" removed="23"/>
@@ -4235,12 +4234,6 @@
 		<implements name="android/content/ComponentCallbacks" removed="14"/>
 		<implements name="android/content/ComponentCallbacks2" since="14"/>
 		<method name="&lt;init>()V"/>
-		<method name="instantiateActivity(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/app/Activity;" since="27"/>
-		<method name="instantiateBackupAgent(Ljava/lang/ClassLoader;Ljava/lang/String;)Landroid/app/backup/BackupAgent;" since="27"/>
-		<method name="instantiateInstrumentation(Ljava/lang/ClassLoader;Ljava/lang/String;)Landroid/app/Instrumentation;" since="27"/>
-		<method name="instantiateProvider(Ljava/lang/ClassLoader;Ljava/lang/String;)Landroid/content/ContentProvider;" since="27"/>
-		<method name="instantiateReceiver(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/content/BroadcastReceiver;" since="27"/>
-		<method name="instantiateService(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/app/Service;" since="27"/>
 		<method name="onCreate()V"/>
 		<method name="onTerminate()V"/>
 		<method name="registerActivityLifecycleCallbacks(Landroid/app/Application$ActivityLifecycleCallbacks;)V" since="14"/>
@@ -6118,7 +6111,6 @@
 	<class name="android/app/WallpaperManager" since="5">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
-		<method name="addOnColorsChangedListener(Landroid/app/WallpaperManager$OnColorsChangedListener;)V" since="27"/>
 		<method name="addOnColorsChangedListener(Landroid/app/WallpaperManager$OnColorsChangedListener;Landroid/os/Handler;)V" since="27"/>
 		<method name="clear()V"/>
 		<method name="clear(I)V" since="24"/>
@@ -9205,6 +9197,7 @@
 		<field name="ACTION_INPUT_METHOD_CHANGED" since="3"/>
 		<field name="ACTION_INSERT"/>
 		<field name="ACTION_INSERT_OR_EDIT"/>
+		<field name="ACTION_INSTALL_FAILURE" since="27"/>
 		<field name="ACTION_INSTALL_PACKAGE" since="14"/>
 		<field name="ACTION_LOCALE_CHANGED" since="7"/>
 		<field name="ACTION_LOCKED_BOOT_COMPLETED" since="24"/>
@@ -9388,6 +9381,7 @@
 		<field name="EXTRA_SHORTCUT_INTENT" deprecated="26"/>
 		<field name="EXTRA_SHORTCUT_NAME" deprecated="26"/>
 		<field name="EXTRA_SHUTDOWN_USERSPACE_ONLY" since="19"/>
+		<field name="EXTRA_SPLIT_NAME" since="27"/>
 		<field name="EXTRA_STREAM"/>
 		<field name="EXTRA_SUBJECT"/>
 		<field name="EXTRA_TEMPLATE"/>
@@ -9995,6 +9989,7 @@
 		<method name="&lt;init>(Landroid/content/pm/ApplicationInfo;)V"/>
 		<method name="dump(Landroid/util/Printer;Ljava/lang/String;)V"/>
 		<method name="getCategoryTitle(Landroid/content/Context;I)Ljava/lang/CharSequence;" since="26"/>
+		<method name="isVirtualPreload()Z" since="27"/>
 		<method name="loadDescription(Landroid/content/pm/PackageManager;)Ljava/lang/CharSequence;"/>
 		<field name="CATEGORY_AUDIO" since="26"/>
 		<field name="CATEGORY_GAME" since="26"/>
@@ -10341,6 +10336,7 @@
 		<method name="openWrite(Ljava/lang/String;JJ)Ljava/io/OutputStream;"/>
 		<method name="removeSplit(Ljava/lang/String;)V" since="24"/>
 		<method name="setStagingProgress(F)V"/>
+		<method name="transfer(Ljava/lang/String;)V" since="27"/>
 	</class>
 	<class name="android/content/pm/PackageInstaller$SessionCallback" since="21">
 		<extends name="java/lang/Object"/>
@@ -10359,10 +10355,16 @@
 		<method name="getAppIcon()Landroid/graphics/Bitmap;"/>
 		<method name="getAppLabel()Ljava/lang/CharSequence;"/>
 		<method name="getAppPackageName()Ljava/lang/String;"/>
+		<method name="getInstallLocation()I" since="27"/>
 		<method name="getInstallReason()I" since="26"/>
 		<method name="getInstallerPackageName()Ljava/lang/String;"/>
+		<method name="getMode()I" since="27"/>
+		<method name="getOriginatingUid()I" since="27"/>
+		<method name="getOriginatingUri()Landroid/net/Uri;" since="27"/>
 		<method name="getProgress()F"/>
+		<method name="getReferrerUri()Landroid/net/Uri;" since="27"/>
 		<method name="getSessionId()I"/>
+		<method name="getSize()J" since="27"/>
 		<method name="isActive()Z"/>
 		<method name="isSealed()Z" since="26"/>
 		<field name="CREATOR"/>
@@ -10573,6 +10575,8 @@
 		<field name="FEATURE_PC" since="27"/>
 		<field name="FEATURE_PICTURE_IN_PICTURE" since="24"/>
 		<field name="FEATURE_PRINTING" since="20"/>
+		<field name="FEATURE_RAM_LOW" since="27"/>
+		<field name="FEATURE_RAM_NORMAL" since="27"/>
 		<field name="FEATURE_SCREEN_LANDSCAPE" since="13"/>
 		<field name="FEATURE_SCREEN_PORTRAIT" since="13"/>
 		<field name="FEATURE_SECURELY_REMOVES_USERS" since="21"/>
@@ -10740,6 +10744,7 @@
 		<field name="PROTECTION_FLAG_APPOP" since="21"/>
 		<field name="PROTECTION_FLAG_DEVELOPMENT" since="16"/>
 		<field name="PROTECTION_FLAG_INSTALLER" since="23"/>
+		<field name="PROTECTION_FLAG_INSTANT" since="27"/>
 		<field name="PROTECTION_FLAG_PRE23" since="23"/>
 		<field name="PROTECTION_FLAG_PREINSTALLED" since="23"/>
 		<field name="PROTECTION_FLAG_PRIVILEGED" since="23"/>
@@ -11646,9 +11651,9 @@
 		<method name="markTableSyncable(Ljava/lang/String;Ljava/lang/String;)V" deprecated="16"/>
 		<method name="markTableSyncable(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" deprecated="16"/>
 		<method name="needUpgrade(I)Z"/>
+		<method name="openDatabase(Ljava/io/File;Landroid/database/sqlite/SQLiteDatabase$OpenParams;)Landroid/database/sqlite/SQLiteDatabase;" since="27"/>
 		<method name="openDatabase(Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)Landroid/database/sqlite/SQLiteDatabase;"/>
 		<method name="openDatabase(Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;ILandroid/database/DatabaseErrorHandler;)Landroid/database/sqlite/SQLiteDatabase;" since="11"/>
-		<method name="openDatabase(Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$OpenParams;)Landroid/database/sqlite/SQLiteDatabase;" since="27"/>
 		<method name="openOrCreateDatabase(Ljava/io/File;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;)Landroid/database/sqlite/SQLiteDatabase;"/>
 		<method name="openOrCreateDatabase(Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;)Landroid/database/sqlite/SQLiteDatabase;"/>
 		<method name="openOrCreateDatabase(Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;Landroid/database/DatabaseErrorHandler;)Landroid/database/sqlite/SQLiteDatabase;" since="11"/>
@@ -25749,8 +25754,8 @@
 		<method name="protect(Ljava/net/DatagramSocket;)Z"/>
 		<method name="protect(Ljava/net/Socket;)Z"/>
 		<method name="setUnderlyingNetworks([Landroid/net/Network;)Z" since="22"/>
-		<field name="METADATA_SUPPORTS_ALWAYS_ON" since="27"/>
 		<field name="SERVICE_INTERFACE"/>
+		<field name="SERVICE_META_DATA_SUPPORTS_ALWAYS_ON" since="27"/>
 	</class>
 	<class name="android/net/VpnService$Builder" since="14">
 		<extends name="java/lang/Object"/>
@@ -30810,7 +30815,6 @@
 		<method name="&lt;init>(Ljava/lang/String;I)V"/>
 		<method name="allowPurging(Z)Z" deprecated="27"/>
 		<method name="close()V"/>
-		<method name="getFileDescriptor()Ljava/io/FileDescriptor;" since="27"/>
 		<method name="getInputStream()Ljava/io/InputStream;"/>
 		<method name="getOutputStream()Ljava/io/OutputStream;"/>
 		<method name="isPurgingAllowed()Z" deprecated="27"/>
@@ -31247,8 +31251,6 @@
 		<implements name="java/io/Closeable"/>
 		<method name="&lt;init>()V"/>
 		<method name="create(Ljava/lang/String;I)Landroid/os/SharedMemory;"/>
-		<method name="getFd()I"/>
-		<method name="getFileDescriptor()Ljava/io/FileDescriptor;"/>
 		<method name="getSize()I"/>
 		<method name="map(III)Ljava/nio/ByteBuffer;"/>
 		<method name="mapReadOnly()Ljava/nio/ByteBuffer;"/>
@@ -35059,7 +35061,7 @@
 		<field name="RADIO_CELL"/>
 		<field name="RADIO_NFC"/>
 		<field name="RADIO_WIFI"/>
-		<field name="SHOW_PROCESSES" deprecated="26"/>
+		<field name="SHOW_PROCESSES" deprecated="25"/>
 		<field name="STAY_ON_WHILE_PLUGGED_IN"/>
 		<field name="SYS_PROP_SETTING_VERSION" removed="24"/>
 		<field name="TRANSITION_ANIMATION_SCALE"/>
@@ -37651,6 +37653,13 @@
 		<method name="&lt;init>([Landroid/view/autofill/AutofillId;)V"/>
 		<field name="CREATOR"/>
 	</class>
+	<class name="android/service/autofill/RegexValidator" since="27">
+		<extends name="java/lang/Object"/>
+		<implements name="android/os/Parcelable"/>
+		<implements name="android/service/autofill/Validator"/>
+		<method name="&lt;init>(Landroid/view/autofill/AutofillId;Ljava/util/regex/Pattern;)V"/>
+		<field name="CREATOR"/>
+	</class>
 	<class name="android/service/autofill/SaveCallback" since="26">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
@@ -37690,13 +37699,6 @@
 		<method name="&lt;init>()V"/>
 		<method name="getClientState()Landroid/os/Bundle;"/>
 		<method name="getFillContexts()Ljava/util/List;"/>
-		<field name="CREATOR"/>
-	</class>
-	<class name="android/service/autofill/SimpleRegexValidator" since="27">
-		<extends name="java/lang/Object"/>
-		<implements name="android/os/Parcelable"/>
-		<implements name="android/service/autofill/Validator"/>
-		<method name="&lt;init>(Landroid/view/autofill/AutofillId;Ljava/util/regex/Pattern;)V"/>
 		<field name="CREATOR"/>
 	</class>
 	<class name="android/service/autofill/Transformation" since="27">
@@ -40067,6 +40069,7 @@
 		<field name="KEY_DEFAULT_VM_NUMBER_STRING" since="26"/>
 		<field name="KEY_DIAL_STRING_REPLACE_STRING_ARRAY" since="26"/>
 		<field name="KEY_DISABLE_CDMA_ACTIVATION_CODE_BOOL"/>
+		<field name="KEY_DISPLAY_HD_AUDIO_PROPERTY_BOOL" since="27"/>
 		<field name="KEY_DROP_VIDEO_CALL_WHEN_ANSWERING_AUDIO_CALL_BOOL" since="25"/>
 		<field name="KEY_DTMF_TYPE_ENABLED_BOOL"/>
 		<field name="KEY_DURATION_BLOCKING_DISABLED_AFTER_EMERGENCY_INT" since="24"/>
@@ -40508,9 +40511,12 @@
 		<field name="MMS_ERROR_UNABLE_CONNECT_MMS" since="21"/>
 		<field name="MMS_ERROR_UNSPECIFIED" since="21"/>
 		<field name="RESULT_ERROR_GENERIC_FAILURE"/>
+		<field name="RESULT_ERROR_LIMIT_EXCEEDED" since="27"/>
 		<field name="RESULT_ERROR_NO_SERVICE"/>
 		<field name="RESULT_ERROR_NULL_PDU"/>
 		<field name="RESULT_ERROR_RADIO_OFF"/>
+		<field name="RESULT_ERROR_SHORT_CODE_NEVER_ALLOWED" since="27"/>
+		<field name="RESULT_ERROR_SHORT_CODE_NOT_ALLOWED" since="27"/>
 		<field name="STATUS_ON_ICC_FREE"/>
 		<field name="STATUS_ON_ICC_READ"/>
 		<field name="STATUS_ON_ICC_SENT"/>
@@ -41276,7 +41282,6 @@
 		<method name="&lt;init>()V"/>
 		<method name="getAllIntentFilters(Ljava/lang/String;)Ljava/util/List;" since="23"/>
 		<method name="getDefaultBrowserPackageName(I)Ljava/lang/String;" since="23" removed="24"/>
-		<method name="getNamesForUids([I)[Ljava/lang/String;" since="27"/>
 		<method name="setDefaultBrowserPackageName(Ljava/lang/String;I)Z" since="23" removed="24"/>
 		<method name="setPackageObbPath(Ljava/lang/String;Ljava/lang/String;)V" since="9" removed="10"/>
 	</class>
@@ -44063,10 +44068,10 @@
 	</class>
 	<class name="android/view/DragAndDropPermissions" since="24">
 		<extends name="java/lang/Object"/>
-		<implements name="android/os/Parcelable" since="25"/>
+		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>()V"/>
 		<method name="release()V"/>
-		<field name="CREATOR" since="25"/>
+		<field name="CREATOR"/>
 	</class>
 	<class name="android/view/DragEvent" since="11">
 		<extends name="java/lang/Object"/>
@@ -44210,9 +44215,13 @@
 		<field name="CONTEXT_CLICK" since="23"/>
 		<field name="FLAG_IGNORE_GLOBAL_SETTING"/>
 		<field name="FLAG_IGNORE_VIEW_SETTING"/>
+		<field name="KEYBOARD_PRESS" since="27"/>
+		<field name="KEYBOARD_RELEASE" since="27"/>
 		<field name="KEYBOARD_TAP" since="8"/>
 		<field name="LONG_PRESS"/>
+		<field name="TEXT_HANDLE_MOVE" since="27"/>
 		<field name="VIRTUAL_KEY" since="5"/>
+		<field name="VIRTUAL_KEY_RELEASE" since="27"/>
 	</class>
 	<class name="android/view/InflateException" since="1">
 		<extends name="java/lang/RuntimeException"/>
@@ -45278,22 +45287,18 @@
 		<method name="&lt;init>(Landroid/graphics/SurfaceTexture;)V" since="14"/>
 		<method name="freeze()V" removed="14"/>
 		<method name="hide()V" removed="14"/>
-		<method name="isAutoRefreshEnabled()Z" since="27"/>
-		<method name="isSharedBufferModeEnabled()Z" since="27"/>
 		<method name="isValid()Z"/>
 		<method name="lockCanvas(Landroid/graphics/Rect;)Landroid/graphics/Canvas;"/>
 		<method name="lockHardwareCanvas()Landroid/graphics/Canvas;" since="23"/>
 		<method name="readFromParcel(Landroid/os/Parcel;)V"/>
 		<method name="release()V" since="14"/>
 		<method name="setAlpha(F)V" removed="14"/>
-		<method name="setAutoRefreshEnabled(Z)V" since="27"/>
 		<method name="setFlags(II)V" removed="14"/>
 		<method name="setFreezeTint(I)V" removed="14"/>
 		<method name="setLayer(I)V" removed="14"/>
 		<method name="setMatrix(FFFF)V" removed="14"/>
 		<method name="setOrientation(II)V" removed="14"/>
 		<method name="setPosition(II)V" removed="14"/>
-		<method name="setSharedBufferModeEnabled(Z)V" since="27"/>
 		<method name="setSize(II)V" removed="14"/>
 		<method name="setTransparentRegionHint(Landroid/graphics/Region;)V" removed="14"/>
 		<method name="show()V" removed="14"/>
@@ -47300,6 +47305,7 @@
 		<method name="getEnabledAccessibilityServiceList(I)Ljava/util/List;" since="14"/>
 		<method name="getInstalledAccessibilityServiceList()Ljava/util/List;" since="14"/>
 		<method name="interrupt()V"/>
+		<method name="isAccessibilityButtonSupported()Z" since="27"/>
 		<method name="isEnabled()Z"/>
 		<method name="isTouchExplorationEnabled()Z" since="14"/>
 		<method name="removeAccessibilityRequestPreparer(Landroid/view/accessibility/AccessibilityRequestPreparer;)V" since="27"/>
@@ -49249,6 +49255,7 @@
 		<method name="getProgress()I"/>
 		<method name="getRendererPriorityWaivedWhenNotVisible()Z" since="26"/>
 		<method name="getRendererRequestedPriority()I" since="26"/>
+		<method name="getSafeBrowsingPrivacyPolicyUrl()Landroid/net/Uri;" since="27"/>
 		<method name="getScale()F" deprecated="17"/>
 		<method name="getSettings()Landroid/webkit/WebSettings;"/>
 		<method name="getTextClassifier()Landroid/view/textclassifier/TextClassifier;" since="27"/>
@@ -49261,7 +49268,6 @@
 		<method name="goBack()V"/>
 		<method name="goBackOrForward(I)V"/>
 		<method name="goForward()V"/>
-		<method name="initSafeBrowsing(Landroid/content/Context;Landroid/webkit/ValueCallback;)V" since="27"/>
 		<method name="invokeZoomPicker()V"/>
 		<method name="isPrivateBrowsingEnabled()Z" since="11"/>
 		<method name="loadData(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"/>
@@ -49308,7 +49314,7 @@
 		<method name="setWebContentsDebuggingEnabled(Z)V" since="19"/>
 		<method name="setWebViewClient(Landroid/webkit/WebViewClient;)V"/>
 		<method name="showFindDialog(Ljava/lang/String;Z)Z" since="11" deprecated="18"/>
-		<method name="shutdownSafeBrowsing()V" since="27"/>
+		<method name="startSafeBrowsing(Landroid/content/Context;Landroid/webkit/ValueCallback;)V" since="27"/>
 		<method name="stopLoading()V"/>
 		<method name="zoomBy(F)V" since="21"/>
 		<method name="zoomIn()Z"/>

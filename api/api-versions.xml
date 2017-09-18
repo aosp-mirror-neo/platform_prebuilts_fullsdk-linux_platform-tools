@@ -40362,14 +40362,44 @@
 		<field name="STATUS_NO_SUCH_ELEMENT"/>
 		<field name="STATUS_UNKNOWN_ERROR"/>
 	</class>
-	<class name="android/telephony/MbmsStreamingManager" since="28">
+	<class name="android/telephony/MbmsDownloadSession" since="28">
 		<extends name="java/lang/Object"/>
+		<implements name="java/lang/AutoCloseable"/>
 		<method name="&lt;init>()V"/>
-		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsStreamingManagerCallback;)Landroid/telephony/MbmsStreamingManager;"/>
-		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsStreamingManagerCallback;ILandroid/os/Handler;)Landroid/telephony/MbmsStreamingManager;"/>
-		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsStreamingManagerCallback;Landroid/os/Handler;)Landroid/telephony/MbmsStreamingManager;"/>
-		<method name="dispose()V"/>
-		<method name="getStreamingServices(Ljava/util/List;)V"/>
+		<method name="cancelDownload(Landroid/telephony/mbms/DownloadRequest;)V"/>
+		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsDownloadSessionCallback;ILandroid/os/Handler;)Landroid/telephony/MbmsDownloadSession;"/>
+		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsDownloadSessionCallback;Landroid/os/Handler;)Landroid/telephony/MbmsDownloadSession;"/>
+		<method name="download(Landroid/telephony/mbms/DownloadRequest;)V"/>
+		<method name="getDownloadStatus(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;)I"/>
+		<method name="getTempFileRootDirectory()Ljava/io/File;"/>
+		<method name="listPendingDownloads()Ljava/util/List;"/>
+		<method name="registerStateCallback(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/DownloadStateCallback;Landroid/os/Handler;)V"/>
+		<method name="requestUpdateFileServices(Ljava/util/List;)V"/>
+		<method name="resetDownloadKnowledge(Landroid/telephony/mbms/DownloadRequest;)V"/>
+		<method name="setTempFileRootDirectory(Ljava/io/File;)V"/>
+		<method name="unregisterStateCallback(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/DownloadStateCallback;)V"/>
+		<field name="DEFAULT_TOP_LEVEL_TEMP_DIRECTORY"/>
+		<field name="EXTRA_MBMS_COMPLETED_FILE_URI"/>
+		<field name="EXTRA_MBMS_DOWNLOAD_REQUEST"/>
+		<field name="EXTRA_MBMS_DOWNLOAD_RESULT"/>
+		<field name="EXTRA_MBMS_FILE_INFO"/>
+		<field name="RESULT_CANCELLED"/>
+		<field name="RESULT_EXPIRED"/>
+		<field name="RESULT_IO_ERROR"/>
+		<field name="RESULT_SUCCESSFUL"/>
+		<field name="STATUS_ACTIVELY_DOWNLOADING"/>
+		<field name="STATUS_PENDING_DOWNLOAD"/>
+		<field name="STATUS_PENDING_DOWNLOAD_WINDOW"/>
+		<field name="STATUS_PENDING_REPAIR"/>
+		<field name="STATUS_UNKNOWN"/>
+	</class>
+	<class name="android/telephony/MbmsStreamingSession" since="28">
+		<extends name="java/lang/Object"/>
+		<implements name="java/lang/AutoCloseable"/>
+		<method name="&lt;init>()V"/>
+		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsStreamingSessionCallback;ILandroid/os/Handler;)Landroid/telephony/MbmsStreamingSession;"/>
+		<method name="create(Landroid/content/Context;Landroid/telephony/mbms/MbmsStreamingSessionCallback;Landroid/os/Handler;)Landroid/telephony/MbmsStreamingSession;"/>
+		<method name="requestUpdateStreamingServices(Ljava/util/List;)V"/>
 		<method name="startStreaming(Landroid/telephony/mbms/StreamingServiceInfo;Landroid/telephony/mbms/StreamingServiceCallback;Landroid/os/Handler;)Landroid/telephony/mbms/StreamingService;"/>
 	</class>
 	<class name="android/telephony/NeighboringCellInfo" since="3">
@@ -40993,16 +41023,74 @@
 		<field name="encodedMessage" deprecated="16"/>
 		<field name="encodedScAddress" deprecated="16"/>
 	</class>
-	<class name="android/telephony/mbms/MbmsException" since="28">
-		<extends name="java/lang/Exception"/>
+	<class name="android/telephony/mbms/DownloadRequest" since="28">
+		<extends name="java/lang/Object"/>
+		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>()V"/>
-		<method name="getErrorCode()I"/>
+		<method name="copy(Landroid/telephony/mbms/DownloadRequest;)Landroid/telephony/mbms/DownloadRequest;"/>
+		<method name="getFileServiceId()Ljava/lang/String;"/>
+		<method name="getMaxAppIntentSize()I"/>
+		<method name="getMaxDestinationUriSize()I"/>
+		<method name="getSourceUri()Landroid/net/Uri;"/>
+		<method name="getSubscriptionId()I"/>
+		<field name="CREATOR"/>
+	</class>
+	<class name="android/telephony/mbms/DownloadRequest$Builder" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="build()Landroid/telephony/mbms/DownloadRequest;"/>
+		<method name="setAppIntent(Landroid/content/Intent;)Landroid/telephony/mbms/DownloadRequest$Builder;"/>
+		<method name="setServiceInfo(Landroid/telephony/mbms/FileServiceInfo;)Landroid/telephony/mbms/DownloadRequest$Builder;"/>
+		<method name="setSource(Landroid/net/Uri;)Landroid/telephony/mbms/DownloadRequest$Builder;"/>
+		<method name="setSubscriptionId(I)Landroid/telephony/mbms/DownloadRequest$Builder;"/>
+	</class>
+	<class name="android/telephony/mbms/DownloadStateCallback" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="onProgressUpdated(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;IIII)V"/>
+		<method name="onStateUpdated(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;I)V"/>
+	</class>
+	<class name="android/telephony/mbms/FileInfo" since="28">
+		<extends name="java/lang/Object"/>
+		<implements name="android/os/Parcelable"/>
+		<method name="&lt;init>()V"/>
+		<method name="getMimeType()Ljava/lang/String;"/>
+		<method name="getUri()Landroid/net/Uri;"/>
+		<field name="CREATOR"/>
+	</class>
+	<class name="android/telephony/mbms/FileServiceInfo" since="28">
+		<extends name="android/telephony/mbms/ServiceInfo"/>
+		<implements name="android/os/Parcelable"/>
+		<method name="&lt;init>()V"/>
+		<method name="getFiles()Ljava/util/List;"/>
+		<field name="CREATOR"/>
+	</class>
+	<class name="android/telephony/mbms/MbmsDownloadReceiver" since="28">
+		<extends name="android/content/BroadcastReceiver"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/telephony/mbms/MbmsDownloadSessionCallback" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="onError(ILjava/lang/String;)V"/>
+		<method name="onFileServicesUpdated(Ljava/util/List;)V"/>
+		<method name="onMiddlewareReady()V"/>
+	</class>
+	<class name="android/telephony/mbms/MbmsErrors" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
 		<field name="ERROR_MIDDLEWARE_LOST"/>
 		<field name="ERROR_MIDDLEWARE_NOT_BOUND"/>
 		<field name="ERROR_NO_UNIQUE_MIDDLEWARE"/>
 		<field name="SUCCESS"/>
 	</class>
-	<class name="android/telephony/mbms/MbmsException$GeneralErrors" since="28">
+	<class name="android/telephony/mbms/MbmsErrors$DownloadErrors" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<field name="ERROR_CANNOT_CHANGE_TEMP_FILE_ROOT"/>
+		<field name="ERROR_UNKNOWN_DOWNLOAD_REQUEST"/>
+	</class>
+	<class name="android/telephony/mbms/MbmsErrors$GeneralErrors" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<field name="ERROR_CARRIER_CHANGE_NOT_ALLOWED"/>
@@ -41013,21 +41101,21 @@
 		<field name="ERROR_OUT_OF_MEMORY"/>
 		<field name="ERROR_UNABLE_TO_READ_SIM"/>
 	</class>
-	<class name="android/telephony/mbms/MbmsException$InitializationErrors" since="28">
+	<class name="android/telephony/mbms/MbmsErrors$InitializationErrors" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<field name="ERROR_APP_PERMISSIONS_NOT_GRANTED"/>
 		<field name="ERROR_DUPLICATE_INITIALIZE"/>
 		<field name="ERROR_UNABLE_TO_INITIALIZE"/>
 	</class>
-	<class name="android/telephony/mbms/MbmsException$StreamingErrors" since="28">
+	<class name="android/telephony/mbms/MbmsErrors$StreamingErrors" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<field name="ERROR_CONCURRENT_SERVICE_LIMIT_REACHED"/>
 		<field name="ERROR_DUPLICATE_START_STREAM"/>
 		<field name="ERROR_UNABLE_TO_START_SERVICE"/>
 	</class>
-	<class name="android/telephony/mbms/MbmsStreamingManagerCallback" since="28">
+	<class name="android/telephony/mbms/MbmsStreamingSessionCallback" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="onError(ILjava/lang/String;)V"/>
@@ -41037,9 +41125,9 @@
 	<class name="android/telephony/mbms/ServiceInfo" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
-		<method name="getClassName()Ljava/lang/String;"/>
 		<method name="getLocales()Ljava/util/List;"/>
-		<method name="getNames()Ljava/util/Map;"/>
+		<method name="getNameForLocale(Ljava/util/Locale;)Ljava/lang/CharSequence;"/>
+		<method name="getServiceClassName()Ljava/lang/String;"/>
 		<method name="getServiceId()Ljava/lang/String;"/>
 		<method name="getSessionEndTime()Ljava/util/Date;"/>
 		<method name="getSessionStartTime()Ljava/util/Date;"/>
@@ -41047,7 +41135,6 @@
 	<class name="android/telephony/mbms/StreamingService" since="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
-		<method name="dispose()V"/>
 		<method name="getInfo()Landroid/telephony/mbms/StreamingServiceInfo;"/>
 		<method name="getPlaybackUri()Landroid/net/Uri;"/>
 		<method name="stopStreaming()V"/>
@@ -48341,6 +48428,7 @@
 		<field name="FLAG_SELECTING"/>
 		<field name="FLAG_SINGLE_LINE"/>
 		<field name="flags"/>
+		<field name="hint" since="28"/>
 		<field name="partialEndOffset"/>
 		<field name="partialStartOffset"/>
 		<field name="selectionEnd"/>

@@ -6301,6 +6301,7 @@
 		<method name="getDeviceOwnerLockScreenInfo()Ljava/lang/CharSequence;" since="24"/>
 		<method name="getInstalledCaCerts(Landroid/content/ComponentName;)Ljava/util/List;" since="21"/>
 		<method name="getKeyguardDisabledFeatures(Landroid/content/ComponentName;)I" since="17"/>
+		<method name="getLockTaskFeatures(Landroid/content/ComponentName;)I" since="28"/>
 		<method name="getLockTaskPackages(Landroid/content/ComponentName;)[Ljava/lang/String;" since="26"/>
 		<method name="getLongSupportMessage(Landroid/content/ComponentName;)Ljava/lang/CharSequence;" since="24"/>
 		<method name="getMaximumFailedPasswordsForWipe(Landroid/content/ComponentName;)I"/>
@@ -6387,6 +6388,7 @@
 		<method name="setGlobalSetting(Landroid/content/ComponentName;Ljava/lang/String;Ljava/lang/String;)V" since="21"/>
 		<method name="setKeyguardDisabled(Landroid/content/ComponentName;Z)Z" since="23"/>
 		<method name="setKeyguardDisabledFeatures(Landroid/content/ComponentName;I)V" since="17"/>
+		<method name="setLockTaskFeatures(Landroid/content/ComponentName;I)V" since="28"/>
 		<method name="setLockTaskPackages(Landroid/content/ComponentName;[Ljava/lang/String;)V" since="21"/>
 		<method name="setLongSupportMessage(Landroid/content/ComponentName;Ljava/lang/CharSequence;)V" since="24"/>
 		<method name="setMasterVolumeMuted(Landroid/content/ComponentName;Z)V" since="21"/>
@@ -6503,6 +6505,13 @@
 		<field name="KEYGUARD_DISABLE_TRUST_AGENTS" since="21"/>
 		<field name="KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS" since="21"/>
 		<field name="KEYGUARD_DISABLE_WIDGETS_ALL" since="17"/>
+		<field name="LOCK_TASK_FEATURE_GLOBAL_ACTIONS" since="28"/>
+		<field name="LOCK_TASK_FEATURE_HOME" since="28"/>
+		<field name="LOCK_TASK_FEATURE_KEYGUARD" since="28"/>
+		<field name="LOCK_TASK_FEATURE_NONE" since="28"/>
+		<field name="LOCK_TASK_FEATURE_NOTIFICATIONS" since="28"/>
+		<field name="LOCK_TASK_FEATURE_RECENTS" since="28"/>
+		<field name="LOCK_TASK_FEATURE_SYSTEM_INFO" since="28"/>
 		<field name="MIME_TYPE_PROVISIONING_NFC" since="21"/>
 		<field name="PASSWORD_QUALITY_ALPHABETIC"/>
 		<field name="PASSWORD_QUALITY_ALPHANUMERIC"/>
@@ -6787,6 +6796,7 @@
 		<method name="getBackoffPolicy()I"/>
 		<method name="getClipData()Landroid/content/ClipData;" since="26"/>
 		<method name="getClipGrantFlags()I" since="26"/>
+		<method name="getEstimatedNetworkBytes()J" since="28"/>
 		<method name="getExtras()Landroid/os/PersistableBundle;"/>
 		<method name="getFlexMillis()J" since="24"/>
 		<method name="getId()I"/>
@@ -6813,6 +6823,7 @@
 		<field name="CREATOR"/>
 		<field name="DEFAULT_INITIAL_BACKOFF_MILLIS"/>
 		<field name="MAX_BACKOFF_DELAY_MILLIS"/>
+		<field name="NETWORK_BYTES_UNKNOWN" since="28"/>
 		<field name="NETWORK_TYPE_ANY"/>
 		<field name="NETWORK_TYPE_METERED" since="26"/>
 		<field name="NETWORK_TYPE_NONE"/>
@@ -6826,6 +6837,7 @@
 		<method name="build()Landroid/app/job/JobInfo;"/>
 		<method name="setBackoffCriteria(JI)Landroid/app/job/JobInfo$Builder;"/>
 		<method name="setClipData(Landroid/content/ClipData;I)Landroid/app/job/JobInfo$Builder;" since="26"/>
+		<method name="setEstimatedNetworkBytes(J)Landroid/app/job/JobInfo$Builder;" since="28"/>
 		<method name="setExtras(Landroid/os/PersistableBundle;)Landroid/app/job/JobInfo$Builder;"/>
 		<method name="setMinimumLatency(J)Landroid/app/job/JobInfo$Builder;"/>
 		<method name="setOverrideDeadline(J)Landroid/app/job/JobInfo$Builder;"/>
@@ -6860,6 +6872,7 @@
 		<method name="getClipGrantFlags()I" since="26"/>
 		<method name="getExtras()Landroid/os/PersistableBundle;"/>
 		<method name="getJobId()I"/>
+		<method name="getNetwork()Landroid/net/Network;" since="28"/>
 		<method name="getTransientExtras()Landroid/os/Bundle;" since="26"/>
 		<method name="getTriggeredContentAuthorities()[Ljava/lang/String;" since="24"/>
 		<method name="getTriggeredContentUris()[Landroid/net/Uri;" since="24"/>
@@ -6898,7 +6911,9 @@
 		<extends name="java/lang/Object"/>
 		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>(Landroid/content/Intent;)V"/>
+		<method name="&lt;init>(Landroid/content/Intent;J)V" since="28"/>
 		<method name="getDeliveryCount()I"/>
+		<method name="getEstimatedNetworkBytes()J" since="28"/>
 		<method name="getIntent()Landroid/content/Intent;"/>
 		<field name="CREATOR"/>
 	</class>
@@ -6971,6 +6986,22 @@
 		<method name="&lt;init>()V"/>
 		<method name="onBindSlice(Landroid/net/Uri;)Landroid/app/slice/Slice;"/>
 		<field name="SLICE_TYPE"/>
+	</class>
+	<class name="android/app/slice/widget/SliceView" since="28">
+		<extends name="android/view/ViewGroup"/>
+		<method name="&lt;init>(Landroid/content/Context;)V"/>
+		<method name="&lt;init>(Landroid/content/Context;Landroid/util/AttributeSet;)V"/>
+		<method name="&lt;init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V"/>
+		<method name="&lt;init>(Landroid/content/Context;Landroid/util/AttributeSet;II)V"/>
+		<method name="clearSlice()V"/>
+		<method name="getMode()Ljava/lang/String;"/>
+		<method name="setMode(Ljava/lang/String;)V"/>
+		<method name="setScrollable(Z)V"/>
+		<method name="setSlice(Landroid/net/Uri;)Z"/>
+		<method name="showSlice(Landroid/app/slice/Slice;)V"/>
+		<field name="MODE_LARGE"/>
+		<field name="MODE_SHORTCUT"/>
+		<field name="MODE_SMALL"/>
 	</class>
 	<class name="android/app/usage/ConfigurationStats" since="21">
 		<extends name="java/lang/Object"/>
@@ -31644,6 +31675,7 @@
 		<field name="DISALLOW_CONFIG_BLUETOOTH" since="18"/>
 		<field name="DISALLOW_CONFIG_CELL_BROADCASTS" since="21"/>
 		<field name="DISALLOW_CONFIG_CREDENTIALS" since="18"/>
+		<field name="DISALLOW_CONFIG_DATE_TIME" since="28"/>
 		<field name="DISALLOW_CONFIG_MOBILE_NETWORKS" since="21"/>
 		<field name="DISALLOW_CONFIG_TETHERING" since="21"/>
 		<field name="DISALLOW_CONFIG_VPN" since="21"/>
@@ -37857,6 +37889,7 @@
 		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>()V"/>
 		<field name="CREATOR"/>
+		<field name="FLAG_DISABLE_ACTIVITY_ONLY" since="28"/>
 		<field name="FLAG_TRACK_CONTEXT_COMMITED" since="28"/>
 	</class>
 	<class name="android/service/autofill/FillResponse$Builder" since="26">
@@ -37864,6 +37897,7 @@
 		<method name="&lt;init>()V"/>
 		<method name="addDataset(Landroid/service/autofill/Dataset;)Landroid/service/autofill/FillResponse$Builder;"/>
 		<method name="build()Landroid/service/autofill/FillResponse;"/>
+		<method name="disableAutofill(J)Landroid/service/autofill/FillResponse$Builder;" since="28"/>
 		<method name="setAuthentication([Landroid/view/autofill/AutofillId;Landroid/content/IntentSender;Landroid/widget/RemoteViews;)Landroid/service/autofill/FillResponse$Builder;"/>
 		<method name="setClientState(Landroid/os/Bundle;)Landroid/service/autofill/FillResponse$Builder;"/>
 		<method name="setFlags(I)Landroid/service/autofill/FillResponse$Builder;" since="28"/>
@@ -40334,6 +40368,7 @@
 		<field name="KEY_DURATION_BLOCKING_DISABLED_AFTER_EMERGENCY_INT" since="24"/>
 		<field name="KEY_EDITABLE_ENHANCED_4G_LTE_BOOL" since="24"/>
 		<field name="KEY_EDITABLE_VOICEMAIL_NUMBER_BOOL" since="26"/>
+		<field name="KEY_EDITABLE_VOICEMAIL_NUMBER_SETTING_BOOL" since="28"/>
 		<field name="KEY_ENABLE_APPS_STRING_ARRAY" since="28"/>
 		<field name="KEY_ENABLE_DIALER_KEY_VIBRATION_BOOL"/>
 		<field name="KEY_FORCE_HOME_NETWORK_BOOL"/>
@@ -40426,6 +40461,8 @@
 		<method name="getLatitude()I"/>
 		<method name="getLongitude()I"/>
 		<method name="getNetworkId()I"/>
+		<method name="getOperatorAlphaLong()Ljava/lang/CharSequence;" since="28"/>
+		<method name="getOperatorAlphaShort()Ljava/lang/CharSequence;" since="28"/>
 		<method name="getSystemId()I"/>
 		<field name="CREATOR"/>
 	</class>
@@ -40437,8 +40474,13 @@
 		<method name="getBsic()I" since="24"/>
 		<method name="getCid()I"/>
 		<method name="getLac()I"/>
-		<method name="getMcc()I"/>
-		<method name="getMnc()I"/>
+		<method name="getMcc()I" deprecated="28"/>
+		<method name="getMccStr()Ljava/lang/String;" since="28"/>
+		<method name="getMnc()I" deprecated="28"/>
+		<method name="getMncStr()Ljava/lang/String;" since="28"/>
+		<method name="getMobileNetworkOperator()Ljava/lang/String;" since="28"/>
+		<method name="getOperatorAlphaLong()Ljava/lang/CharSequence;" since="28"/>
+		<method name="getOperatorAlphaShort()Ljava/lang/CharSequence;" since="28"/>
 		<method name="getPsc()I" deprecated="18"/>
 		<field name="CREATOR"/>
 	</class>
@@ -40448,8 +40490,13 @@
 		<method name="&lt;init>()V"/>
 		<method name="getCi()I"/>
 		<method name="getEarfcn()I" since="24"/>
-		<method name="getMcc()I"/>
-		<method name="getMnc()I"/>
+		<method name="getMcc()I" deprecated="28"/>
+		<method name="getMccStr()Ljava/lang/String;" since="28"/>
+		<method name="getMnc()I" deprecated="28"/>
+		<method name="getMncStr()Ljava/lang/String;" since="28"/>
+		<method name="getMobileNetworkOperator()Ljava/lang/String;" since="28"/>
+		<method name="getOperatorAlphaLong()Ljava/lang/CharSequence;" since="28"/>
+		<method name="getOperatorAlphaShort()Ljava/lang/CharSequence;" since="28"/>
 		<method name="getPci()I"/>
 		<method name="getTac()I"/>
 		<field name="CREATOR"/>
@@ -40460,8 +40507,13 @@
 		<method name="&lt;init>()V"/>
 		<method name="getCid()I"/>
 		<method name="getLac()I"/>
-		<method name="getMcc()I"/>
-		<method name="getMnc()I"/>
+		<method name="getMcc()I" deprecated="28"/>
+		<method name="getMccStr()Ljava/lang/String;" since="28"/>
+		<method name="getMnc()I" deprecated="28"/>
+		<method name="getMncStr()Ljava/lang/String;" since="28"/>
+		<method name="getMobileNetworkOperator()Ljava/lang/String;" since="28"/>
+		<method name="getOperatorAlphaLong()Ljava/lang/CharSequence;" since="28"/>
+		<method name="getOperatorAlphaShort()Ljava/lang/CharSequence;" since="28"/>
 		<method name="getPsc()I"/>
 		<method name="getUarfcn()I" since="24"/>
 		<field name="CREATOR"/>
@@ -40872,6 +40924,8 @@
 		<field name="ENCODING_7BIT"/>
 		<field name="ENCODING_8BIT"/>
 		<field name="ENCODING_UNKNOWN"/>
+		<field name="FORMAT_3GPP" since="28"/>
+		<field name="FORMAT_3GPP2" since="28"/>
 		<field name="MAX_USER_DATA_BYTES"/>
 		<field name="MAX_USER_DATA_BYTES_WITH_HEADER"/>
 		<field name="MAX_USER_DATA_SEPTETS"/>

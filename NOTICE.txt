@@ -988,7 +988,6 @@ Notices for file(s):
 /bin/make_f2fs
 /lib/libf2fs_fmt_host.a
 /lib64/libf2fs_fmt_host.a
-/lib64/libf2fs_fmt_host_dyn.so
 ------------------------------------------------------------
 The tools for F2FS are covered by GNU Public License version 2.
 Exceptionally, the following files are also covered by the GNU Lesser General
@@ -5427,17 +5426,8 @@ Notices for file(s):
 ============================================================
 Notices for file(s):
 /bin/blk_alloc_to_base_fs
-/bin/make_ext4fs
-/bin/mkuserimg.sh
-/lib/libext4_utils.a
-/lib/libf2fs_dlutils_host.a
-/lib/libf2fs_ioutils_host.a
-/lib/libf2fs_utils_host.a
-/lib64/libext4_utils.a
+/bin/mkuserimg_mke2fs.sh
 /lib64/libext4_utils.so
-/lib64/libf2fs_dlutils_host.a
-/lib64/libf2fs_ioutils_host.a
-/lib64/libf2fs_utils_host.a
 ------------------------------------------------------------
 
    Copyright (c) 2010, The Android Open Source Project

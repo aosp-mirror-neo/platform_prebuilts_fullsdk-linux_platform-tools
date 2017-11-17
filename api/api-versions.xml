@@ -545,6 +545,7 @@
 		<field name="detailSocialSummary" since="5"/>
 		<field name="detailsElementBackground" since="11"/>
 		<field name="dial"/>
+		<field name="dialogCornerRadius" since="28"/>
 		<field name="dialogIcon"/>
 		<field name="dialogLayout"/>
 		<field name="dialogMessage"/>
@@ -673,6 +674,7 @@
 		<field name="fontProviderPackage" since="26"/>
 		<field name="fontProviderQuery" since="26"/>
 		<field name="fontStyle" since="26"/>
+		<field name="fontVariationSettings" since="28"/>
 		<field name="fontWeight" since="26"/>
 		<field name="footerDividersEnabled" since="3"/>
 		<field name="forceHasOverlappingRendering" since="24"/>
@@ -3653,12 +3655,12 @@
 		<method name="getContentScene()Landroid/transition/Scene;" since="21"/>
 		<method name="getContentTransitionManager()Landroid/transition/TransitionManager;" since="21"/>
 		<method name="getCurrentFocus()Landroid/view/View;"/>
-		<method name="getFragmentManager()Landroid/app/FragmentManager;" since="11"/>
+		<method name="getFragmentManager()Landroid/app/FragmentManager;" since="11" deprecated="28"/>
 		<method name="getInstanceCount()J" removed="11"/>
 		<method name="getIntent()Landroid/content/Intent;"/>
 		<method name="getLastNonConfigurationInstance()Ljava/lang/Object;" deprecated="16"/>
 		<method name="getLayoutInflater()Landroid/view/LayoutInflater;"/>
-		<method name="getLoaderManager()Landroid/app/LoaderManager;" since="11"/>
+		<method name="getLoaderManager()Landroid/app/LoaderManager;" since="11" deprecated="28"/>
 		<method name="getLocalClassName()Ljava/lang/String;"/>
 		<method name="getMaxNumPictureInPictureActions()I" since="26"/>
 		<method name="getMediaController()Landroid/media/session/MediaController;" since="21"/>
@@ -3696,7 +3698,7 @@
 		<method name="navigateUpToFromChild(Landroid/app/Activity;Landroid/content/Intent;)Z" since="16"/>
 		<method name="onActivityReenter(ILandroid/content/Intent;)V" since="21"/>
 		<method name="onActivityResult(IILandroid/content/Intent;)V"/>
-		<method name="onAttachFragment(Landroid/app/Fragment;)V" since="11"/>
+		<method name="onAttachFragment(Landroid/app/Fragment;)V" since="11" deprecated="28"/>
 		<method name="onBackPressed()V" since="5"/>
 		<method name="onChildTitleChanged(Landroid/app/Activity;Ljava/lang/CharSequence;)V"/>
 		<method name="onContextItemSelected(Landroid/view/MenuItem;)Z"/>
@@ -3814,8 +3816,8 @@
 		<method name="startActivityForResult(Landroid/content/Intent;ILandroid/os/Bundle;)V" since="16"/>
 		<method name="startActivityFromChild(Landroid/app/Activity;Landroid/content/Intent;I)V"/>
 		<method name="startActivityFromChild(Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;)V" since="16"/>
-		<method name="startActivityFromFragment(Landroid/app/Fragment;Landroid/content/Intent;I)V" since="11"/>
-		<method name="startActivityFromFragment(Landroid/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)V" since="16"/>
+		<method name="startActivityFromFragment(Landroid/app/Fragment;Landroid/content/Intent;I)V" since="11" deprecated="28"/>
+		<method name="startActivityFromFragment(Landroid/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)V" since="16" deprecated="28"/>
 		<method name="startActivityIfNeeded(Landroid/content/Intent;I)Z"/>
 		<method name="startActivityIfNeeded(Landroid/content/Intent;ILandroid/os/Bundle;)Z" since="16"/>
 		<method name="startIntentSenderForResult(Landroid/content/IntentSender;ILandroid/content/Intent;III)V" since="5"/>
@@ -4440,7 +4442,7 @@
 		<method name="takeKeyEvents(Z)V"/>
 		<method name="unregisterForContextMenu(Landroid/view/View;)V"/>
 	</class>
-	<class name="android/app/DialogFragment" since="11">
+	<class name="android/app/DialogFragment" since="11" deprecated="28">
 		<extends name="android/app/Fragment"/>
 		<implements name="android/content/DialogInterface$OnCancelListener"/>
 		<implements name="android/content/DialogInterface$OnDismissListener"/>
@@ -4559,7 +4561,7 @@
 		<method name="setSelectedChild(IIZ)Z"/>
 		<method name="setSelectedGroup(I)V"/>
 	</class>
-	<class name="android/app/Fragment" since="11">
+	<class name="android/app/Fragment" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<implements name="android/content/ComponentCallbacks" removed="14"/>
 		<implements name="android/content/ComponentCallbacks2" since="14"/>
@@ -4578,7 +4580,7 @@
 		<method name="getHost()Ljava/lang/Object;" since="23"/>
 		<method name="getId()I"/>
 		<method name="getLayoutInflater()Landroid/view/LayoutInflater;" since="26"/>
-		<method name="getLoaderManager()Landroid/app/LoaderManager;"/>
+		<method name="getLoaderManager()Landroid/app/LoaderManager;" deprecated="28"/>
 		<method name="getParentFragment()Landroid/app/Fragment;" since="17"/>
 		<method name="getReenterTransition()Landroid/transition/Transition;" since="21"/>
 		<method name="getResources()Landroid/content/res/Resources;"/>
@@ -4667,11 +4669,11 @@
 		<method name="startPostponedEnterTransition()V" since="26"/>
 		<method name="unregisterForContextMenu(Landroid/view/View;)V"/>
 	</class>
-	<class name="android/app/Fragment$InstantiationException" since="11">
+	<class name="android/app/Fragment$InstantiationException" since="11" deprecated="28">
 		<extends name="android/util/AndroidRuntimeException"/>
 		<method name="&lt;init>(Ljava/lang/String;Ljava/lang/Exception;)V"/>
 	</class>
-	<class name="android/app/Fragment$SavedState" since="13">
+	<class name="android/app/Fragment$SavedState" since="13" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>()V"/>
@@ -4689,17 +4691,17 @@
 		<method name="setParentTitle(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/view/View$OnClickListener;)V"/>
 		<method name="setTitle(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V"/>
 	</class>
-	<class name="android/app/FragmentBreadCrumbs$OnBreadCrumbClickListener" since="12">
+	<class name="android/app/FragmentBreadCrumbs$OnBreadCrumbClickListener" since="12" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onBreadCrumbClick(Landroid/app/FragmentManager$BackStackEntry;I)Z"/>
 	</class>
-	<class name="android/app/FragmentContainer" since="23">
+	<class name="android/app/FragmentContainer" since="23" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="onFindViewById(I)Landroid/view/View;"/>
 		<method name="onHasView()Z"/>
 	</class>
-	<class name="android/app/FragmentController" since="23">
+	<class name="android/app/FragmentController" since="23" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="attachHost(Landroid/app/Fragment;)V"/>
@@ -4743,7 +4745,7 @@
 		<method name="retainNonConfig()Ljava/util/List;" deprecated="24"/>
 		<method name="saveAllState()Landroid/os/Parcelable;"/>
 	</class>
-	<class name="android/app/FragmentHostCallback" since="23">
+	<class name="android/app/FragmentHostCallback" since="23" deprecated="28">
 		<extends name="android/app/FragmentContainer"/>
 		<method name="&lt;init>(Landroid/content/Context;Landroid/os/Handler;I)V"/>
 		<method name="onAttachFragment(Landroid/app/Fragment;)V"/>
@@ -4759,7 +4761,7 @@
 		<method name="onStartIntentSenderFromFragment(Landroid/app/Fragment;Landroid/content/IntentSender;ILandroid/content/Intent;IIILandroid/os/Bundle;)V" since="24"/>
 		<method name="onUseFragmentManagerInflaterFactory()Z"/>
 	</class>
-	<class name="android/app/FragmentManager" since="11">
+	<class name="android/app/FragmentManager" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="addOnBackStackChangedListener(Landroid/app/FragmentManager$OnBackStackChangedListener;)V"/>
@@ -4790,7 +4792,7 @@
 		<method name="unregisterFragmentLifecycleCallbacks(Landroid/app/FragmentManager$FragmentLifecycleCallbacks;)V" since="26"/>
 		<field name="POP_BACK_STACK_INCLUSIVE"/>
 	</class>
-	<class name="android/app/FragmentManager$BackStackEntry" since="11">
+	<class name="android/app/FragmentManager$BackStackEntry" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="getBreadCrumbShortTitle()Ljava/lang/CharSequence;"/>
 		<method name="getBreadCrumbShortTitleRes()I"/>
@@ -4799,7 +4801,7 @@
 		<method name="getId()I"/>
 		<method name="getName()Ljava/lang/String;" since="14"/>
 	</class>
-	<class name="android/app/FragmentManager$FragmentLifecycleCallbacks" since="26">
+	<class name="android/app/FragmentManager$FragmentLifecycleCallbacks" since="26" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="onFragmentActivityCreated(Landroid/app/FragmentManager;Landroid/app/Fragment;Landroid/os/Bundle;)V"/>
@@ -4817,15 +4819,15 @@
 		<method name="onFragmentViewCreated(Landroid/app/FragmentManager;Landroid/app/Fragment;Landroid/view/View;Landroid/os/Bundle;)V"/>
 		<method name="onFragmentViewDestroyed(Landroid/app/FragmentManager;Landroid/app/Fragment;)V"/>
 	</class>
-	<class name="android/app/FragmentManager$OnBackStackChangedListener" since="11">
+	<class name="android/app/FragmentManager$OnBackStackChangedListener" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onBackStackChanged()V"/>
 	</class>
-	<class name="android/app/FragmentManagerNonConfig" since="24">
+	<class name="android/app/FragmentManagerNonConfig" since="24" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 	</class>
-	<class name="android/app/FragmentTransaction" since="11">
+	<class name="android/app/FragmentTransaction" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="add(ILandroid/app/Fragment;)Landroid/app/FragmentTransaction;"/>
@@ -4926,6 +4928,7 @@
 		<method name="setInTouchMode(Z)V"/>
 		<method name="start()V"/>
 		<method name="startActivitySync(Landroid/content/Intent;)Landroid/app/Activity;"/>
+		<method name="startActivitySync(Landroid/content/Intent;Landroid/os/Bundle;)Landroid/app/Activity;" since="28"/>
 		<method name="startAllocCounting()V" deprecated="23"/>
 		<method name="startPerformanceSnapshot()V"/>
 		<method name="startProfiling()V"/>
@@ -5030,7 +5033,7 @@
 		<method name="setListAdapter(Landroid/widget/ListAdapter;)V"/>
 		<method name="setSelection(I)V"/>
 	</class>
-	<class name="android/app/ListFragment" since="11">
+	<class name="android/app/ListFragment" since="11" deprecated="28">
 		<extends name="android/app/Fragment"/>
 		<method name="&lt;init>()V"/>
 		<method name="getListAdapter()Landroid/widget/ListAdapter;"/>
@@ -5044,7 +5047,7 @@
 		<method name="setListShownNoAnimation(Z)V"/>
 		<method name="setSelection(I)V"/>
 	</class>
-	<class name="android/app/LoaderManager" since="11">
+	<class name="android/app/LoaderManager" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
 		<method name="destroyLoader(I)V"/>
@@ -5054,7 +5057,7 @@
 		<method name="initLoader(ILandroid/os/Bundle;Landroid/app/LoaderManager$LoaderCallbacks;)Landroid/content/Loader;"/>
 		<method name="restartLoader(ILandroid/os/Bundle;Landroid/app/LoaderManager$LoaderCallbacks;)Landroid/content/Loader;"/>
 	</class>
-	<class name="android/app/LoaderManager$LoaderCallbacks" since="11">
+	<class name="android/app/LoaderManager$LoaderCallbacks" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onCreateLoader(ILandroid/os/Bundle;)Landroid/content/Loader;"/>
 		<method name="onLoadFinished(Landroid/content/Loader;Ljava/lang/Object;)V"/>
@@ -6512,6 +6515,7 @@
 		<field name="LOCK_TASK_FEATURE_NOTIFICATIONS" since="28"/>
 		<field name="LOCK_TASK_FEATURE_RECENTS" since="28"/>
 		<field name="LOCK_TASK_FEATURE_SYSTEM_INFO" since="28"/>
+		<field name="MAKE_USER_EPHEMERAL" since="28"/>
 		<field name="MIME_TYPE_PROVISIONING_NFC" since="21"/>
 		<field name="PASSWORD_QUALITY_ALPHABETIC"/>
 		<field name="PASSWORD_QUALITY_ALPHANUMERIC"/>
@@ -6806,7 +6810,8 @@
 		<method name="getMinFlexMillis()J" since="24"/>
 		<method name="getMinLatencyMillis()J"/>
 		<method name="getMinPeriodMillis()J" since="24"/>
-		<method name="getNetworkType()I"/>
+		<method name="getNetworkType()I" deprecated="28"/>
+		<method name="getRequiredNetwork()Landroid/net/NetworkRequest;" since="28"/>
 		<method name="getService()Landroid/content/ComponentName;"/>
 		<method name="getTransientExtras()Landroid/os/Bundle;" since="26"/>
 		<method name="getTriggerContentMaxDelay()J" since="24"/>
@@ -6825,7 +6830,8 @@
 		<field name="MAX_BACKOFF_DELAY_MILLIS"/>
 		<field name="NETWORK_BYTES_UNKNOWN" since="28"/>
 		<field name="NETWORK_TYPE_ANY"/>
-		<field name="NETWORK_TYPE_METERED" since="26"/>
+		<field name="NETWORK_TYPE_CELLULAR" since="28"/>
+		<field name="NETWORK_TYPE_METERED" since="26" deprecated="28"/>
 		<field name="NETWORK_TYPE_NONE"/>
 		<field name="NETWORK_TYPE_NOT_ROAMING" since="24"/>
 		<field name="NETWORK_TYPE_UNMETERED"/>
@@ -6844,6 +6850,7 @@
 		<method name="setPeriodic(J)Landroid/app/job/JobInfo$Builder;"/>
 		<method name="setPeriodic(JJ)Landroid/app/job/JobInfo$Builder;" since="24"/>
 		<method name="setPersisted(Z)Landroid/app/job/JobInfo$Builder;"/>
+		<method name="setRequiredNetwork(Landroid/net/NetworkRequest;)Landroid/app/job/JobInfo$Builder;" since="28"/>
 		<method name="setRequiredNetworkType(I)Landroid/app/job/JobInfo$Builder;"/>
 		<method name="setRequiresBatteryNotLow(Z)Landroid/app/job/JobInfo$Builder;" since="26"/>
 		<method name="setRequiresCharging(Z)Landroid/app/job/JobInfo$Builder;"/>
@@ -6922,6 +6929,7 @@
 		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>(Landroid/os/Parcel;)V"/>
 		<method name="bindSlice(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/app/slice/Slice;"/>
+		<method name="bindSlice(Landroid/content/Context;Landroid/content/Intent;)Landroid/app/slice/Slice;"/>
 		<method name="getHints()Ljava/util/List;"/>
 		<method name="getItems()Ljava/util/List;"/>
 		<method name="getUri()Landroid/net/Uri;"/>
@@ -6985,6 +6993,7 @@
 		<extends name="android/content/ContentProvider"/>
 		<method name="&lt;init>()V"/>
 		<method name="onBindSlice(Landroid/net/Uri;)Landroid/app/slice/Slice;"/>
+		<method name="onMapIntentToUri(Landroid/content/Intent;)Landroid/net/Uri;"/>
 		<field name="SLICE_TYPE"/>
 	</class>
 	<class name="android/app/slice/widget/SliceView" since="28">
@@ -8445,7 +8454,7 @@
 		<extends name="android/os/Handler"/>
 		<method name="&lt;init>(Landroid/content/AsyncQueryHandler;Landroid/os/Looper;)V"/>
 	</class>
-	<class name="android/content/AsyncTaskLoader" since="11">
+	<class name="android/content/AsyncTaskLoader" since="11" deprecated="28">
 		<extends name="android/content/Loader"/>
 		<method name="&lt;init>(Landroid/content/Context;)V"/>
 		<method name="cancelLoad()Z" removed="16"/>
@@ -9018,6 +9027,7 @@
 		<field name="CONTEXT_IGNORE_SECURITY"/>
 		<field name="CONTEXT_INCLUDE_CODE"/>
 		<field name="CONTEXT_RESTRICTED" since="4"/>
+		<field name="CROSS_PROFILE_APPS_SERVICE" since="28"/>
 		<field name="DEVICE_POLICY_SERVICE" since="8"/>
 		<field name="DISPLAY_SERVICE" since="17"/>
 		<field name="DOWNLOAD_SERVICE" since="9"/>
@@ -9082,7 +9092,7 @@
 		<method name="getPackageCodePath()Ljava/lang/String;"/>
 		<method name="getPackageResourcePath()Ljava/lang/String;"/>
 	</class>
-	<class name="android/content/CursorLoader" since="11">
+	<class name="android/content/CursorLoader" since="11" deprecated="28">
 		<extends name="android/content/AsyncTaskLoader"/>
 		<method name="&lt;init>(Landroid/content/Context;)V"/>
 		<method name="&lt;init>(Landroid/content/Context;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"/>
@@ -9688,7 +9698,7 @@
 		<method name="&lt;init>(Ljava/lang/Exception;)V"/>
 		<method name="&lt;init>(Ljava/lang/String;)V"/>
 	</class>
-	<class name="android/content/Loader" since="11">
+	<class name="android/content/Loader" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>(Landroid/content/Context;)V"/>
 		<method name="abandon()V"/>
@@ -9721,15 +9731,15 @@
 		<method name="unregisterListener(Landroid/content/Loader$OnLoadCompleteListener;)V"/>
 		<method name="unregisterOnLoadCanceledListener(Landroid/content/Loader$OnLoadCanceledListener;)V" since="16"/>
 	</class>
-	<class name="android/content/Loader$ForceLoadContentObserver" since="11">
+	<class name="android/content/Loader$ForceLoadContentObserver" since="11" deprecated="28">
 		<extends name="android/database/ContentObserver"/>
 		<method name="&lt;init>(Landroid/content/Loader;)V"/>
 	</class>
-	<class name="android/content/Loader$OnLoadCanceledListener" since="16">
+	<class name="android/content/Loader$OnLoadCanceledListener" since="16" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onLoadCanceled(Landroid/content/Loader;)V"/>
 	</class>
-	<class name="android/content/Loader$OnLoadCompleteListener" since="11">
+	<class name="android/content/Loader$OnLoadCompleteListener" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onLoadComplete(Landroid/content/Loader;Ljava/lang/Object;)V"/>
 	</class>
@@ -10382,6 +10392,7 @@
 		<field name="FLAG_MATCH_DYNAMIC"/>
 		<field name="FLAG_MATCH_MANIFEST"/>
 		<field name="FLAG_MATCH_PINNED"/>
+		<field name="FLAG_MATCH_PINNED_BY_ANY_LAUNCHER" since="28"/>
 	</class>
 	<class name="android/content/pm/PackageInfo" since="1">
 		<extends name="java/lang/Object"/>
@@ -11063,6 +11074,12 @@
 		<method name="getVersionCode()I"/>
 		<field name="CREATOR"/>
 	</class>
+	<class name="android/content/pm/crossprofile/CrossProfileApps" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="getTargetUserProfiles()Ljava/util/List;"/>
+		<method name="startMainActivity(Landroid/content/ComponentName;Landroid/os/UserHandle;Landroid/graphics/Rect;Landroid/os/Bundle;)V"/>
+	</class>
 	<class name="android/content/res/AssetFileDescriptor" since="1">
 		<extends name="java/lang/Object"/>
 		<implements name="android/os/Parcelable" since="3"/>
@@ -11742,6 +11759,7 @@
 		<method name="&lt;init>(Landroid/database/sqlite/SQLiteCursorDriver;Ljava/lang/String;Landroid/database/sqlite/SQLiteQuery;)V" since="11"/>
 		<method name="&lt;init>(Landroid/database/sqlite/SQLiteDatabase;Landroid/database/sqlite/SQLiteCursorDriver;Ljava/lang/String;Landroid/database/sqlite/SQLiteQuery;)V" deprecated="16"/>
 		<method name="getDatabase()Landroid/database/sqlite/SQLiteDatabase;"/>
+		<method name="setFillWindowForwardOnly(Z)V" since="28"/>
 		<method name="setSelectionArguments([Ljava/lang/String;)V"/>
 	</class>
 	<class name="android/database/sqlite/SQLiteCursorDriver" since="1">
@@ -11847,9 +11865,11 @@
 		<method name="getCursorFactory()Landroid/database/sqlite/SQLiteDatabase$CursorFactory;"/>
 		<method name="getErrorHandler()Landroid/database/DatabaseErrorHandler;"/>
 		<method name="getIdleConnectionTimeout()J"/>
+		<method name="getJournalMode()Ljava/lang/String;" since="28"/>
 		<method name="getLookasideSlotCount()I"/>
 		<method name="getLookasideSlotSize()I"/>
 		<method name="getOpenFlags()I"/>
+		<method name="getSynchronousMode()Ljava/lang/String;" since="28"/>
 	</class>
 	<class name="android/database/sqlite/SQLiteDatabase$OpenParams$Builder" since="27">
 		<extends name="java/lang/Object"/>
@@ -11861,8 +11881,10 @@
 		<method name="setCursorFactory(Landroid/database/sqlite/SQLiteDatabase$CursorFactory;)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;"/>
 		<method name="setErrorHandler(Landroid/database/DatabaseErrorHandler;)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;"/>
 		<method name="setIdleConnectionTimeout(J)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;"/>
+		<method name="setJournalMode(Ljava/lang/String;)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;" since="28"/>
 		<method name="setLookasideConfig(II)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;"/>
 		<method name="setOpenFlags(I)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;"/>
+		<method name="setSynchronousMode(Ljava/lang/String;)Landroid/database/sqlite/SQLiteDatabase$OpenParams$Builder;" since="28"/>
 	</class>
 	<class name="android/database/sqlite/SQLiteDatabaseCorruptException" since="1">
 		<extends name="android/database/sqlite/SQLiteException"/>
@@ -11907,6 +11929,7 @@
 	</class>
 	<class name="android/database/sqlite/SQLiteOpenHelper" since="1">
 		<extends name="java/lang/Object"/>
+		<method name="&lt;init>(Landroid/content/Context;Ljava/lang/String;ILandroid/database/sqlite/SQLiteDatabase$OpenParams;)V" since="28"/>
 		<method name="&lt;init>(Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)V"/>
 		<method name="&lt;init>(Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;ILandroid/database/DatabaseErrorHandler;)V" since="11"/>
 		<method name="close()V"/>
@@ -14953,6 +14976,7 @@
 		<method name="setRepeatingBurst(Ljava/util/List;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;Landroid/os/Handler;)I"/>
 		<method name="setRepeatingRequest(Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;Landroid/os/Handler;)I"/>
 		<method name="stopRepeating()V"/>
+		<method name="updateOutputConfiguration(Landroid/hardware/camera2/params/OutputConfiguration;)V" since="28"/>
 	</class>
 	<class name="android/hardware/camera2/CameraCaptureSession$CaptureCallback" since="21">
 		<extends name="java/lang/Object"/>
@@ -15595,9 +15619,11 @@
 		<method name="&lt;init>(Landroid/view/Surface;)V"/>
 		<method name="addSurface(Landroid/view/Surface;)V" since="26"/>
 		<method name="enableSurfaceSharing()V" since="26"/>
+		<method name="getMaxSharedSurfaceCount()I" since="28"/>
 		<method name="getSurface()Landroid/view/Surface;"/>
 		<method name="getSurfaceGroupId()I"/>
 		<method name="getSurfaces()Ljava/util/List;" since="26"/>
+		<method name="removeSurface(Landroid/view/Surface;)V" since="28"/>
 		<field name="CREATOR"/>
 		<field name="SURFACE_GROUP_ID_NONE"/>
 	</class>
@@ -22493,6 +22519,10 @@
 		<field name="KEY_DURATION"/>
 		<field name="KEY_FLAC_COMPRESSION_LEVEL"/>
 		<field name="KEY_FRAME_RATE"/>
+		<field name="KEY_GRID_COLS" since="28"/>
+		<field name="KEY_GRID_HEIGHT" since="28"/>
+		<field name="KEY_GRID_ROWS" since="28"/>
+		<field name="KEY_GRID_WIDTH" since="28"/>
 		<field name="KEY_HDR_STATIC_INFO" since="24"/>
 		<field name="KEY_HEIGHT"/>
 		<field name="KEY_INTRA_REFRESH_PERIOD" since="24"/>
@@ -22536,6 +22566,7 @@
 		<field name="MIMETYPE_AUDIO_RAW" since="21"/>
 		<field name="MIMETYPE_AUDIO_SCRAMBLED" since="26"/>
 		<field name="MIMETYPE_AUDIO_VORBIS" since="21"/>
+		<field name="MIMETYPE_IMAGE_ANDROID_HEIC" since="28"/>
 		<field name="MIMETYPE_TEXT_CEA_608" since="21"/>
 		<field name="MIMETYPE_TEXT_VTT" since="21"/>
 		<field name="MIMETYPE_VIDEO_AVC" since="21"/>
@@ -22629,9 +22660,13 @@
 		<method name="&lt;init>()V"/>
 		<method name="extractMetadata(I)Ljava/lang/String;"/>
 		<method name="getEmbeddedPicture()[B"/>
+		<method name="getFrameAtIndex(I)Landroid/graphics/Bitmap;" since="28"/>
 		<method name="getFrameAtTime()Landroid/graphics/Bitmap;"/>
 		<method name="getFrameAtTime(J)Landroid/graphics/Bitmap;"/>
 		<method name="getFrameAtTime(JI)Landroid/graphics/Bitmap;"/>
+		<method name="getFramesAtIndex(II)[Landroid/graphics/Bitmap;" since="28"/>
+		<method name="getImageAtIndex(I)Landroid/graphics/Bitmap;" since="28"/>
+		<method name="getPrimaryImage()Landroid/graphics/Bitmap;" since="28"/>
 		<method name="getScaledFrameAtTime(JIII)Landroid/graphics/Bitmap;" since="27"/>
 		<method name="release()V"/>
 		<method name="setDataSource(Landroid/content/Context;Landroid/net/Uri;)V"/>
@@ -22654,11 +22689,18 @@
 		<field name="METADATA_KEY_DURATION"/>
 		<field name="METADATA_KEY_GENRE"/>
 		<field name="METADATA_KEY_HAS_AUDIO" since="14"/>
+		<field name="METADATA_KEY_HAS_IMAGE" since="28"/>
 		<field name="METADATA_KEY_HAS_VIDEO" since="14"/>
+		<field name="METADATA_KEY_IMAGE_COUNT" since="28"/>
+		<field name="METADATA_KEY_IMAGE_HEIGHT" since="28"/>
+		<field name="METADATA_KEY_IMAGE_PRIMARY" since="28"/>
+		<field name="METADATA_KEY_IMAGE_ROTATION" since="28"/>
+		<field name="METADATA_KEY_IMAGE_WIDTH" since="28"/>
 		<field name="METADATA_KEY_LOCATION" since="15"/>
 		<field name="METADATA_KEY_MIMETYPE"/>
 		<field name="METADATA_KEY_NUM_TRACKS"/>
 		<field name="METADATA_KEY_TITLE"/>
+		<field name="METADATA_KEY_VIDEO_FRAME_COUNT" since="28"/>
 		<field name="METADATA_KEY_VIDEO_HEIGHT" since="14"/>
 		<field name="METADATA_KEY_VIDEO_ROTATION" since="17"/>
 		<field name="METADATA_KEY_VIDEO_WIDTH" since="14"/>
@@ -22690,6 +22732,7 @@
 	</class>
 	<class name="android/media/MediaPlayer" since="1">
 		<extends name="java/lang/Object"/>
+		<implements name="android/media/AudioRouting" since="28"/>
 		<implements name="android/media/VolumeAutomation" since="26"/>
 		<method name="&lt;init>()V"/>
 		<method name="addTimedTextSource(Landroid/content/Context;Landroid/net/Uri;Ljava/lang/String;)V" since="16"/>
@@ -25656,6 +25699,7 @@
 		<field name="NET_CAPABILITY_MMS"/>
 		<field name="NET_CAPABILITY_NOT_METERED"/>
 		<field name="NET_CAPABILITY_NOT_RESTRICTED"/>
+		<field name="NET_CAPABILITY_NOT_ROAMING" since="28"/>
 		<field name="NET_CAPABILITY_NOT_VPN"/>
 		<field name="NET_CAPABILITY_RCS"/>
 		<field name="NET_CAPABILITY_SUPL"/>
@@ -25688,7 +25732,7 @@
 		<method name="isConnected()Z"/>
 		<method name="isConnectedOrConnecting()Z"/>
 		<method name="isFailover()Z"/>
-		<method name="isRoaming()Z" since="3"/>
+		<method name="isRoaming()Z" since="3" deprecated="28"/>
 		<field name="CREATOR" since="24"/>
 	</class>
 	<class name="android/net/NetworkInfo$DetailedState" since="1">
@@ -30720,6 +30764,7 @@
 	<class name="android/os/Debug" since="1">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
+		<method name="attachJvmtiAgent(Ljava/lang/String;Ljava/lang/String;)V" since="28"/>
 		<method name="changeDebugPort(I)V" deprecated="16"/>
 		<method name="dumpHprofData(Ljava/lang/String;)V" since="3"/>
 		<method name="dumpService(Ljava/lang/String;Ljava/io/FileDescriptor;[Ljava/lang/String;)Z" since="8"/>
@@ -31527,6 +31572,14 @@
 		<method name="setThreadPolicy(Landroid/os/StrictMode$ThreadPolicy;)V"/>
 		<method name="setVmPolicy(Landroid/os/StrictMode$VmPolicy;)V"/>
 	</class>
+	<class name="android/os/StrictMode$OnThreadViolationListener" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="onThreadViolation(Landroid/os/strictmode/Violation;)V"/>
+	</class>
+	<class name="android/os/StrictMode$OnVmViolationListener" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="onVmViolation(Landroid/os/strictmode/Violation;)V"/>
+	</class>
 	<class name="android/os/StrictMode$ThreadPolicy" since="9">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
@@ -31549,6 +31602,7 @@
 		<method name="penaltyDialog()Landroid/os/StrictMode$ThreadPolicy$Builder;"/>
 		<method name="penaltyDropBox()Landroid/os/StrictMode$ThreadPolicy$Builder;"/>
 		<method name="penaltyFlashScreen()Landroid/os/StrictMode$ThreadPolicy$Builder;" since="11"/>
+		<method name="penaltyListener(Landroid/os/StrictMode$OnThreadViolationListener;Ljava/util/concurrent/Executor;)Landroid/os/StrictMode$ThreadPolicy$Builder;" since="28"/>
 		<method name="penaltyLog()Landroid/os/StrictMode$ThreadPolicy$Builder;"/>
 		<method name="permitAll()Landroid/os/StrictMode$ThreadPolicy$Builder;"/>
 		<method name="permitCustomSlowCalls()Landroid/os/StrictMode$ThreadPolicy$Builder;" since="11"/>
@@ -31581,6 +31635,7 @@
 		<method name="penaltyDeathOnCleartextNetwork()Landroid/os/StrictMode$VmPolicy$Builder;" since="23"/>
 		<method name="penaltyDeathOnFileUriExposure()Landroid/os/StrictMode$VmPolicy$Builder;" since="24"/>
 		<method name="penaltyDropBox()Landroid/os/StrictMode$VmPolicy$Builder;"/>
+		<method name="penaltyListener(Landroid/os/StrictMode$OnVmViolationListener;Ljava/util/concurrent/Executor;)Landroid/os/StrictMode$VmPolicy$Builder;" since="28"/>
 		<method name="penaltyLog()Landroid/os/StrictMode$VmPolicy$Builder;"/>
 		<method name="setClassInstanceLimit(Ljava/lang/Class;I)Landroid/os/StrictMode$VmPolicy$Builder;" since="11"/>
 	</class>
@@ -31589,10 +31644,12 @@
 		<method name="&lt;init>()V"/>
 		<method name="currentThreadTimeMillis()J"/>
 		<method name="elapsedRealtime()J"/>
+		<method name="elapsedRealtimeClock()Ljava/time/Clock;" since="28"/>
 		<method name="elapsedRealtimeNanos()J" since="17"/>
 		<method name="setCurrentTimeMillis(J)Z"/>
 		<method name="sleep(J)V"/>
 		<method name="uptimeMillis()J"/>
+		<method name="uptimeMillisClock()Ljava/time/Clock;" since="28"/>
 	</class>
 	<class name="android/os/TestLooperManager" since="26">
 		<extends name="java/lang/Object"/>
@@ -31676,6 +31733,7 @@
 		<field name="DISALLOW_CONFIG_CELL_BROADCASTS" since="21"/>
 		<field name="DISALLOW_CONFIG_CREDENTIALS" since="18"/>
 		<field name="DISALLOW_CONFIG_DATE_TIME" since="28"/>
+		<field name="DISALLOW_CONFIG_LOCALE" since="28"/>
 		<field name="DISALLOW_CONFIG_MOBILE_NETWORKS" since="21"/>
 		<field name="DISALLOW_CONFIG_TETHERING" since="21"/>
 		<field name="DISALLOW_CONFIG_VPN" since="21"/>
@@ -31704,6 +31762,7 @@
 		<field name="DISALLOW_UNINSTALL_APPS" since="18"/>
 		<field name="DISALLOW_UNMUTE_MICROPHONE" since="21"/>
 		<field name="DISALLOW_USB_FILE_TRANSFER" since="18"/>
+		<field name="DISALLOW_USER_SWITCH" since="28"/>
 		<field name="ENSURE_VERIFY_APPS" since="21"/>
 		<field name="KEY_RESTRICTIONS_PENDING" since="22"/>
 		<field name="USER_CREATION_FAILED_NOT_PERMITTED" since="24"/>
@@ -31940,6 +31999,75 @@
 		<method name="isRemovable()Z"/>
 		<field name="CREATOR"/>
 		<field name="EXTRA_STORAGE_VOLUME"/>
+	</class>
+	<class name="android/os/strictmode/CleartextNetworkViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/ContentUriWithoutPermissionViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/CustomViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/DiskReadViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/DiskWriteViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/FileUriExposedViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/InstanceCountViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+		<method name="getNumberOfInstances()J"/>
+	</class>
+	<class name="android/os/strictmode/IntentReceiverLeakedViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/LeakedClosableViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/NetworkViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/ResourceMismatchViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/ServiceConnectionLeakedViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/SqliteObjectLeakedViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/UnbufferedIoViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/UntaggedSocketViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/Violation" since="28">
+		<extends name="java/lang/Throwable"/>
+		<method name="&lt;init>()V"/>
+	</class>
+	<class name="android/os/strictmode/WebViewMethodCalledOnWrongThreadViolation" since="28">
+		<extends name="android/os/strictmode/Violation"/>
+		<method name="&lt;init>()V"/>
 	</class>
 	<class name="android/preference/CheckBoxPreference" since="1">
 		<extends name="android/preference/Preference" removed="14"/>
@@ -32236,7 +32364,7 @@
 		<method name="putString(Ljava/lang/String;Ljava/lang/String;)V"/>
 		<method name="putStringSet(Ljava/lang/String;Ljava/util/Set;)V"/>
 	</class>
-	<class name="android/preference/PreferenceFragment" since="11">
+	<class name="android/preference/PreferenceFragment" since="11" deprecated="28">
 		<extends name="android/app/Fragment"/>
 		<method name="&lt;init>()V"/>
 		<method name="addPreferencesFromIntent(Landroid/content/Intent;)V"/>
@@ -32247,7 +32375,7 @@
 		<method name="onPreferenceTreeClick(Landroid/preference/PreferenceScreen;Landroid/preference/Preference;)Z"/>
 		<method name="setPreferenceScreen(Landroid/preference/PreferenceScreen;)V"/>
 	</class>
-	<class name="android/preference/PreferenceFragment$OnPreferenceStartFragmentCallback" since="11">
+	<class name="android/preference/PreferenceFragment$OnPreferenceStartFragmentCallback" since="11" deprecated="28">
 		<extends name="java/lang/Object"/>
 		<method name="onPreferenceStartFragment(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z"/>
 	</class>
@@ -35264,6 +35392,7 @@
 		<field name="EXTRA_DO_NOT_DISTURB_MODE_ENABLED" since="23"/>
 		<field name="EXTRA_DO_NOT_DISTURB_MODE_MINUTES" since="23"/>
 		<field name="EXTRA_INPUT_METHOD_ID" since="11"/>
+		<field name="EXTRA_SUB_ID" since="28"/>
 		<field name="INTENT_CATEGORY_USAGE_ACCESS_CONFIG" since="23"/>
 		<field name="METADATA_USAGE_ACCESS_REASON" since="23"/>
 	</class>
@@ -38870,6 +38999,16 @@
 		<method name="&lt;init>(Ljava/lang/String;ILjava/lang/Throwable;)V"/>
 		<field name="errno"/>
 	</class>
+	<class name="android/system/Int32Ref" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>(I)V"/>
+		<field name="value"/>
+	</class>
+	<class name="android/system/Int64Ref" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>(J)V"/>
+		<field name="value"/>
+	</class>
 	<class name="android/system/Os" since="21">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
@@ -38941,7 +39080,8 @@
 		<method name="remove(Ljava/lang/String;)V"/>
 		<method name="removexattr(Ljava/lang/String;Ljava/lang/String;)V" since="26"/>
 		<method name="rename(Ljava/lang/String;Ljava/lang/String;)V"/>
-		<method name="sendfile(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;Landroid/util/MutableLong;J)J"/>
+		<method name="sendfile(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;Landroid/system/Int64Ref;J)J" since="28"/>
+		<method name="sendfile(Ljava/io/FileDescriptor;Ljava/io/FileDescriptor;Landroid/util/MutableLong;J)J" deprecated="28"/>
 		<method name="sendto(Ljava/io/FileDescriptor;Ljava/nio/ByteBuffer;ILjava/net/InetAddress;I)I"/>
 		<method name="sendto(Ljava/io/FileDescriptor;[BIIILjava/net/InetAddress;I)I"/>
 		<method name="setegid(I)V"/>
@@ -38966,7 +39106,8 @@
 		<method name="umask(I)I"/>
 		<method name="uname()Landroid/system/StructUtsname;"/>
 		<method name="unsetenv(Ljava/lang/String;)V"/>
-		<method name="waitpid(ILandroid/util/MutableInt;I)I"/>
+		<method name="waitpid(ILandroid/system/Int32Ref;I)I" since="28"/>
+		<method name="waitpid(ILandroid/util/MutableInt;I)I" deprecated="28"/>
 		<method name="write(Ljava/io/FileDescriptor;Ljava/nio/ByteBuffer;)I"/>
 		<method name="write(Ljava/io/FileDescriptor;[BII)I"/>
 		<method name="writev(Ljava/io/FileDescriptor;[Ljava/lang/Object;[I[I)I"/>
@@ -39541,6 +39682,7 @@
 		<method name="getRttCall()Landroid/telecom/Call$RttCall;" since="26"/>
 		<method name="getState()I"/>
 		<method name="getVideoCall()Landroid/telecom/InCallService$VideoCall;"/>
+		<method name="handoverTo(Landroid/telecom/PhoneAccountHandle;ILandroid/os/Bundle;)V" since="28"/>
 		<method name="hold()V"/>
 		<method name="isRttActive()Z" since="26"/>
 		<method name="mergeConference()V"/>
@@ -39585,6 +39727,8 @@
 		<method name="onConferenceableCallsChanged(Landroid/telecom/Call;Ljava/util/List;)V"/>
 		<method name="onConnectionEvent(Landroid/telecom/Call;Ljava/lang/String;Landroid/os/Bundle;)V" since="25"/>
 		<method name="onDetailsChanged(Landroid/telecom/Call;Landroid/telecom/Call$Details;)V"/>
+		<method name="onHandoverComplete(Landroid/telecom/Call;)V" since="28"/>
+		<method name="onHandoverFailed(Landroid/telecom/Call;I)V" since="28"/>
 		<method name="onParentChanged(Landroid/telecom/Call;Landroid/telecom/Call;)V"/>
 		<method name="onPostDialWait(Landroid/telecom/Call;Ljava/lang/String;)V"/>
 		<method name="onRttInitiationFailure(Landroid/telecom/Call;I)V" since="26"/>
@@ -39593,6 +39737,10 @@
 		<method name="onRttStatusChanged(Landroid/telecom/Call;ZLandroid/telecom/Call$RttCall;)V" since="26"/>
 		<method name="onStateChanged(Landroid/telecom/Call;I)V"/>
 		<method name="onVideoCallChanged(Landroid/telecom/Call;Landroid/telecom/InCallService$VideoCall;)V"/>
+		<field name="HANDOVER_FAILURE_DEST_APP_REJECTED" since="28"/>
+		<field name="HANDOVER_FAILURE_DEST_INVALID_PERM" since="28"/>
+		<field name="HANDOVER_FAILURE_DEST_NOT_SUPPORTED" since="28"/>
+		<field name="HANDOVER_FAILURE_DEST_USER_REJECTED" since="28"/>
 	</class>
 	<class name="android/telecom/Call$Details" since="23">
 		<extends name="java/lang/Object"/>
@@ -39663,7 +39811,9 @@
 		<implements name="android/os/Parcelable"/>
 		<method name="&lt;init>(ZII)V"/>
 		<method name="audioRouteToString(I)Ljava/lang/String;"/>
+		<method name="getActiveBluetoothDevice()Landroid/bluetooth/BluetoothDevice;" since="28"/>
 		<method name="getRoute()I"/>
+		<method name="getSupportedBluetoothDevices()Ljava/util/Collection;" since="28"/>
 		<method name="getSupportedRouteMask()I"/>
 		<method name="isMuted()Z"/>
 		<field name="CREATOR"/>
@@ -39795,6 +39945,7 @@
 		<method name="putExtras(Landroid/os/Bundle;)V" since="25"/>
 		<method name="removeExtras(Ljava/util/List;)V" since="25"/>
 		<method name="removeExtras([Ljava/lang/String;)V" since="25"/>
+		<method name="requestBluetoothAudio(Ljava/lang/String;)V" since="28"/>
 		<method name="sendConnectionEvent(Ljava/lang/String;Landroid/os/Bundle;)V" since="25"/>
 		<method name="setActive()V"/>
 		<method name="setAddress(Landroid/net/Uri;I)V"/>
@@ -39925,8 +40076,11 @@
 		<method name="onConference(Landroid/telecom/Connection;Landroid/telecom/Connection;)V"/>
 		<method name="onCreateIncomingConnection(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;"/>
 		<method name="onCreateIncomingConnectionFailed(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V" since="26"/>
+		<method name="onCreateIncomingHandoverConnection(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;" since="28"/>
 		<method name="onCreateOutgoingConnection(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;"/>
 		<method name="onCreateOutgoingConnectionFailed(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V" since="26"/>
+		<method name="onCreateOutgoingHandoverConnection(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;" since="28"/>
+		<method name="onHandoverFailed(Landroid/telecom/ConnectionRequest;I)V" since="28"/>
 		<method name="onRemoteConferenceAdded(Landroid/telecom/RemoteConference;)V"/>
 		<method name="onRemoteExistingConnectionAdded(Landroid/telecom/RemoteConnection;)V"/>
 		<field name="SERVICE_INTERFACE"/>
@@ -39981,6 +40135,7 @@
 		<method name="onCanAddCallChanged(Z)V"/>
 		<method name="onConnectionEvent(Landroid/telecom/Call;Ljava/lang/String;Landroid/os/Bundle;)V" since="25"/>
 		<method name="onSilenceRinger()V" since="24"/>
+		<method name="requestBluetoothAudio(Ljava/lang/String;)V" since="28"/>
 		<method name="setAudioRoute(I)V"/>
 		<method name="setMuted(Z)V"/>
 		<field name="SERVICE_INTERFACE"/>
@@ -40045,6 +40200,9 @@
 		<field name="CREATOR"/>
 		<field name="EXTRA_CALL_SUBJECT_CHARACTER_ENCODING" since="24"/>
 		<field name="EXTRA_CALL_SUBJECT_MAX_LENGTH" since="24"/>
+		<field name="EXTRA_LOG_SELF_MANAGED_CALLS" since="28"/>
+		<field name="EXTRA_SUPPORTS_HANDOVER_FROM" since="28"/>
+		<field name="EXTRA_SUPPORTS_HANDOVER_TO" since="28"/>
 		<field name="NO_HIGHLIGHT_COLOR"/>
 		<field name="NO_RESOURCE_ID"/>
 		<field name="SCHEME_SIP"/>
@@ -40207,6 +40365,7 @@
 	<class name="android/telecom/TelecomManager" since="21">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
+		<method name="acceptHandover(Landroid/net/Uri;ILandroid/telecom/PhoneAccountHandle;)V" since="28"/>
 		<method name="acceptRingingCall()V" since="26"/>
 		<method name="acceptRingingCall(I)V" since="26"/>
 		<method name="addNewIncomingCall(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V" since="23"/>
@@ -40349,12 +40508,14 @@
 		<field name="KEY_CDMA_3WAYCALL_FLASH_DELAY_INT" since="26"/>
 		<field name="KEY_CDMA_DTMF_TONE_DELAY_INT" since="24"/>
 		<field name="KEY_CDMA_NONROAMING_NETWORKS_STRING_ARRAY"/>
+		<field name="KEY_CDMA_ROAMING_MODE_INT" since="28"/>
 		<field name="KEY_CDMA_ROAMING_NETWORKS_STRING_ARRAY"/>
 		<field name="KEY_CI_ACTION_ON_SYS_UPDATE_BOOL" since="24"/>
 		<field name="KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_STRING" since="24"/>
 		<field name="KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_VAL_STRING" since="24"/>
 		<field name="KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING" since="24"/>
 		<field name="KEY_CONFIG_IMS_PACKAGE_OVERRIDE_STRING" since="26"/>
+		<field name="KEY_CONFIG_TELEPHONY_USE_OWN_NUMBER_FOR_VOICEMAIL_BOOL" since="28"/>
 		<field name="KEY_CSP_ENABLED_BOOL"/>
 		<field name="KEY_DATA_LIMIT_THRESHOLD_BYTES_LONG" since="26"/>
 		<field name="KEY_DATA_WARNING_THRESHOLD_BYTES_LONG" since="26"/>
@@ -40830,6 +40991,7 @@
 		<method name="sendMultimediaMessage(Landroid/content/Context;Landroid/net/Uri;Ljava/lang/String;Landroid/os/Bundle;Landroid/app/PendingIntent;)V" since="21"/>
 		<method name="sendMultipartTextMessage(Ljava/lang/String;Ljava/lang/String;Ljava/util/ArrayList;Ljava/util/ArrayList;Ljava/util/ArrayList;)V"/>
 		<method name="sendTextMessage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;Landroid/app/PendingIntent;)V"/>
+		<method name="sendTextMessageWithoutPersisting(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;Landroid/app/PendingIntent;)V" since="28"/>
 		<field name="EXTRA_MMS_DATA" since="21"/>
 		<field name="EXTRA_MMS_HTTP_STATUS" since="22"/>
 		<field name="MMS_CONFIG_ALIAS_ENABLED" since="21"/>
@@ -41085,6 +41247,10 @@
 		<field name="CALL_STATE_IDLE"/>
 		<field name="CALL_STATE_OFFHOOK"/>
 		<field name="CALL_STATE_RINGING"/>
+		<field name="CDMA_ROAMING_MODE_AFFILIATED" since="28"/>
+		<field name="CDMA_ROAMING_MODE_ANY" since="28"/>
+		<field name="CDMA_ROAMING_MODE_HOME" since="28"/>
+		<field name="CDMA_ROAMING_MODE_RADIO_DEFAULT" since="28"/>
 		<field name="DATA_ACTIVITY_DORMANT" since="4"/>
 		<field name="DATA_ACTIVITY_IN"/>
 		<field name="DATA_ACTIVITY_INOUT"/>
@@ -44572,6 +44738,7 @@
 		<field name="STATE_DOZING" since="20" removed="21"/>
 		<field name="STATE_OFF" since="20"/>
 		<field name="STATE_ON" since="20"/>
+		<field name="STATE_ON_SUSPEND" since="28"/>
 		<field name="STATE_UNKNOWN" since="20"/>
 		<field name="STATE_VR" since="26"/>
 	</class>
@@ -48965,6 +49132,12 @@
 		<method name="setOnClickListener(Landroid/view/View$OnClickListener;)Landroid/view/textclassifier/TextClassification$Builder;"/>
 		<method name="setText(Ljava/lang/String;)Landroid/view/textclassifier/TextClassification$Builder;"/>
 	</class>
+	<class name="android/view/textclassifier/TextClassification$Options" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="getDefaultLocales()Landroid/os/LocaleList;"/>
+		<method name="setDefaultLocales(Landroid/os/LocaleList;)Landroid/view/textclassifier/TextClassification$Options;"/>
+	</class>
 	<class name="android/view/textclassifier/TextClassificationManager" since="26">
 		<extends name="java/lang/Object"/>
 		<method name="&lt;init>()V"/>
@@ -48974,13 +49147,48 @@
 	<class name="android/view/textclassifier/TextClassifier" since="26">
 		<extends name="java/lang/Object"/>
 		<method name="classifyText(Ljava/lang/CharSequence;IILandroid/os/LocaleList;)Landroid/view/textclassifier/TextClassification;"/>
+		<method name="classifyText(Ljava/lang/CharSequence;IILandroid/view/textclassifier/TextClassification$Options;)Landroid/view/textclassifier/TextClassification;" since="28"/>
+		<method name="generateLinks(Ljava/lang/CharSequence;Landroid/view/textclassifier/TextLinks$Options;)Landroid/view/textclassifier/TextLinks;" since="28"/>
 		<method name="suggestSelection(Ljava/lang/CharSequence;IILandroid/os/LocaleList;)Landroid/view/textclassifier/TextSelection;"/>
+		<method name="suggestSelection(Ljava/lang/CharSequence;IILandroid/view/textclassifier/TextSelection$Options;)Landroid/view/textclassifier/TextSelection;" since="28"/>
 		<field name="NO_OP"/>
 		<field name="TYPE_ADDRESS"/>
 		<field name="TYPE_EMAIL"/>
 		<field name="TYPE_OTHER"/>
 		<field name="TYPE_PHONE"/>
 		<field name="TYPE_URL"/>
+	</class>
+	<class name="android/view/textclassifier/TextLinks" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="apply(Landroid/text/SpannableString;Ljava/util/function/Function;)Z"/>
+		<method name="getLinks()Ljava/util/Collection;"/>
+	</class>
+	<class name="android/view/textclassifier/TextLinks$Builder" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>(Ljava/lang/String;)V"/>
+		<method name="addLink(Landroid/view/textclassifier/TextLinks$TextLink;)Landroid/view/textclassifier/TextLinks$Builder;"/>
+		<method name="build()Landroid/view/textclassifier/TextLinks;"/>
+	</class>
+	<class name="android/view/textclassifier/TextLinks$Options" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="getDefaultLocales()Landroid/os/LocaleList;"/>
+	</class>
+	<class name="android/view/textclassifier/TextLinks$Options$Builder" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="build()Landroid/view/textclassifier/TextLinks$Options;"/>
+		<method name="setLocaleList(Landroid/os/LocaleList;)Landroid/view/textclassifier/TextLinks$Options$Builder;"/>
+	</class>
+	<class name="android/view/textclassifier/TextLinks$TextLink" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>(Ljava/lang/String;IILjava/util/Map;)V"/>
+		<method name="getConfidenceScore(Ljava/lang/String;)F"/>
+		<method name="getEnd()I"/>
+		<method name="getEntity(I)Ljava/lang/String;"/>
+		<method name="getEntityCount()I"/>
+		<method name="getStart()I"/>
 	</class>
 	<class name="android/view/textclassifier/TextSelection" since="26">
 		<extends name="java/lang/Object"/>
@@ -48996,6 +49204,12 @@
 		<method name="&lt;init>(II)V"/>
 		<method name="build()Landroid/view/textclassifier/TextSelection;"/>
 		<method name="setEntityType(Ljava/lang/String;F)Landroid/view/textclassifier/TextSelection$Builder;"/>
+	</class>
+	<class name="android/view/textclassifier/TextSelection$Options" since="28">
+		<extends name="java/lang/Object"/>
+		<method name="&lt;init>()V"/>
+		<method name="getDefaultLocales()Landroid/os/LocaleList;"/>
+		<method name="setDefaultLocales(Landroid/os/LocaleList;)Landroid/view/textclassifier/TextSelection$Options;"/>
 	</class>
 	<class name="android/view/textservice/SentenceSuggestionsInfo" since="16">
 		<extends name="java/lang/Object"/>
@@ -49976,7 +50190,7 @@
 		<method name="setHttpAuthUsernamePassword(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" since="26"/>
 		<field name="LOGTAG" removed="17"/>
 	</class>
-	<class name="android/webkit/WebViewFragment" since="11">
+	<class name="android/webkit/WebViewFragment" since="11" deprecated="28">
 		<extends name="android/app/Fragment"/>
 		<method name="&lt;init>()V"/>
 		<method name="getWebView()Landroid/webkit/WebView;"/>

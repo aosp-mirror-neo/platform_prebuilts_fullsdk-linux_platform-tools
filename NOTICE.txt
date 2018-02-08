@@ -26,6 +26,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ============================================================
 Notices for file(s):
+/lib/libtinyxml2.so
 /lib64/libtinyxml2.so
 ------------------------------------------------------------
 This software is provided 'as-is', without any express or implied
@@ -117,6 +118,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================================
 Notices for file(s):
 /lib/libcompiler_rt-extras.a
+/lib/libcompiler_rt.so
 /lib64/libcompiler_rt-extras.a
 /lib64/libcompiler_rt.so
 ------------------------------------------------------------
@@ -2262,11 +2264,11 @@ Public License instead of this License.
 ============================================================
 Notices for file(s):
 /bin/assemble_vintf
-/framework/desugar.jar
 /framework/guavalib.jar
 /framework/jarjar.jar
 /framework/jsilver.jar
 /framework/objenesis-host.jar
+/lib/libvintf.so
 /lib64/libhidl-gen-hash.so
 /lib64/libvintf.so
 ------------------------------------------------------------
@@ -5808,35 +5810,6 @@ is preserved.
 
 ============================================================
 Notices for file(s):
-/lib/libexpat-host.so
-/lib/libexpat.a
-/lib64/libexpat-host.so
-/lib64/libexpat.a
-------------------------------------------------------------
-Copyright (c) 1998-2000 Thai Open Source Software Center Ltd and Clark Cooper
-Copyright (c) 2001-2016 Expat maintainers
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-============================================================
-Notices for file(s):
 /framework/doclava.jar
 ------------------------------------------------------------
  
@@ -6428,6 +6401,7 @@ Notices for file(s):
 /bin/aprotoc
 /framework/host-libprotobuf-java-full.jar
 /framework/host-libprotobuf-java-lite.jar
+/lib/libprotobuf-cpp-lite.so
 /lib64/libprotobuf-cpp-full.so
 /lib64/libprotobuf-cpp-lite.so
 /lib64/libprotoc.so
@@ -7085,6 +7059,7 @@ bzip2/libbzip2 version 1.0.6 of 6 September 2010
 ============================================================
 Notices for file(s):
 /lib/libpcre2.a
+/lib/libpcre2.so
 /lib64/libpcre2.a
 /lib64/libpcre2.so
 ------------------------------------------------------------

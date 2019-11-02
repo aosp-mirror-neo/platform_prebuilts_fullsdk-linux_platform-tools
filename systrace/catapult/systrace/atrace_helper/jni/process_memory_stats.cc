@@ -4,7 +4,6 @@
 
 #include "process_memory_stats.h"
 
-#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,8 +73,7 @@ bool ProcessMemoryStats::ReadFullStats(int pid) {
       // Note that the mapped file name ([stack]) is optional and won't be
       // present on anonymous memory maps (hence res >= 3 below).
       int res = sscanf(line,
-          "%" PRIx64 "-%" PRIx64 " %4s %*" PRIx64 " %*[:0-9a-f] "
-          "%*[0-9a-f]%*[ \t]%127[^\n]",
+          "%llx-%llx %4s %*llx %*[:0-9a-f] %*[0-9a-f]%*[ \t]%127[^\n]",
           &new_mmap->start_addr, &new_mmap->end_addr, new_mmap->prot_flags,
           new_mmap->mapped_file);
       last_mmap_entry = new_mmap.get();

@@ -25,6 +25,7 @@ _SYSTRACE_TO_TRACE_DATA_NAME_MAPPING = {
     'androidProcessDump': trace_data.ANDROID_PROCESS_DATA_PART,
     'atraceProcessDump': trace_data.ATRACE_PROCESS_DUMP_PART,
     'systemTraceEvents': trace_data.ATRACE_PART,
+    'powerTraceAsString': trace_data.BATTOR_TRACE_PART,
     'systraceController': trace_data.TELEMETRY_PART,
     'traceEvents': trace_data.CHROME_TRACE_PART,
     'waltTrace': trace_data.WALT_TRACE_PART,
@@ -33,13 +34,12 @@ _SYSTRACE_HEADER = 'Systrace'
 
 
 def NewGenerateHTMLOutput(trace_results, output_file_name):
-  with trace_data.TraceDataBuilder() as builder:
-    for trace in trace_results:
-      trace_data_part = _SYSTRACE_TO_TRACE_DATA_NAME_MAPPING.get(
-          trace.source_name)
-      builder.AddTraceFor(
-          trace_data_part, trace.raw_data, allow_unstructured=True)
-    builder.Serialize(output_file_name, _SYSTRACE_HEADER)
+  trace_data_builder = trace_data.TraceDataBuilder()
+  for trace in trace_results:
+    trace_data_part = _SYSTRACE_TO_TRACE_DATA_NAME_MAPPING.get(
+        trace.source_name)
+    trace_data_builder.AddTraceFor(trace_data_part, trace.raw_data)
+  trace_data_builder.AsData().Serialize(output_file_name, _SYSTRACE_HEADER)
 
 
 def GenerateHTMLOutput(trace_results, output_file_name):

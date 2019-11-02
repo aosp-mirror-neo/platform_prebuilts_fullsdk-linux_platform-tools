@@ -15,7 +15,7 @@ import urllib2
 
 _BASE_URL = 'https://chromium.googlesource.com'
 # Can be up to 10,000.
-_REVISION_COUNT = 10000
+_REVISION_COUNT = 1000
 
 _REPOSITORIES = [
     'chromium/src',
@@ -67,13 +67,9 @@ def CommitTimes(repository, revision_count):
     commit_time_string = revision['committer']['time']
     commit_time = datetime.datetime.strptime(
         commit_time_string, '%a %b %d %H:%M:%S %Y')
-    commit_times.append(commit_time - datetime.timedelta(hours=7))
+    commit_times.append(commit_time)
 
   return commit_times
-
-
-def IsWeekday(time):
-  return time.weekday() >= 0 and time.weekday() < 5
 
 
 def main():
@@ -82,22 +78,22 @@ def main():
 
     commit_durations = []
     for time1, time2 in Pairwise(commit_times):
-      #if not (IsWeekday(time1) and IsWeekday(time2)):
-      #  continue
-      commit_durations.append((time1 - time2).total_seconds() / 60.)
+      commit_durations.append((time1 - time2).total_seconds())
     commit_durations.sort()
 
     print 'REPOSITORY:', repository
-    print 'Start Date:', min(commit_times), 'PDT'
-    print '  End Date:', max(commit_times), 'PDT'
+    print 'Start Date:', min(commit_times)
+    print '  End Date:', max(commit_times)
     print '  Duration:', max(commit_times) - min(commit_times)
     print '         n:', len(commit_times)
 
-    for p in (0.25, 0.50, 0.90):
+    for p in (0.00, 0.05, 0.25, 0.50, 0.75, 0.95, 1.00):
       percentile = Percentile(commit_durations, p)
-      print '%3d%% commit duration:' % (p * 100), '%6.1fm' % percentile
+      print '%3d%% commit duration:' % (p * 100), '%6ds' % percentile
     mean = math.fsum(commit_durations) / len(commit_durations)
-    print 'Mean commit duration:', '%6.1fm' % mean
+    print ' Min commit duration:', '%6ds' % min(commit_durations)
+    print 'Mean commit duration:', '%6ds' % mean
+    print ' Max commit duration:', '%6ds' % max(commit_durations)
     print
 
 

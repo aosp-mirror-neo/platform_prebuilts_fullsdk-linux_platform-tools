@@ -112,9 +112,9 @@ def get_device_status_unsafe(device):
       except ValueError:
         continue
       key = line.split(':')[0].strip()
-      if key == 'MemTotal':
+      if 'MemTotal' == key:
         status['mem']['total'] = value
-      elif key == 'MemFree':
+      elif 'MemFree' == key:
         status['mem']['free'] = value
 
   # Process
@@ -162,8 +162,7 @@ def get_device_status(device):
   try:
     status = get_device_status_unsafe(device)
   except device_errors.DeviceUnreachableError:
-    status = collections.defaultdict(dict)
-    status['state'] = 'offline'
+    status = {'state': 'offline'}
   return status
 
 

@@ -4,9 +4,8 @@
 
 import optparse
 import os
-import re
-
 import py_utils
+import re
 
 from profile_chrome import util
 from systrace import trace_result

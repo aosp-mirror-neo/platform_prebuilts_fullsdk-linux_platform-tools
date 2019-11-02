@@ -4,7 +4,6 @@
 
 """A wrapper for subprocess to make calling shell commands easier."""
 
-import codecs
 import logging
 import os
 import pipes
@@ -16,15 +15,10 @@ import subprocess
 import sys
 import time
 
-from devil import base_error
 
 logger = logging.getLogger(__name__)
 
 _SafeShellChars = frozenset(string.ascii_letters + string.digits + '@%_-+=:,./')
-
-# Cache the string-escape codec to ensure subprocess can find it
-# later. Return value doesn't matter.
-codecs.lookup('string-escape')
 
 
 def SingleQuote(s):
@@ -158,12 +152,12 @@ def _ValidateAndLogCommand(args, cwd, shell):
   else:
     if shell:
       raise Exception('array args must be run with shell=False')
-    args = ' '.join(SingleQuote(str(c)) for c in args)
+    args = ' '.join(SingleQuote(c) for c in args)
   if cwd is None:
     cwd = ''
   else:
     cwd = ':' + cwd
-  logger.debug('[host]%s> %s', cwd, args)
+  logger.info('[host]%s> %s', cwd, args)
   return args
 
 
@@ -193,27 +187,6 @@ def GetCmdStatusAndOutput(args, cwd=None, shell=False, env=None):
   return (status, stdout)
 
 
-def StartCmd(args, cwd=None, shell=False, env=None):
-  """Starts a subprocess and returns a handle to the process.
-
-  Args:
-    args: A string or a sequence of program arguments. The program to execute is
-      the string or the first item in the args sequence.
-    cwd: If not None, the subprocess's current directory will be changed to
-      |cwd| before it's executed.
-    shell: Whether to execute args as a shell command. Must be True if args
-      is a string and False if args is a sequence.
-    env: If not None, a mapping that defines environment variables for the
-      subprocess.
-
-  Returns:
-    A process handle from subprocess.Popen.
-  """
-  _ValidateAndLogCommand(args, cwd, shell)
-  return Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-               shell=shell, cwd=cwd, env=env)
-
-
 def GetCmdStatusOutputAndError(args, cwd=None, shell=False, env=None):
   """Executes a subprocess and returns its exit code, output, and errors.
 
@@ -237,11 +210,11 @@ def GetCmdStatusOutputAndError(args, cwd=None, shell=False, env=None):
   return (pipe.returncode, stdout, stderr)
 
 
-class TimeoutError(base_error.BaseError):
+class TimeoutError(Exception):
   """Module-specific timeout exception."""
 
   def __init__(self, output=None):
-    super(TimeoutError, self).__init__('Timeout')
+    super(TimeoutError, self).__init__()
     self._output = output
 
   @property
@@ -253,7 +226,6 @@ def _IterProcessStdoutFcntl(
     process, iter_timeout=None, timeout=None, buffer_size=4096,
     poll_interval=1):
   """An fcntl-based implementation of _IterProcessStdout."""
-  # pylint: disable=too-many-nested-blocks
   import fcntl
   try:
     # Enable non-blocking reads from the child's stdout.

@@ -5,9 +5,8 @@
 import json
 import optparse
 import os
-import re
-
 import py_utils
+import re
 
 from devil.android import device_errors
 from devil.android.sdk import intent
@@ -210,8 +209,6 @@ def _ComputeChromeCategories(config):
     categories.append('disabled-by-default-blink.scheduler')
     categories.append('disabled-by-default-cc.debug.scheduler')
     categories.append('disabled-by-default-renderer.scheduler')
-    categories.append('disabled-by-default-sequence_manager')
-    categories.append('sequence_manager')
   if config.chrome_categories:
     categories += config.chrome_categories.split(',')
   return categories

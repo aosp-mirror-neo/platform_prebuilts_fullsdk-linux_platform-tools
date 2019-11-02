@@ -13,6 +13,8 @@ __all__ = [
 
 
 class Function(base_symbol.AnnotatedSymbol):
+  # pylint: disable=abstract-class-not-used
+
   @classmethod
   def Annotate(cls, symbol_type, children):
     if symbol_type != symbol.stmt:

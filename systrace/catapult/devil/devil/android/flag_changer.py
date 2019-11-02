@@ -52,14 +52,12 @@ class FlagChanger(object):
     once the tests have completed.
   """
 
-  def __init__(self, device, cmdline_file, use_legacy_path=False):
+  def __init__(self, device, cmdline_file):
     """Initializes the FlagChanger and records the original arguments.
 
     Args:
       device: A DeviceUtils instance.
       cmdline_file: Name of the command line file where to store flags.
-      use_legacy_path: Whether to use the legacy commandline path (needed for
-        M54 and earlier)
     """
     self._device = device
     self._should_reset_enforce = False
@@ -68,20 +66,13 @@ class FlagChanger(object):
       raise ValueError(
           'cmdline_file should be a file name only, do not include path'
           ' separators in: %s' % cmdline_file)
-    cmdline_path = posixpath.join(_CMDLINE_DIR, cmdline_file)
-    alternate_cmdline_path = posixpath.join(_CMDLINE_DIR_LEGACY, cmdline_file)
+    self._cmdline_path = posixpath.join(_CMDLINE_DIR, cmdline_file)
 
-    if use_legacy_path:
-      cmdline_path, alternate_cmdline_path = (
-          alternate_cmdline_path, cmdline_path)
-      if not self._device.HasRoot():
-        raise ValueError('use_legacy_path requires a rooted device')
-    self._cmdline_path = cmdline_path
-
-    if self._device.PathExists(alternate_cmdline_path):
+    cmdline_path_legacy = posixpath.join(_CMDLINE_DIR_LEGACY, cmdline_file)
+    if self._device.PathExists(cmdline_path_legacy):
       logger.warning(
-          'Removing alternate command line file %r.', alternate_cmdline_path)
-      self._device.RemovePath(alternate_cmdline_path, as_root=True)
+            'Removing legacy command line file %r.', cmdline_path_legacy)
+      self._device.RemovePath(cmdline_path_legacy, as_root=True)
 
     self._state_stack = [None]  # Actual state is set by GetCurrentFlags().
     self.GetCurrentFlags()
@@ -95,8 +86,7 @@ class FlagChanger(object):
       A list of flags.
     """
     if self._device.PathExists(self._cmdline_path):
-      command_line = self._device.ReadFile(
-          self._cmdline_path, as_root=True).strip()
+      command_line = self._device.ReadFile(self._cmdline_path).strip()
     else:
       command_line = ''
     flags = _ParseFlags(command_line)
@@ -105,7 +95,7 @@ class FlagChanger(object):
     self._state_stack[-1] = set(flags)
     return flags
 
-  def ReplaceFlags(self, flags, log_flags=True):
+  def ReplaceFlags(self, flags):
     """Replaces the flags in the command line with the ones provided.
        Saves the current flags state on the stack, so a call to Restore will
        change the state back to the one preceeding the call to ReplaceFlags.
@@ -121,7 +111,7 @@ class FlagChanger(object):
     new_flags = set(flags)
     self._state_stack.append(new_flags)
     self._SetPermissive()
-    return self._UpdateCommandLineFile(log_flags=log_flags)
+    return self._UpdateCommandLineFile()
 
   def AddFlags(self, flags):
     """Appends flags to the command line if they aren't already there.
@@ -181,14 +171,10 @@ class FlagChanger(object):
     """Set SELinux to permissive, if needed.
 
     On Android N and above this is needed in order to allow Chrome to read the
-    legacy command line file.
+    command line file.
 
     TODO(crbug.com/699082): Remove when a better solution exists.
     """
-    # TODO(crbug.com/948578): figure out the exact scenarios where the lowered
-    # permissions are needed, and document them in the code.
-    if not self._device.HasRoot():
-      return
     if (self._device.build_version_sdk >= version_codes.NOUGAT and
         self._device.GetEnforce()):
       self._device.SetEnforce(enabled=False)
@@ -209,13 +195,13 @@ class FlagChanger(object):
     """
     # The initial state must always remain on the stack.
     assert len(self._state_stack) > 1, (
-        'Mismatch between calls to Add/RemoveFlags and Restore')
+      "Mismatch between calls to Add/RemoveFlags and Restore")
     self._state_stack.pop()
     if len(self._state_stack) == 1:
       self._ResetEnforce()
     return self._UpdateCommandLineFile()
 
-  def _UpdateCommandLineFile(self, log_flags=True):
+  def _UpdateCommandLineFile(self):
     """Writes out the command line to the file, or removes it if empty.
 
     Returns:
@@ -223,15 +209,13 @@ class FlagChanger(object):
     """
     command_line = _SerializeFlags(self._state_stack[-1])
     if command_line is not None:
-      self._device.WriteFile(self._cmdline_path, command_line, as_root=True)
+      self._device.WriteFile(self._cmdline_path, command_line)
     else:
-      self._device.RemovePath(self._cmdline_path, force=True, as_root=True)
+      self._device.RemovePath(self._cmdline_path, force=True)
 
-    flags = self.GetCurrentFlags()
-    logging.info('Flags now written on the device to %s', self._cmdline_path)
-    if log_flags:
-      logging.info('Flags: %s', flags)
-    return flags
+    current_flags = self.GetCurrentFlags()
+    logger.info('Flags now set on the device: %s', current_flags)
+    return current_flags
 
 
 def _ParseFlags(line):
@@ -253,7 +237,6 @@ def _ParseFlags(line):
   current_quote = None
   current_flag = None
 
-  # pylint: disable=unsubscriptable-object
   for c in line:
     # Detect start or end of quote block.
     if (current_quote is None and c in _QUOTES) or c == current_quote:

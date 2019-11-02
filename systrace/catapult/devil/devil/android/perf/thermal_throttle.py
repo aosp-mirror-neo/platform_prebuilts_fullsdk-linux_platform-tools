@@ -76,7 +76,6 @@ class ThermalThrottle(object):
     self._device = device
     self._throttled = False
     self._detector = None
-    # pylint: disable=redefined-variable-type
     if OmapThrottlingDetector.IsSupported(device):
       self._detector = OmapThrottlingDetector(device)
     elif ExynosThrottlingDetector.IsSupported(device):

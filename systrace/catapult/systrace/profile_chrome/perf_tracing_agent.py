@@ -5,12 +5,11 @@
 import logging
 import optparse
 import os
+import py_utils
 import signal
 import subprocess
 import sys
 import tempfile
-
-import py_utils
 
 from devil.android import device_temp_file
 from devil.android.perf import perf_control
@@ -23,7 +22,7 @@ _CATAPULT_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), '..', '..')
 sys.path.append(os.path.join(_CATAPULT_DIR, 'telemetry'))
 try:
-  # pylint: disable=F0401,no-name-in-module,wrong-import-position
+  # pylint: disable=F0401
   from telemetry.internal.platform.profiler import android_profiling_helper
   from telemetry.internal.util import binary_manager
 except ImportError:

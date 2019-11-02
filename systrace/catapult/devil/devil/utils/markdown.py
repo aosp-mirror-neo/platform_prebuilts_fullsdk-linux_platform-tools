@@ -3,8 +3,6 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-from __future__ import print_function
-
 import argparse
 import imp
 import os
@@ -184,7 +182,7 @@ def md_module(module_obj, module_path=None, module_link=None):
     A list of markdown-formatted lines.
   """
   def should_doc(name):
-    return (not isinstance(module_obj.__dict__[name], types.ModuleType)
+    return (type(module_obj.__dict__[name]) != types.ModuleType
             and not name.startswith('_'))
 
   stuff_to_doc = sorted(
@@ -195,9 +193,9 @@ def md_module(module_obj, module_path=None, module_link=None):
   functions_to_doc = []
 
   for s in stuff_to_doc:
-    if isinstance(s, types.TypeType):
+    if type(s) == types.TypeType:
       classes_to_doc.append(s)
-    elif isinstance(s, types.FunctionType):
+    elif type(s) == types.FunctionType:
       functions_to_doc.append(s)
 
   command = ['devil/utils/markdown.py']
@@ -223,7 +221,7 @@ def md_module(module_obj, module_path=None, module_link=None):
   for f in functions_to_doc:
     content += md_function(f)
 
-  print('\n'.join(content))
+  print '\n'.join(content)
 
   return 0
 
@@ -245,7 +243,7 @@ def md_class(class_obj):
     content.extend(md_docstring(class_obj.__doc__))
 
   def should_doc(name, obj):
-    return (isinstance(obj, types.FunctionType)
+    return (type(obj) == types.FunctionType
             and (name.startswith('__') or not name.startswith('_')))
 
   methods_to_doc = sorted(

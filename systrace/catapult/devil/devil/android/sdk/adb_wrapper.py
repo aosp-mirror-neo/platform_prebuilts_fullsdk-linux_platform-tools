@@ -9,7 +9,9 @@ should be delegated to a higher level (ex. DeviceUtils).
 """
 
 import collections
-import distutils.version
+# pylint: disable=import-error
+# pylint: disable=no-name-in-module
+import distutils.version as du_version
 import errno
 import logging
 import os
@@ -17,6 +19,7 @@ import posixpath
 import re
 import subprocess
 
+from devil import base_error
 from devil import devil_env
 from devil.android import decorators
 from devil.android import device_errors
@@ -31,6 +34,7 @@ logger = logging.getLogger(__name__)
 
 
 ADB_KEYS_FILE = '/data/misc/adb/adb_keys'
+ADB_HOST_KEYS_DIR = os.path.join(os.path.expanduser('~'), '.android')
 
 DEFAULT_TIMEOUT = 30
 DEFAULT_RETRIES = 2
@@ -39,8 +43,10 @@ _ADB_VERSION_RE = re.compile(r'Android Debug Bridge version (\d+\.\d+\.\d+)')
 _EMULATOR_RE = re.compile(r'^emulator-[0-9]+$')
 _DEVICE_NOT_FOUND_RE = re.compile(r"error: device '(?P<serial>.+)' not found")
 _READY_STATE = 'device'
-_VERITY_DISABLE_RE = re.compile(r'Verity (already )?disabled')
-_VERITY_ENABLE_RE = re.compile(r'Verity (already )?enabled')
+_VERITY_DISABLE_RE = re.compile(r'(V|v)erity (is )?(already )?disabled'
+                                r'|Successfully disabled verity')
+_VERITY_ENABLE_RE = re.compile(r'(V|v)erity (is )?(already )?enabled'
+                               r'|Successfully enabled verity')
 _WAITING_FOR_DEVICE_RE = re.compile(r'- waiting for device -')
 
 
@@ -92,7 +98,11 @@ def _GetVersion():
 
 
 def _ShouldRetryAdbCmd(exc):
-  return not isinstance(exc, device_errors.NoAdbError)
+  # Errors are potentially transient and should be retried, with the exception
+  # of NoAdbError. Exceptions [e.g. generated from SIGTERM handler] should be
+  # raised.
+  return (isinstance(exc, base_error.BaseError) and
+          not isinstance(exc, device_errors.NoAdbError))
 
 
 DeviceStat = collections.namedtuple('DeviceStat',
@@ -253,13 +263,22 @@ class AdbWrapper(object):
   @classmethod
   @decorators.WithTimeoutAndConditionalRetries(_ShouldRetryAdbCmd)
   def _RunAdbCmd(cls, args, timeout=None, retries=None, device_serial=None,
-                 check_error=True, cpu_affinity=None):
-    # pylint: disable=no-member
+                 check_error=True, cpu_affinity=None, additional_env=None):
+    if timeout:
+      remaining = timeout_retry.CurrentTimeoutThreadGroup().GetRemainingTime()
+      if remaining:
+        # Use a slightly smaller timeout than remaining time to ensure that we
+        # have time to collect output from the command.
+        timeout = 0.95 * remaining
+      else:
+        timeout = None
+    env = cls._ADB_ENV.copy()
+    if additional_env:
+      env.update(additional_env)
     try:
       status, output = cmd_helper.GetCmdStatusAndOutputWithTimeout(
           cls._BuildAdbCmd(args, device_serial, cpu_affinity=cpu_affinity),
-          timeout_retry.CurrentTimeoutThreadGroup().GetRemainingTime(),
-          env=cls._ADB_ENV)
+          timeout, env=env)
     except OSError as e:
       if e.errno in (errno.ENOENT, errno.ENOEXEC):
         raise device_errors.NoAdbError(msg=str(e))
@@ -291,7 +310,8 @@ class AdbWrapper(object):
       timeout: Timeout in seconds.
       retries: Number of retries.
       check_error: Check that the command doesn't return an error message. This
-        does NOT check the exit status of shell commands.
+        does check the error status of adb but DOES NOT check the exit status
+        of shell commands.
 
     Returns:
       The output of the command.
@@ -300,13 +320,17 @@ class AdbWrapper(object):
                            device_serial=self._device_serial,
                            check_error=check_error)
 
-  def _IterRunDeviceAdbCmd(self, args, iter_timeout, timeout):
+  def _IterRunDeviceAdbCmd(self, args, iter_timeout, timeout,
+                           check_error=True):
     """Runs an adb command and returns an iterator over its output lines.
 
     Args:
       args: A list of arguments to adb.
       iter_timeout: Timeout for each iteration in seconds.
       timeout: Timeout for the entire command in seconds.
+      check_error: Check that the command succeeded. This does check the
+        error status of the adb command but DOES NOT check the exit status
+        of shell commands.
 
     Yields:
       The output of the command line by line.
@@ -315,7 +339,8 @@ class AdbWrapper(object):
         self._BuildAdbCmd(args, self._device_serial),
         iter_timeout=iter_timeout,
         timeout=timeout,
-        env=self._ADB_ENV)
+        env=self._ADB_ENV,
+        check_status=check_error)
 
   def __eq__(self, other):
     """Consider instances equal if they refer to the same device.
@@ -353,10 +378,21 @@ class AdbWrapper(object):
     cls._RunAdbCmd(['kill-server'], timeout=timeout, retries=retries)
 
   @classmethod
-  def StartServer(cls, timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
+  def StartServer(cls, keys=None, timeout=DEFAULT_TIMEOUT,
+                  retries=DEFAULT_RETRIES):
+    """Starts the ADB server.
+
+    Args:
+      keys: (optional) List of local ADB keys to use to auth with devices.
+      timeout: (optional) Timeout per try in seconds.
+      retries: (optional) Number of retries to attempt.
+    """
+    additional_env = {}
+    if keys:
+      additional_env['ADB_VENDOR_KEYS'] = ':'.join(keys)
     # CPU affinity is used to reduce adb instability http://crbug.com/268450
     cls._RunAdbCmd(['start-server'], timeout=timeout, retries=retries,
-                   cpu_affinity=0)
+                   cpu_affinity=0, additional_env=additional_env)
 
   @classmethod
   def GetDevices(cls, timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
@@ -422,8 +458,8 @@ class AdbWrapper(object):
     """
     VerifyLocalFileExists(local)
 
-    if (distutils.version.LooseVersion(self.Version()) <
-        distutils.version.LooseVersion('1.0.36')):
+    if (du_version.LooseVersion(self.Version()) <
+        du_version.LooseVersion('1.0.36')):
 
       # Different versions of adb handle pushing a directory to an existing
       # directory differently.
@@ -479,6 +515,19 @@ class AdbWrapper(object):
           cmd,
           'File pulled from the device did not arrive on the host: %s' % local,
           device_serial=str(self))
+
+  def StartShell(self, cmd):
+    """Starts a subprocess on the device and returns a handle to the process.
+
+    Args:
+      args: A sequence of program arguments. The executable to run is the first
+        item in the sequence.
+
+    Returns:
+      An instance of subprocess.Popen associated with the live process.
+    """
+    return cmd_helper.StartCmd(
+        self._BuildAdbCmd(['shell'] + cmd, self._device_serial))
 
   def Shell(self, command, expect_status=0, timeout=DEFAULT_TIMEOUT,
             retries=DEFAULT_RETRIES):
@@ -575,7 +624,7 @@ class AdbWrapper(object):
 
   def Logcat(self, clear=False, dump=False, filter_specs=None,
              logcat_format=None, ring_buffer=None, iter_timeout=None,
-             timeout=None, retries=DEFAULT_RETRIES):
+             check_error=True, timeout=None, retries=DEFAULT_RETRIES):
     """Get an iterable over the logcat output.
 
     Args:
@@ -591,6 +640,7 @@ class AdbWrapper(object):
       iter_timeout: If set and neither clear nor dump is set, the number of
         seconds to wait between iterations. If no line is found before the
         given number of seconds elapses, the iterable will yield None.
+      check_error: Whether to check the exit status of the logcat command.
       timeout: (optional) If set, timeout per try in seconds. If clear or dump
         is set, defaults to DEFAULT_TIMEOUT.
       retries: (optional) If clear or dump is set, the number of retries to
@@ -616,10 +666,13 @@ class AdbWrapper(object):
       cmd.extend(filter_specs)
 
     if use_iter:
-      return self._IterRunDeviceAdbCmd(cmd, iter_timeout, timeout)
+      return self._IterRunDeviceAdbCmd(
+          cmd, iter_timeout, timeout, check_error=check_error)
     else:
       timeout = timeout if timeout is not None else DEFAULT_TIMEOUT
-      return self._RunDeviceAdbCmd(cmd, timeout, retries).splitlines()
+      output = self._RunDeviceAdbCmd(
+          cmd, timeout, retries, check_error=check_error)
+      return output.splitlines()
 
   def Forward(self, local, remote, allow_rebind=False,
               timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
@@ -671,8 +724,8 @@ class AdbWrapper(object):
     Returns:
       The output of adb forward --list as a string.
     """
-    if (distutils.version.LooseVersion(self.Version()) >=
-        distutils.version.LooseVersion('1.0.36')):
+    if (du_version.LooseVersion(self.Version()) >=
+        du_version.LooseVersion('1.0.36')):
       # Starting in 1.0.36, this can occasionally fail with a protocol fault.
       # As this interrupts all connections with all devices, we instead just
       # return an empty list. This may give clients an inaccurate result, but
@@ -915,18 +968,28 @@ class AdbWrapper(object):
     return self._RunDeviceAdbCmd(['emu'] + cmd, timeout, retries)
 
   def DisableVerity(self, timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
-    """Disable Marshmallow's Verity security feature"""
+    """Disable Marshmallow's Verity security feature.
+
+    Returns:
+      The output of the disable-verity command as a string.
+    """
     output = self._RunDeviceAdbCmd(['disable-verity'], timeout, retries)
     if output and not _VERITY_DISABLE_RE.search(output):
       raise device_errors.AdbCommandFailedError(
           ['disable-verity'], output, device_serial=self._device_serial)
+    return output
 
   def EnableVerity(self, timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
-    """Enable Marshmallow's Verity security feature"""
+    """Enable Marshmallow's Verity security feature.
+
+    Returns:
+      The output of the enable-verity command as a string.
+    """
     output = self._RunDeviceAdbCmd(['enable-verity'], timeout, retries)
     if output and not _VERITY_ENABLE_RE.search(output):
       raise device_errors.AdbCommandFailedError(
           ['enable-verity'], output, device_serial=self._device_serial)
+    return output
 
   @property
   def is_emulator(self):

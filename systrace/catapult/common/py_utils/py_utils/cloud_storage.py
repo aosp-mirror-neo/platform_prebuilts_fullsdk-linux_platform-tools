@@ -9,21 +9,21 @@ import contextlib
 import hashlib
 import logging
 import os
+import re
 import shutil
 import stat
 import subprocess
-import re
 import sys
 import tempfile
 import time
 
 import py_utils
+from py_utils import cloud_storage_global_lock  # pylint: disable=unused-import
 from py_utils import lock
 
 # Do a no-op import here so that cloud_storage_global_lock dep is picked up
 # by https://cs.chromium.org/chromium/src/build/android/test_runner.pydeps.
 # TODO(nedn, jbudorick): figure out a way to get rid of this ugly hack.
-from py_utils import cloud_storage_global_lock  # pylint: disable=unused-import
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
@@ -42,7 +42,7 @@ BUCKET_ALIASES = collections.OrderedDict((
     ('output', TELEMETRY_OUTPUT),
 ))
 
-BUCKET_ALIAS_NAMES = BUCKET_ALIASES.keys()
+BUCKET_ALIAS_NAMES = list(BUCKET_ALIASES.keys())
 
 
 _GSUTIL_PATH = os.path.join(py_utils.GetCatapultDir(), 'third_party', 'gsutil',
@@ -120,6 +120,9 @@ def _EnsureExecutable(gsutil):
     os.chmod(gsutil, st.st_mode | stat.S_IEXEC)
 
 
+def _IsRunningOnSwarming():
+  return os.environ.get('SWARMING_HEADLESS') is not None
+
 def _RunCommand(args):
   # On cros device, as telemetry is running as root, home will be set to /root/,
   # which is not writable. gsutil will attempt to create a download tracker dir
@@ -132,6 +135,8 @@ def _RunCommand(args):
   if py_utils.IsRunningOnCrosDevice():
     gsutil_env = os.environ.copy()
     gsutil_env['HOME'] = _CROS_GSUTIL_HOME_WAR
+  elif _IsRunningOnSwarming():
+    gsutil_env = os.environ.copy()
 
   if os.name == 'nt':
     # If Windows, prepend python. Python scripts aren't directly executable.

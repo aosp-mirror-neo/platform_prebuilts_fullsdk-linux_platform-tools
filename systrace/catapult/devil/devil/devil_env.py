@@ -11,12 +11,11 @@ import sys
 import tempfile
 import threading
 
-CATAPULT_ROOT_PATH = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..', '..'))
-DEPENDENCY_MANAGER_PATH = os.path.join(
-    CATAPULT_ROOT_PATH, 'dependency_manager')
-PYMOCK_PATH = os.path.join(
-    CATAPULT_ROOT_PATH, 'third_party', 'mock')
+CATAPULT_ROOT_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', '..'))
+DEPENDENCY_MANAGER_PATH = os.path.join(CATAPULT_ROOT_PATH, 'dependency_manager')
+PYMOCK_PATH = os.path.join(CATAPULT_ROOT_PATH, 'third_party', 'mock')
+PY_UTILS_PATH = os.path.join(CATAPULT_ROOT_PATH, 'common', 'py_utils')
 
 
 @contextlib.contextmanager
@@ -28,52 +27,49 @@ def SysPath(path):
   else:
     sys.path.pop()
 
+
 with SysPath(DEPENDENCY_MANAGER_PATH):
   import dependency_manager  # pylint: disable=import-error
 
 _ANDROID_BUILD_TOOLS = {'aapt', 'dexdump', 'split-select'}
 
-_DEVIL_DEFAULT_CONFIG = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), 'devil_dependencies.json'))
+_DEVIL_DEFAULT_CONFIG = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), 'devil_dependencies.json'))
 
 _LEGACY_ENVIRONMENT_VARIABLES = {
-  'ADB_PATH': {
-    'dependency_name': 'adb',
-    'platform': 'linux2_x86_64',
-  },
-  'ANDROID_SDK_ROOT': {
-    'dependency_name': 'android_sdk',
-    'platform': 'linux2_x86_64',
-  },
+    'ADB_PATH': {
+        'dependency_name': 'adb',
+        'platform': 'linux2_x86_64',
+    },
+    'ANDROID_SDK_ROOT': {
+        'dependency_name': 'android_sdk',
+        'platform': 'linux2_x86_64',
+    },
 }
 
 
 def EmptyConfig():
-  return {
-    'config_type': 'BaseConfig',
-    'dependencies': {}
-  }
+  return {'config_type': 'BaseConfig', 'dependencies': {}}
 
 
 def LocalConfigItem(dependency_name, dependency_platform, dependency_path):
   if isinstance(dependency_path, basestring):
     dependency_path = [dependency_path]
   return {
-    dependency_name: {
-      'file_info': {
-        dependency_platform: {
-          'local_paths': dependency_path
-        },
+      dependency_name: {
+          'file_info': {
+              dependency_platform: {
+                  'local_paths': dependency_path
+              },
+          },
       },
-    },
   }
 
 
 def _GetEnvironmentVariableConfig():
   env_config = EmptyConfig()
-  path_config = (
-      (os.environ.get(k), v)
-      for k, v in _LEGACY_ENVIRONMENT_VARIABLES.iteritems())
+  path_config = ((os.environ.get(k), v)
+                 for k, v in _LEGACY_ENVIRONMENT_VARIABLES.iteritems())
   path_config = ((p, c) for p, c in path_config if p)
   for p, c in path_config:
     env_config['dependencies'].update(
@@ -82,7 +78,6 @@ def _GetEnvironmentVariableConfig():
 
 
 class _Environment(object):
-
   def __init__(self):
     self._dm_init_lock = threading.Lock()
     self._dm = None
@@ -111,9 +106,7 @@ class _Environment(object):
         env_config = _GetEnvironmentVariableConfig()
         if env_config:
           configs.insert(0, env_config)
-        self._InitializeRecursive(
-            configs=configs,
-            config_files=config_files)
+        self._InitializeRecursive(configs=configs, config_files=config_files)
         assert self._dm is not None, 'Failed to create dependency manager.'
 
   def _InitializeRecursive(self, configs=None, config_files=None):
@@ -159,7 +152,9 @@ class _Environment(object):
       devil_logger.propagate = False
       devil_logger.addHandler(handler)
 
-      import py_utils.cloud_storage
+      with SysPath(PY_UTILS_PATH):
+        import py_utils.cloud_storage
+
       lock_logger = py_utils.cloud_storage.logger
       lock_logger.setLevel(log_level)
       lock_logger.propagate = False
@@ -191,4 +186,3 @@ def GetPlatform(arch=None, device=None):
 
 
 config = _Environment()
-

@@ -5,8 +5,9 @@
 import json
 import optparse
 import os
-import py_utils
 import re
+
+import py_utils
 
 from devil.android import device_errors
 from devil.android.sdk import intent
@@ -202,6 +203,9 @@ def _ComputeChromeCategories(config):
   if config.trace_gpu:
     categories.append('disabled-by-default-gpu.debug*')
   if config.trace_flow:
+    categories.append('toplevel.flow')
+    # toplevel.flow was moved out of disabled-by-default, leaving here for
+    # compatibility with older versions of Chrome.
     categories.append('disabled-by-default-toplevel.flow')
   if config.trace_memory:
     categories.append('disabled-by-default-memory')
@@ -209,6 +213,8 @@ def _ComputeChromeCategories(config):
     categories.append('disabled-by-default-blink.scheduler')
     categories.append('disabled-by-default-cc.debug.scheduler')
     categories.append('disabled-by-default-renderer.scheduler')
+    categories.append('disabled-by-default-sequence_manager')
+    categories.append('sequence_manager')
   if config.chrome_categories:
     categories += config.chrome_categories.split(',')
   return categories

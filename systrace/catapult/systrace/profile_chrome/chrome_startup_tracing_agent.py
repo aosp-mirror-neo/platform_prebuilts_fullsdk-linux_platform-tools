@@ -5,8 +5,9 @@
 import logging
 import optparse
 import os
-import py_utils
 import re
+
+import py_utils
 
 from devil.android import flag_changer
 from devil.android.constants import webapk
@@ -39,7 +40,7 @@ class ChromeStartupTracingAgent(tracing_agents.TracingAgent):
   def _SetupTracing(self):
     # TODO(lizeb): Figure out how to clean up the command-line file when
     # _TearDownTracing() is not executed in StopTracing().
-    flags = ['--trace-startup']
+    flags = ['--trace-startup', '--enable-perfetto']
     if self._trace_time is not None:
       flags.append('--trace-startup-duration={}'.format(self._trace_time))
     self._flag_changer.AddFlags(flags)

@@ -4,11 +4,12 @@
 
 import optparse
 import platform
-import py_utils
 import re
 import sys
 import threading
 import zlib
+
+import py_utils
 
 from devil.android import device_utils
 from devil.android.sdk import version_codes
@@ -27,8 +28,9 @@ ADB_LARGE_OUTPUT_TIMEOUT = 600
 ATRACE_BASE_ARGS = ['atrace']
 # If a custom list of categories is not specified, traces will include
 # these categories (if available on the device).
-DEFAULT_CATEGORIES = 'sched,freq,gfx,view,dalvik,webview,'\
-                     'input,disk,am,wm,rs,binder_driver'
+DEFAULT_CATEGORIES = 'am,binder_driver,camera,dalvik,freq,'\
+                     'gfx,hal,idle,input,memory,memreclaim,'\
+                     'res,sched,sync,view,webview,wm,workq'
 # The command to list trace categories.
 LIST_CATEGORIES_ARGS = ATRACE_BASE_ARGS + ['--list_categories']
 # Minimum number of seconds between displaying status updates.
@@ -102,7 +104,8 @@ def try_create_agent(config):
            'Your device SDK version is %d.' % device_sdk_version)
     return None
 
-  return AtraceAgent(device_sdk_version)
+  return AtraceAgent(device_sdk_version,
+                     util.get_tracing_path(config.device_serial_number))
 
 def _construct_extra_atrace_args(config, categories):
   """Construct extra arguments (-a, -k, categories) for atrace command.
@@ -139,6 +142,11 @@ def _construct_atrace_args(config, categories):
   if (config.trace_buf_size is not None) and (config.trace_buf_size > 0):
     atrace_args.extend(['-b', str(config.trace_buf_size)])
 
+  elif 'webview' in categories and 'sched' in categories:
+    # https://crbug.com/814330: webview_startup sometimes exceeds the buffer
+    # limit, so doubling this.
+    atrace_args.extend(['-b', '8192'])
+
   elif 'sched' in categories:
     # 'sched' is a high-volume tag, double the default buffer size
     # to accommodate that
@@ -151,9 +159,10 @@ def _construct_atrace_args(config, categories):
 
 class AtraceAgent(tracing_agents.TracingAgent):
 
-  def __init__(self, device_sdk_version):
+  def __init__(self, device_sdk_version, tracing_path):
     super(AtraceAgent, self).__init__()
     self._device_sdk_version = device_sdk_version
+    self._tracing_path = tracing_path
     self._adb = None
     self._trace_data = None
     self._tracer_args = None
@@ -225,7 +234,7 @@ class AtraceAgent(tracing_agents.TracingAgent):
         sync_id: ID string for clock sync marker.
     """
     cmd = 'echo trace_event_clock_sync: name=%s >' \
-        ' /sys/kernel/debug/tracing/trace_marker' % sync_id
+        ' %s/trace_marker' % (sync_id, self._tracing_path)
     with self._device_utils.adb.PersistentShell(
         self._device_serial_number) as shell:
       t1 = trace_time_module.Now()
@@ -235,19 +244,28 @@ class AtraceAgent(tracing_agents.TracingAgent):
   def _stop_collect_trace(self):
     """Stops atrace.
 
-    Note that prior to Api 23, --async-stop may not actually stop tracing.
-    Thus, this uses a fallback method of running a zero-length synchronous
-    trace if tracing is still on."""
-    result = self._device_utils.RunShellCommand(
-        self._tracer_args + ['--async_stop'], raw_output=True,
-        large_output=True, check_return=True, timeout=ADB_LARGE_OUTPUT_TIMEOUT)
-    is_trace_enabled_file = '/sys/kernel/debug/tracing/tracing_on'
-
+    Note that prior to Api 23, --async-stop isn't working correctly. It
+    doesn't stop tracing and clears trace buffer before dumping it rendering
+    results unusable."""
     if self._device_sdk_version < version_codes.MARSHMALLOW:
-      if int(self._device_utils.ReadFile(is_trace_enabled_file)):
-        # tracing was incorrectly left on, disable it
-        self._device_utils.RunShellCommand(
-            self._tracer_args + ['-t 0'], check_return=True)
+      is_trace_enabled_file = '%s/tracing_on' % self._tracing_path
+      # Stop tracing first so new data won't arrive while dump is performed (it
+      # may take a non-trivial time and tracing buffer may overflow).
+      self._device_utils.WriteFile(is_trace_enabled_file, '0')
+      result = self._device_utils.RunShellCommand(
+          self._tracer_args + ['--async_dump'], raw_output=True,
+          large_output=True, check_return=True,
+          timeout=ADB_LARGE_OUTPUT_TIMEOUT)
+      # Run synchronous tracing for 0 seconds to stop tracing, clear buffers
+      # and other state.
+      self._device_utils.RunShellCommand(
+          self._tracer_args + ['-t 0'], check_return=True)
+    else:
+      # On M+ --async_stop does everything necessary
+      result = self._device_utils.RunShellCommand(
+          self._tracer_args + ['--async_stop'], raw_output=True,
+          large_output=True, check_return=True,
+          timeout=ADB_LARGE_OUTPUT_TIMEOUT)
 
     return result
 

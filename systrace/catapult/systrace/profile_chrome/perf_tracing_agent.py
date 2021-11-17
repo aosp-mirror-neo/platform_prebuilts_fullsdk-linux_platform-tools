@@ -5,11 +5,12 @@
 import logging
 import optparse
 import os
-import py_utils
 import signal
 import subprocess
 import sys
 import tempfile
+
+import py_utils
 
 from devil.android import device_temp_file
 from devil.android.perf import perf_control
@@ -22,7 +23,7 @@ _CATAPULT_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), '..', '..')
 sys.path.append(os.path.join(_CATAPULT_DIR, 'telemetry'))
 try:
-  # pylint: disable=F0401
+  # pylint: disable=F0401,no-name-in-module,wrong-import-position
   from telemetry.internal.platform.profiler import android_profiling_helper
   from telemetry.internal.util import binary_manager
 except ImportError:
@@ -181,7 +182,7 @@ class PerfProfilerAgent(tracing_agents.TracingAgent):
                                                     required_libs,
                                                     use_symlinks=False)
     perfhost_path = binary_manager.FetchPath(
-        android_profiling_helper.GetPerfhostName(), 'x86_64', 'linux')
+        android_profiling_helper.GetPerfhostName(), 'linux', 'x86_64')
 
     ui.PrintMessage('\nNote: to view the profile in perf, run:')
     ui.PrintMessage('  ' + self._GetInteractivePerfCommand(perfhost_path,

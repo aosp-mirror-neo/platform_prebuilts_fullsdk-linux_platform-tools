@@ -102,6 +102,22 @@ class CloudStorageFakeFsUnitTest(BaseFakeFsUnitTest):
     finally:
       cloud_storage._RunCommand = orig_run_command
 
+  def testUploadCreatesValidCloudUrls(self):
+    orig_run_command = cloud_storage._RunCommand
+    try:
+      cloud_storage._RunCommand = self._FakeRunCommand
+      remote_path = 'test-remote-path.html'
+      local_path = 'test-local-path.html'
+      cloud_filepath = cloud_storage.Upload(
+          cloud_storage.PUBLIC_BUCKET, remote_path, local_path)
+      self.assertEqual('https://console.developers.google.com/m/cloudstorage'
+                       '/b/chromium-telemetry/o/test-remote-path.html',
+                       cloud_filepath.view_url)
+      self.assertEqual('gs://chromium-telemetry/test-remote-path.html',
+                       cloud_filepath.fetch_url)
+    finally:
+      cloud_storage._RunCommand = orig_run_command
+
   @mock.patch('py_utils.cloud_storage.subprocess')
   def testExistsReturnsFalse(self, subprocess_mock):
     p_mock = mock.Mock()
@@ -153,6 +169,48 @@ class CloudStorageFakeFsUnitTest(BaseFakeFsUnitTest):
       cloud_storage.Copy('bucket1', 'bucket2', 'remote_path1', 'remote_path2')
     finally:
       cloud_storage._RunCommand = orig_run_command
+
+  @mock.patch('py_utils.cloud_storage._RunCommand')
+  def testListNoPrefix(self, mock_run_command):
+    mock_run_command.return_value = '\n'.join(['gs://bucket/foo-file.txt',
+                                               'gs://bucket/foo1/',
+                                               'gs://bucket/foo2/'])
+
+    self.assertEqual(cloud_storage.List('bucket'),
+                     ['/foo-file.txt', '/foo1/', '/foo2/'])
+
+  @mock.patch('py_utils.cloud_storage._RunCommand')
+  def testListWithPrefix(self, mock_run_command):
+    mock_run_command.return_value = '\n'.join(['gs://bucket/foo/foo-file.txt',
+                                               'gs://bucket/foo/foo1/',
+                                               'gs://bucket/foo/foo2/'])
+
+    self.assertEqual(cloud_storage.List('bucket', 'foo'),
+                     ['/foo/foo-file.txt', '/foo/foo1/', '/foo/foo2/'])
+
+  @mock.patch('py_utils.cloud_storage._RunCommand')
+  def testListDirs(self, mock_run_command):
+    mock_run_command.return_value = '\n'.join(['gs://bucket/foo-file.txt',
+                                               '',
+                                               'gs://bucket/foo1/',
+                                               'gs://bucket/foo2/',
+                                               'gs://bucket/foo1/file.txt'])
+
+    self.assertEqual(cloud_storage.ListDirs('bucket', 'foo*'),
+                     ['/foo1/', '/foo2/'])
+
+  @mock.patch('py_utils.cloud_storage.subprocess.Popen')
+  def testSwarmingUsesExistingEnv(self, mock_popen):
+    os.environ['SWARMING_HEADLESS'] = '1'
+
+    mock_gsutil = mock_popen()
+    mock_gsutil.communicate = mock.MagicMock(return_value=('a', 'b'))
+    mock_gsutil.returncode = None
+
+    cloud_storage.Copy('bucket1', 'bucket2', 'remote_path1', 'remote_path2')
+
+    mock_popen.assert_called_with(
+        mock.ANY, stderr=-1, env=os.environ, stdout=-1)
 
   @mock.patch('py_utils.cloud_storage._FileLock')
   def testDisableCloudStorageIo(self, unused_lock_mock):
